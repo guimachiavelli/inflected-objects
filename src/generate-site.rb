@@ -10,6 +10,10 @@ class InflectedSite
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections
 
+        if !Dir.exist? @public
+            Dir.mkdir(@public)
+        end
+
         publish
     end
 
