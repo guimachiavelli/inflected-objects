@@ -8,7 +8,7 @@ class InflectedSite
     def initialize(public_html = './public')
         @public = public_html
         @structure = InflectedStructure.new
-        @site = InflectedGenerator.new @structure.sections
+        @site = InflectedGenerator.new @structure.sections, @public
 
         if !Dir.exist? @public
             Dir.mkdir(@public)
@@ -28,6 +28,22 @@ class InflectedSite
             name = content[:name] == 'root' ? 'index' : content[:name]
             path = File.join(@public, name  + '.html')
             File.write(path, content[:html])
+
+            copy_media content[:media]
+        end
+    end
+
+    def copy_media(media_type)
+        media_type.each do |type, media|
+            type = type.to_s
+            dir = File.join(@public, type)
+            Dir.mkdir(dir) unless Dir.exists? dir
+
+            media.each do |medium|
+                path = File.join(dir, File.basename(medium))
+                FileUtils.copy medium, path
+            end
+
         end
     end
 

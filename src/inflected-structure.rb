@@ -12,17 +12,19 @@ class InflectedStructure
     def get_content(page, path = nil)
         path ||= File.join(@content, '**')
         dir = Dir.glob(path)
+        path = path.gsub('*', '')
         content = {:name => page,
-                   :path => path.gsub('*', ''),
+                   :path => path,
                    :page => nil,
                    :sections => [],
-                   :special => [] }
+                   :media => {} }
         dir.each_with_object(content) do |item, content|
             basename = File.basename(item)
+            symbol = basename.gsub('_', '').to_sym
             if section?(item, basename)
-                content[:sections] << basename.to_sym
-            elsif special?(item, basename)
-                content[:special] << basename.to_sym
+                content[:sections] << symbol
+            elsif media?(item, basename)
+                content[:media][symbol] = get_media(item)
             elsif index?(basename, content) || page?(basename, page)
                 content[:page] = basename
             end
@@ -37,6 +39,10 @@ class InflectedStructure
         end
     end
 
+    def get_media(type)
+        Dir.glob(File.join(type, '**'))
+    end
+
     def index?(basename, content)
         basename == 'index.md' && content[:page] == nil
     end
@@ -49,7 +55,7 @@ class InflectedStructure
         File.directory?(item) && !basename.start_with?(MARK)
     end
 
-    def special?(item, basename)
+    def media?(item, basename)
         File.directory?(item) && basename.start_with?(MARK)
     end
 
