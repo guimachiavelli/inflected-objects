@@ -1,12 +1,14 @@
 require 'fileutils'
 require_relative './inflected-structure.rb'
 require_relative './inflected-generator.rb'
+require_relative './inflected-dropbox.rb'
 
 class InflectedSite
     attr_reader :structure
 
-    def initialize(public_html = './public')
+    def initialize(public_html = './public', content = './content')
         @public = public_html
+        @content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections, @public
 
@@ -44,7 +46,6 @@ class InflectedSite
                 path = File.join(dir, File.basename(medium))
                 FileUtils.copy medium, path
             end
-
         end
     end
 
