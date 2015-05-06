@@ -4,14 +4,12 @@ class InflectedDownloader
     PATH = File.dirname(__FILE__)
     SECRET_FILE = File.join(PATH, 'secret', 'secret.txt')
     CREDENTIALS_FILE = File.join(PATH, 'secret', 'credentials.txt')
-    DOWNLOAD_DIR = File.dirname(__FILE__) + '/download'
 
     def initialize(content_dir)
         @app_secret = get_app_secret(File.read(SECRET_FILE))
         @access_token, @user_id = get_credentials
         @content_dir = File.join(content_dir)
         Dir.mkdir(@content_dir) unless Dir.exists?(@content_dir)
-        Dir.mkdir(DOWNLOAD_DIR) unless Dir.exists?(DOWNLOAD_DIR)
 
         download
     end
@@ -30,10 +28,6 @@ class InflectedDownloader
 
     def download(path = '/')
         connect
-        #folders = folder_list
-        #files = file_list(folders)
-
-        #puts files
 
         files = @client.metadata(path)['contents']
 
@@ -47,47 +41,6 @@ class InflectedDownloader
                 download_file(file['path'])
             end
         end
-
-        #create_folders(projects)
-        #files.each do |file|
-            #download_file(file)
-        #end
-    end
-
-    def folder_list
-        dirs = []
-        folders = @client.metadata('/')
-
-        test = @client.get_file '/**/*'
-
-        folders['contents'].each do |content|
-            dirs << content['path']
-        end
-
-        dirs
-    end
-
-    #def create_folders(projects)
-        #projects.each do |project|
-            #dir_path = DOWNLOAD_DIR + project
-            #Dir.mkdir(dir_path) unless Dir.exists?(dir_path) or !File.directory? project
-        #end
-    #end
-
-    def file_list(pages)
-        files = []
-        pages.each do |page|
-            page = @client.metadata(page)
-            if page['is_dir']
-                project_files = page['contents']
-                project_files.each do |file|
-                    files << file['path']
-                end
-            else
-                files << page['path']
-            end
-        end
-        files
     end
 
     def download_file(path)

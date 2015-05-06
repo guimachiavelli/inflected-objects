@@ -8,7 +8,7 @@ class InflectedSite
 
     def initialize(public_html = './public', content = './content')
         @public = public_html
-        @content = InflectedDownloader.new(content)
+        #@content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections, @public
 
