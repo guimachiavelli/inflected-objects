@@ -20,7 +20,7 @@ class InflectedStructure
                    :media => {} }
         dir.each_with_object(content) do |item, content|
             basename = File.basename(item)
-            symbol = basename.gsub('_', '').to_sym
+            symbol = basename.gsub('_', '').gsub('.md', '').to_sym
             if section?(item, basename)
                 content[:sections] << symbol
             elsif media?(item, basename)
@@ -40,6 +40,7 @@ class InflectedStructure
     end
 
     def get_media(type)
+        return type unless File.directory? type
         Dir.glob(File.join(type, '**'))
     end
 
@@ -56,7 +57,7 @@ class InflectedStructure
     end
 
     def media?(item, basename)
-        File.directory?(item) && basename.start_with?(MARK)
+        basename.start_with?(MARK)
     end
 
     def to_s

@@ -35,6 +35,7 @@ class InflectedSite
 
     def copy_media(media_type)
         media_type.each do |type, media|
+            return nil unless type == :imgs || type == :texts
             type = type.to_s
             dir = File.join(@public, type)
             Dir.mkdir(dir) unless Dir.exists? dir
