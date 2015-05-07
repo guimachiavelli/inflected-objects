@@ -47,14 +47,4 @@ class InflectedGenerator
         File.readlines(file)
     end
 
-    def add_externals(externals)
-        return '' if externals == nil
-        doc = '<ul class="externals">'
-        externals = File.read(externals)
-        externals.each_line do |external|
-            puts external
-            doc += '<li><iframe src="' + external + '" width="500" height="500"></iframe></li>'
-        end
-        doc + '</ul>'
-    end
 end

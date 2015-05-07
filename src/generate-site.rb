@@ -8,19 +8,20 @@ class InflectedSite
 
     def initialize(public_html = './public', content = './content')
         @public = public_html
+        @assets = File.join(@public, 'assets')
         #@content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections, @public
 
-        if !Dir.exist? @public
-            Dir.mkdir(@public)
-        end
+        Dir.mkdir(@public) unless Dir.exist? @public
+        Dir.mkdir(@assets) unless Dir.exist? @assets
 
         publish
     end
 
     def clear
-        FileUtils.rm_r(Dir.glob(File.join(@public, '*')))
+        FileUtils.rm_r(Dir.glob(File.join(@public, 'assets' ,'*')))
+        FileUtils.rm_r(Dir.glob(File.join(@public, '*.html')))
     end
 
     def publish
@@ -39,7 +40,7 @@ class InflectedSite
         media_type.each do |type, media|
             return nil unless type == :imgs || type == :texts
             type = type.to_s
-            dir = File.join(@public, type)
+            dir = File.join(@assets, type)
             Dir.mkdir(dir) unless Dir.exists? dir
 
             media.each do |medium|

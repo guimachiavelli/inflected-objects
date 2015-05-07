@@ -22,7 +22,7 @@
         <% if @imgs %>
             <ul class="images">
             <% for @img in @imgs %>
-                <li><img src="imgs/<%= File.basename(@img) %>"></li>
+                <li><img src="assets/imgs/<%= File.basename(@img) %>"></li>
             <% end %>
             </ul>
         <% end %>
