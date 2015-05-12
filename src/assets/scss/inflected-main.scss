@@ -1,0 +1,174 @@
+@import 'vars';
+@import 'sections';
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background: transparent;
+    font-family: $main-font;
+}
+
+a {
+    text-decoration: none;
+    color: $text-colour;
+}
+
+
+
+.header {
+
+}
+
+.header-title {
+    font-size: 7em;
+    .deform {
+        display: block;
+        transform: translateX(percentage(-1/7.5)) scaleX(.75) skewX(45deg);
+    }
+}
+
+
+
+
+
+
+.navigation-list {
+    counter-reset: num;
+}
+
+.navigation-item {
+    &:before {
+        content: counter(num);
+        counter-increment: num;
+        font-family: $highlight-font;
+        font-size: 2em;
+        display: inline-block;
+        transform: skew(-45deg/2);
+        margin: 0 3em 0 2em;
+        position: absolute;
+    }
+}
+
+.navigation-item--performance,
+.navigation-item--circulation,
+.navigation-item--autonomy {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+}
+
+
+.navigation-link {
+    font-size: 2.25em;
+    letter-spacing: 2px;
+    display: inline-block;
+    transform: scaleX(.7) skewX(-45deg);
+    width: 100%;
+}
+
+.navigation-subpages {
+    counter-reset: subnum;
+}
+
+.navigation-subpage-item {
+    &:before {
+        content: counter(num) ' .' counter(subnum);
+        counter-increment: subnum;
+        font-family: $highlight-font;
+        font-size: 2.75em;
+        display: inline-block;
+        transform: skew(-45deg/2);
+        margin: 0 4em 0 4em;
+        position: absolute;
+    }
+}
+
+.navigation-subpage-link {
+    font-size: 3em;
+    letter-spacing: 2px;
+    display: inline-block;
+    transform: scaleX(.7) skewX(-45deg);
+    width: 100%;
+    padding-left: 20%;
+}
+
+
+.content {
+    position: relative;
+    width: 60%;
+    z-index: 1;
+}
+
+.section {
+    position: relative;
+    z-index: 1;
+}
+
+.modal-bg {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent url('./fog.png');
+    background-size: cover;
+
+    -webkit-animation-duration: 10s;
+    -webkit-animation-name: breathe;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+}
+
+.section-frame {
+    z-index: 3;
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 15%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+}
+
+
+@-webkit-keyframes breathe {
+  from {
+      transform: scale(1,1);
+  }
+
+  to {
+      transform: scale(1.05,1.05);
+  }
+}
+
+
+.images {
+    list-style: none;
+}
+
+.images{
+    img {
+        max-width: 50%;
+        max-height: 50%;
+        position: absolute;
+        top: random(20) * 1%;
+        left: random(50) * 1%;
+    }
+
+    li:last-child img {
+        top: random(30) * 1%;
+        left: random(60) * 1%;
+    }
+
+}

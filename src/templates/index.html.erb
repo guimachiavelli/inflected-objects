@@ -6,18 +6,52 @@
 		<title>Inflected Object</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/inflected-main.css" type="text/css">
 	</head>
 
-	<body class="">
-        <%= @content %>
+    <body class="container <%= @name %>">
 
-        <% if @sections %>
-            <ol class="sections">
-            <% for @section in @sections %>
-                <li><a href="<%= @section %>.html"><%= @section %></a></li>
+        <div class="header">
+            <% if @name == 'root' %>
+                <h1 class="header-title">
+                    <span class="deform">Inflected objects</span>
+                </h1>
             <% end %>
+        </div>
+
+        <div class="content">
+            <%= @content %>
+        </div>
+
+        <div class="navigation">
+            <ol class="navigation-list">
+                <% for @section in @sections %>
+                    <% section_name = @section.to_s.capitalize
+                                              .gsub(/[0-9|-]/, '')
+                    %>
+                    <li class="navigation-item navigation-item--<%= section_name %>">
+                        <a class="navigation-link"
+                           href="<%= @section %>.html">
+                           <%= section_name %>
+                        </a>
+                        <ol class="navigation-subpages">
+                            <% for @page in @subpages %>
+                                <% parent = @page[:parent].to_s.capitalize
+                                                          .gsub(/[0-9|-]/, '')
+                                %>
+                                <% if parent == section_name %>
+                                    <li class="navigation-subpage-item">
+                                        <a href="#" class="navigation-subpage-link">
+                                            <%= @page[:name] %>
+                                        </a>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ol>
+                    </li>
+                <% end %>
             </ol>
-        <% end %>
+        </div>
 
         <% if @imgs %>
             <ul class="images">
@@ -67,6 +101,8 @@
             <% end %>
             </ul>
         <% end %>
+
+        <script src="js/bundle.js"></script>
 
 	</body>
 </html>
