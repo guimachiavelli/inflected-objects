@@ -16,6 +16,7 @@ class InflectedStructure
         content = {:name => page,
                    :path => path,
                    :page => nil,
+                   :subpages => [],
                    :sections => [],
                    :media => {} }
         dir.each_with_object(content) do |item, content|
@@ -27,6 +28,9 @@ class InflectedStructure
                 content[:media][symbol] = get_media(item)
             elsif index?(basename, content) || page?(basename, page)
                 content[:page] = basename
+            elsif File.extname(item) == '.md'
+                #content[:subpages] << item
+                @sections[:root][:subpages] << {name: item, parent: page }
             end
         end
     end
@@ -49,6 +53,7 @@ class InflectedStructure
     end
 
     def page?(basename, page)
+        page = page.gsub(/[0-9|-]/, '')
         basename == page + '.md'
     end
 

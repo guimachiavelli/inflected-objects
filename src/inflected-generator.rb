@@ -26,15 +26,27 @@ class InflectedGenerator
         page = File.join(section[:path], section[:page])
         page = File.read(page)
         @content = Kramdown::Document.new(page).to_html
+        @name = section[:name]
         @sections = section[:sections]
         @imgs = section[:media][:imgs]
         @videos = get_video_list(section[:media][:videos])
         @texts = section[:media][:texts]
         @externals = get_externals_list(section[:media][:externals])
+        @subpages = get_subpages(section[:subpages])
 
         section[:html] = html.result(binding)
 
         section
+    end
+
+    def get_subpages(subpages)
+        subpages.map do |page|
+            {
+                :name => File.basename(page[:name]).gsub('.md', ''),
+                :content => Kramdown::Document.new(page[:name]).to_html,
+                :parent => page[:parent]
+            }
+        end
     end
 
     def get_video_list(file)

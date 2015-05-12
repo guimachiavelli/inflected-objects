@@ -1,4 +1,5 @@
 require 'dropbox_sdk'
+require 'fileutils'
 
 class InflectedDownloader
     PATH = File.dirname(__FILE__)
@@ -11,7 +12,12 @@ class InflectedDownloader
         @content_dir = File.join(content_dir)
         Dir.mkdir(@content_dir) unless Dir.exists?(@content_dir)
 
+        clear_previous_content
         download
+    end
+
+    def clear_previous_content
+        FileUtils.rm_r(Dir.glob(File.join(@content_dir, '*')))
     end
 
     def get_app_secret(file)
