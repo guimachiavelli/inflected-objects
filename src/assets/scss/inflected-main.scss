@@ -26,14 +26,18 @@ a {
 
 
 .header {
-
+    margin-bottom: 26px;
 }
 
 .header-title {
-    font-size: 7em;
+    font-size: 5em;
+    margin-top: 10px;
+    margin-left: -8px;
+    letter-spacing: 0.5px;
+
     .deform {
         display: block;
-        transform: translateX(percentage(-1/7.5)) scaleX(.75) skewX(45deg);
+        transform: scaleY(1.5) skewX(45deg);
     }
 }
 
@@ -43,18 +47,24 @@ a {
 
 
 .navigation-list {
+    max-width: 900px;
     counter-reset: num;
 }
 
 .navigation-item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
     &:before {
         content: counter(num);
         counter-increment: num;
         font-family: $highlight-font;
-        font-size: 2em;
+        font-size: 2.2em;
         display: inline-block;
         transform: skew(-45deg/2);
-        margin: 0 3em 0 2em;
+        left: 50px;
+        margin-top: -2px;
         position: absolute;
     }
 }
@@ -67,17 +77,26 @@ a {
     overflow: hidden;
 }
 
-
 .navigation-link {
-    font-size: 2.25em;
-    letter-spacing: 2px;
-    display: inline-block;
-    transform: scaleX(.7) skewX(-45deg);
-    width: 100%;
+    font-size: 1.6em;
+    text-transform: capitalize;
+    margin-left: 145px;
+    line-height: 1.5;
+
+    .deform {
+        display: inline-block;
+        transform: scaleY(1.4) skewX(-43deg);
+        letter-spacing: 1px;
+    }
 }
 
 .navigation-subpages {
+    display: none;
     counter-reset: subnum;
+
+    &.navigation-subpages--show {
+        display: block;
+    }
 }
 
 .navigation-subpage-item {
@@ -88,8 +107,12 @@ a {
         font-size: 2.75em;
         display: inline-block;
         transform: skew(-45deg/2);
-        margin: 0 4em 0 4em;
+        left: 15%;
         position: absolute;
+    }
+
+    .navigation-item--artists &:before {
+        content: '';
     }
 }
 
@@ -100,7 +123,14 @@ a {
     transform: scaleX(.7) skewX(-45deg);
     width: 100%;
     padding-left: 20%;
+
+    .navigation-item--artists & {
+        transform: translateX(-10%) scaleX(.7) skewX(45deg);
+        padding: 0;
+    }
+
 }
+
 
 
 .content {
@@ -117,12 +147,12 @@ a {
 .modal-bg {
     z-index: 2;
     position: absolute;
-    top: 0;
+    top: 10%;
     right: 0;
     bottom: 0;
     left: 0;
-    background: transparent url('./fog.png');
-    background-size: cover;
+    background: transparent url('./fog.png') no-repeat 0 -10%;
+    background-size: 100%;
 
     -webkit-animation-duration: 10s;
     -webkit-animation-name: breathe;
@@ -144,7 +174,7 @@ a {
 
 @-webkit-keyframes breathe {
   from {
-      transform: scale(1,1);
+      transform: scale(1,1) rotateZ(.25deg);
   }
 
   to {
