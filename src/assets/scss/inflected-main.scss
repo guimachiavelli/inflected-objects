@@ -96,6 +96,7 @@ a {
 
     &.navigation-subpages--show {
         display: block;
+        margin-top: 1em;
     }
 }
 
@@ -104,10 +105,11 @@ a {
         content: counter(num) ' .' counter(subnum);
         counter-increment: subnum;
         font-family: $highlight-font;
-        font-size: 2.75em;
+        font-size: 3.2em;
         display: inline-block;
         transform: skew(-45deg/2);
-        left: 15%;
+        left: 142px;
+        margin-top: -4px;
         position: absolute;
     }
 
@@ -119,16 +121,34 @@ a {
 .navigation-subpage-link {
     font-size: 3em;
     letter-spacing: 2px;
-    display: inline-block;
-    transform: scaleX(.7) skewX(-45deg);
-    width: 100%;
+    max-width: 60%;
     padding-left: 20%;
+    display: inline-block;
+    line-height: 1;
+
+    .deform {
+        transform: scaleX(.7) skewX(-45deg);
+        display: inline-block;
+    }
 
     .navigation-item--artists & {
         transform: translateX(-10%) scaleX(.7) skewX(45deg);
         padding: 0;
     }
 
+}
+
+.navigation-item--isr {
+    .navigation-text {
+        display: inline-block;
+        transform: scaleY(1.4) skewX(-43deg);
+        margin-right: .5em;
+    }
+
+    img {
+        line-height: 0;
+        height: 20px;
+    }
 }
 
 
