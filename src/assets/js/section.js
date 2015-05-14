@@ -35,7 +35,14 @@
     }
 
     function close() {
-        callback();
+        var parent, docEl;
+
+        docEl = document.querySelector('.modal-section');
+        parent = docEl.parentNode;
+
+        parent.removeChild(docEl);
+
+        el = null;
     }
 
     function unbindEvents() {

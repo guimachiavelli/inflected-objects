@@ -9,12 +9,17 @@
             for (i = 0, len = nodeList.length; i < len; i += 1) {
                 nodeList[i].addEventListener(event, handler);
             }
+        },
+        toggleClass: function(node, className) {
+
         }
+
     };
 
     var site = {
         container: null,
         navigation: null,
+        navItemsPrimary: null,
         modal: null,
 
         init: function() {
@@ -25,14 +30,33 @@
 
         bindEvents: function() {
             this.navigation.addEventListener('click',
-                                           this.onSectionLinkClick.bind(this));
+                                              this.onSectionLinkClick.bind(this));
         },
 
         onSectionLinkClick: function(e) {
             e.preventDefault();
-            var targetSection, sectionEl;
+            var el, targetSection, sectionEl, subNav;
 
-            targetSection = e.srcElement.href;
+            if (e.target.nodeName === 'SPAN') {
+                el = e.target.parentNode;
+            } else {
+                el = e.target;
+            }
+
+            if (el.nodeName !== 'A') {
+                return;
+            }
+
+            subNav = el.parentNode.querySelectorAll('li');
+
+            if (subNav.length > 0) {
+                el.parentNode.querySelector('.navigation-subpages')
+                            .classList.toggle('navigation-subpages--show');
+                return;
+            }
+
+            targetSection = el.href;
+
             if (!targetSection) {
                 return;
             }
@@ -42,9 +66,8 @@
             this.container.appendChild(this.modal);
         },
 
-        modalClose: function() {
 
-        }
+
     };
 
     site.init();
