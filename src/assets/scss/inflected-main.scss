@@ -23,17 +23,31 @@ a {
     color: $text-colour;
 }
 
+body:not(.root) {
+    font-family: $secondary-font;
+    margin-top: 5em;
+
+    p {
+        max-width: 650px;
+        margin: 0 auto 1em auto;
+        font-size: 2em;
+    }
+
+}
+
 
 
 .header {
-    margin-bottom: 26px;
+    margin-bottom: 5px;
 }
 
 .header-title {
     font-size: 5em;
-    margin-top: 10px;
+    line-height: 2;
     margin-left: -8px;
     letter-spacing: 0.5px;
+    width: 100%;
+    overflow: hidden;
 
     .deform {
         display: block;
@@ -69,6 +83,19 @@ a {
     }
 }
 
+
+.release-second {
+    display: block;
+    margin-left: 30px;
+    margin-top: -.25em;
+    margin-bottom: -.25em;
+}
+
+.release-third {
+    margin-left: 120px;
+}
+
+
 .navigation-item--performance,
 .navigation-item--circulation,
 .navigation-item--autonomy {
@@ -96,8 +123,12 @@ a {
 
     &.navigation-subpages--show {
         display: block;
-        margin-top: 1em;
+        margin: 1em 0 2em;
     }
+}
+
+.navigation-item--artists .navigation-subpages--show {
+    margin-top: 2.5em;
 }
 
 .navigation-subpage-item {
@@ -164,6 +195,15 @@ a {
     z-index: 1;
 }
 
+.modal-section {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
 .modal-bg {
     z-index: 2;
     position: absolute;
@@ -171,34 +211,62 @@ a {
     right: 0;
     bottom: 0;
     left: 0;
-    background: transparent url('./fog.png') no-repeat 0 -10%;
+    background: transparent url('./fog.png');
     background-size: 100%;
+    opacity: 0.75;
 
-    -webkit-animation-duration: 10s;
-    -webkit-animation-name: breathe;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
+    &:before {
+        content: '';
+        z-index: 2;
+        position: absolute;
+        top: 10%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: block;
+
+        background: transparent url('./fog.png');
+        background-size: 100%;
+
+        -webkit-animation-duration: 2s;
+        -webkit-animation-name: breathe;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-direction: alternate;
+        -webkit-animation-timing-function: ease-in-out;
+
+        -ms-animation-duration: 2s;
+        -ms-animation-name: breathe;
+        -ms-animation-iteration-count: infinite;
+        -ms-animation-direction: alternate;
+        -ms-animation-timing-function: ease-in-out;
+
+        animation-duration: 2s;
+        animation-name: breathe;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
 }
 
 .section-frame {
     z-index: 3;
     position: absolute;
-    height: 90%;
-    width: 90%;
+    height: 75%;
+    width: 60%;
     top: 15%;
-    right: 10%;
-    bottom: 10%;
-    left: 10%;
+    right: 20%;
+    bottom: 0;
+    left: 20%;
 }
 
 
 @-webkit-keyframes breathe {
   from {
-      transform: scale(1,1) rotateZ(.25deg);
+      transform: scale(1,1) rotateZ(0);
   }
 
   to {
-      transform: scale(1.05,1.05);
+      transform: scale(1.2,1.2) rotateZ(2.5deg);
   }
 }
 
