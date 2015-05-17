@@ -5,7 +5,10 @@ class InflectedGenerator
     attr_reader :parsed_sections
 
     PATH = File.dirname(__FILE__)
-    TPL_PATH = File.join(PATH, 'templates', 'index.html.erb')
+    TPL_PATH = File.join(File.expand_path('..', PATH),
+                         'template',
+                         'html',
+                         'index.html.erb')
 
     def initialize(sections, public_path)
         @public_path = public_path
@@ -17,7 +20,6 @@ class InflectedGenerator
             parsed_section = generate_section_page(section)
             @parsed_sections[name] = parsed_section if parsed_section != nil
         end
-
     end
 
     def generate_section_page(section)
@@ -58,5 +60,4 @@ class InflectedGenerator
         return if file == nil
         File.readlines(file)
     end
-
 end
