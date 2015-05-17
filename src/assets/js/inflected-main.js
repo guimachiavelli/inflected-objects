@@ -60,6 +60,12 @@
             }
 
             targetSection = el.href;
+            console.log(targetSection.host);
+
+            if (el.classList.contains('artist-link')) {
+                window.location = targetSection;
+                return;
+            }
 
             if (!targetSection || targetSection.indexOf('#') > -1) {
                 return;

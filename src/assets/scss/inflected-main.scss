@@ -25,7 +25,6 @@ a {
 
 body:not(.root) {
     font-family: $secondary-font;
-    margin-top: 5em;
 
     p {
         max-width: 650px;
@@ -42,7 +41,7 @@ body:not(.root) {
 }
 
 .header-title {
-    font-size: 5em;
+    font-size: 4em;
     line-height: 2;
     margin-left: -8px;
     letter-spacing: 0.5px;
@@ -52,6 +51,10 @@ body:not(.root) {
     .deform {
         display: block;
         transform: scaleY(1.5) skewX(45deg);
+    }
+
+    @media (min-width: 400px) {
+        font-size: 5em;
     }
 }
 
@@ -77,22 +80,34 @@ body:not(.root) {
         font-size: 2.2em;
         display: inline-block;
         transform: skew(-45deg/2);
-        left: 50px;
-        margin-top: -2px;
         position: absolute;
+            left: 8px;
+            margin-top: 4px;
+    }
+
+    @media (min-width: 400px) {
+        &:before {
+            left: 50px;
+            margin-top: -2px;
+        }
     }
 }
 
 
 .release-second {
-    display: block;
-    margin-left: 30px;
-    margin-top: -.25em;
-    margin-bottom: -.25em;
+
+    @media (min-width: 400px) {
+        display: block;
+        margin-left: 30px;
+        margin-top: -.25em;
+        margin-bottom: -.25em;
+    }
 }
 
 .release-third {
-    margin-left: 120px;
+    @media (min-width: 400px) {
+        margin-left: 120px;
+    }
 }
 
 
@@ -105,15 +120,21 @@ body:not(.root) {
 }
 
 .navigation-link {
-    font-size: 1.6em;
+    font-size: 1.2em;
     text-transform: capitalize;
-    margin-left: 145px;
-    line-height: 1.5;
+    margin-left: 35px;
+    line-height: 3;
 
     .deform {
         display: inline-block;
         transform: scaleY(1.4) skewX(-43deg);
         letter-spacing: 1px;
+    }
+
+    @media (min-width: 400px) {
+        font-size: 1.6em;
+        margin-left: 145px;
+        line-height: 1.5;
     }
 }
 
@@ -139,13 +160,20 @@ body:not(.root) {
         font-size: 3.2em;
         display: inline-block;
         transform: skew(-45deg/2);
-        left: 142px;
+        left: 8px;
         margin-top: -4px;
         position: absolute;
     }
 
     .navigation-item--artists &:before {
         content: '';
+    }
+
+    @media (min-width: 400px) {
+        &:before {
+            left: 142px;
+            margin-top: -4px;
+        }
     }
 }
 
@@ -169,10 +197,20 @@ body:not(.root) {
 
 }
 
-.navigation-item--isr {
-    .navigation-text {
+.footer {
+    margin: 3em;
+
+    @media (min-width: 400px) {
+        position: absolute;
+        bottom: 1em;
+        left: 50px;
+        margin: 0;
+    }
+
+    .footer-text {
+        font-family: $secondary-font;
         display: inline-block;
-        transform: scaleY(1.4) skewX(-43deg);
+        text-transform: none;
         margin-right: .5em;
     }
 
@@ -201,32 +239,34 @@ body:not(.root) {
     width: 100%;
     top: 0;
     left: 0;
-    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+
+    @media (min-width: 400px) {
+        position: absolute;
+        overflow: hidden;
+    }
 }
 
 .modal-bg {
     z-index: 2;
     position: absolute;
-    top: 10%;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: transparent url('./fog.png');
-    background-size: 100%;
-    opacity: 0.75;
 
     &:before {
         content: '';
         z-index: 2;
-        position: absolute;
+        position: fixed;
         top: 10%;
         bottom: 0;
         right: 0;
         left: 0;
         display: block;
-
-        background: transparent url('./fog.png');
-        background-size: 100%;
+        background: transparent url('./fog.png') repeat center;
+        background-size: cover;
 
         -webkit-animation-duration: 2s;
         -webkit-animation-name: breathe;
@@ -246,6 +286,11 @@ body:not(.root) {
         animation-direction: alternate;
         animation-timing-function: ease-in-out;
     }
+
+    @media (min-width: 400px) {
+        position: absolute;
+        background-size: 100%;
+    }
 }
 
 .section-frame {
@@ -253,7 +298,7 @@ body:not(.root) {
     position: absolute;
     height: 75%;
     width: 60%;
-    top: 15%;
+    top: 25%;
     right: 20%;
     bottom: 0;
     left: 20%;
