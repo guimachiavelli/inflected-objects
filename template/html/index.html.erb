@@ -9,7 +9,10 @@
         <link rel="stylesheet" href="css/inflected-main.css" type="text/css">
 	</head>
 
-    <body class="container <%= @name %>">
+    <body class="<%= @name %>">
+
+        <div class="container">
+
 
         <div class="header">
             <% if @name == 'root' %>
@@ -32,7 +35,9 @@
                     <li class="navigation-item navigation-item--<%= section_name %>">
                         <a class="navigation-link"
                            href="<%= @section %>.html">
-                           <%= section_name %>
+                           <span class="deform">
+                               <%= section_name %>
+                           </span>
                         </a>
                         <ol class="navigation-subpages">
                             <% for @page in @subpages %>
@@ -42,7 +47,9 @@
                                 <% if parent == section_name %>
                                     <li class="navigation-subpage-item">
                                         <a href="#" class="navigation-subpage-link">
-                                            <%= @page[:name] %>
+                                            <span class="deform">
+                                                <%= @page[:name] %>
+                                            </span>
                                         </a>
                                     </li>
                                 <% end %>
@@ -103,6 +110,7 @@
         <% end %>
 
         <script src="js/bundle.js"></script>
+        </div>
 
 	</body>
 </html>

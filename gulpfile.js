@@ -9,14 +9,14 @@ var gulp = require('gulp'),
     sass = require('gulp-sass');
 
 gulp.task('browserify', function() {
-    browserify('./src/assets/js/inflected-main.js')
+    browserify('./template/js/inflected-main.js')
               .bundle()
               .pipe(source('bundle.js'))
               .pipe(gulp.dest('./public/js/'));
-
 });
+
 gulp.task('sass', function () {
-    gulp.src('./src/assets/scss/**/*.scss')
+    gulp.src('./template/scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./public/css'));
 });
@@ -30,6 +30,6 @@ gulp.task('autoprefixer', function () {
 });
 
 gulp.task('develop', function(){
-    gulp.watch(['./src/assets/scss/**/*.scss', './src/assets/js/**/*.js'],
+    gulp.watch(['./template/scss/**/*.scss', './template/js/**/*.js'],
                ['sass', 'browserify', 'autoprefixer']);
 });

@@ -29,51 +29,76 @@
         },
 
         bindEvents: function() {
-            this.navigation.addEventListener('click',
+            document.body.addEventListener('click',
                                               this.onSectionLinkClick.bind(this));
         },
 
         onSectionLinkClick: function(e) {
             e.preventDefault();
-            var el, targetSection, sectionEl, subNav;
 
-            if (e.target.nodeName === 'SPAN') {
-                el = e.target.parentNode;
-            } else {
-                el = e.target;
-            }
+            var el, container;
 
-            if (el.nodeName === 'SPAN') {
-                el = el.parentNode;
-            }
+            container = document.querySelector('.modal-container');
 
-            if (el.nodeName !== 'A') {
+            if  (container !== null) {
+                el = document.querySelector('.black-layer');
+                el.className = 'black-layer transition-out';
+                setTimeout(function() {
+                    document.body.removeChild(container);
+                }, 350);
                 return;
             }
 
-            subNav = el.parentNode.querySelectorAll('li');
+            container = document.createElement('div');
+            container.className = 'modal-container';
 
-            if (subNav !== null && subNav.length > 0) {
-                el.parentNode.querySelector('.navigation-subpages')
-                            .classList.toggle('navigation-subpages--show');
-                return;
-            }
+            el = document.createElement('div');
+            el.className = 'black-layer';
 
-            targetSection = el.href;
-            console.log(targetSection.host);
+            container.appendChild(el);
+            document.body.appendChild(container);
+            el.offsetHeight;
+            el.className = 'black-layer transition-in';
 
-            if (el.classList.contains('artist-link')) {
-                window.location = targetSection;
-                return;
-            }
+            //var el, targetSection, sectionEl, subNav;
 
-            if (!targetSection || targetSection.indexOf('#') > -1) {
-                return;
-            }
+            //if (e.target.nodeName === 'SPAN') {
+                //el = e.target.parentNode;
+            //} else {
+                //el = e.target;
+            //}
 
-            this.modal = section.open(targetSection, this.modalClose);
+            //if (el.nodeName === 'SPAN') {
+                //el = el.parentNode;
+            //}
 
-            this.container.appendChild(this.modal);
+            //if (el.nodeName !== 'A') {
+                //return;
+            //}
+
+            //subNav = el.parentNode.querySelectorAll('li');
+
+            //if (subNav !== null && subNav.length > 0) {
+                //el.parentNode.querySelector('.navigation-subpages')
+                            //.classList.toggle('navigation-subpages--show');
+                //return;
+            //}
+
+            //targetSection = el.href;
+            //console.log(targetSection.host);
+
+            //if (el.classList.contains('artist-link')) {
+                //window.location = targetSection;
+                //return;
+            //}
+
+            //if (!targetSection || targetSection.indexOf('#') > -1) {
+                //return;
+            //}
+
+            //this.modal = section.open(targetSection, this.modalClose);
+
+            //this.container.appendChild(this.modal);
         }
     };
 

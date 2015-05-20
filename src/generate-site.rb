@@ -9,7 +9,7 @@ class InflectedSite
     def initialize(public_html = './public', content = './content')
         @public = public_html
         @assets = File.join(@public, 'assets')
-        @content = InflectedDownloader.new(content)
+        #@content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections, @public
 
@@ -49,7 +49,6 @@ class InflectedSite
             end
         end
     end
-
 end
 
 InflectedSite.new
