@@ -1,0 +1,22 @@
+.footer {
+    margin: 3em;
+
+    @media (min-width: 400px) {
+        position: absolute;
+        bottom: 1em;
+        left: 50px;
+        margin: 0;
+    }
+
+    .footer-text {
+        font-family: $secondary-font;
+        display: inline-block;
+        text-transform: none;
+        margin-right: .5em;
+    }
+
+    img {
+        line-height: 0;
+        height: 20px;
+    }
+}

@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    list-style: none;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    background: lightgrey;
+    font-family: $main-font;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: $text-colour;
+}
+
+body:not(.root) {
+    font-family: $secondary-font;
+
+    p {
+        max-width: 650px;
+        margin: 0 auto 1em auto;
+        font-size: 2em;
+    }
+}
+
+
+.container {
+    height: 100%;
+    background: #fff;
+    @include animation(site-wobble 10s 
+                       cubic-bezier(0.45, 0.05, 0.55, 0.95) 
+                       infinite alternate);
+}

@@ -1,0 +1,28 @@
+.modal-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 0;
+}
+
+.black-layer {
+    width: 50%;
+    padding-top: 50%;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-100%);
+    transform-origin: right top;
+    transition: transform 350ms cubic-bezier(0, 0, 0, 1);
+
+    &.transition-in {
+        transform: translateX(50%);
+    }
+
+    &.transition-out {
+        transition-duration: 300ms;
+        transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75);
+    }
+}
