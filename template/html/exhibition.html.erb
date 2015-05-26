@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Inflected Object</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/inflected-main.css" type="text/css">
+	</head>
+
+    <body class="<%= @name %>">
+
+        <div class="container">
+
+
+        <div class="header">
+            <% if @name == 'root' %>
+                <h1 class="header-title">
+                    <span class="deform">Inflected objects</span>
+                </h1>
+            <% end %>
+        </div>
+
+        <div class="content">
+            <%= @content %>
+        </div>
+
+        <div class="navigation">
+            <ol class="navigation-list">
+                <% for @section in @sections %>
+                    <% section_name = @section.to_s.capitalize
+                                              .gsub(/[0-9|-]/, '')
+                    %>
+                    <li class="navigation-item navigation-item--<%= section_name %>">
+                        <a class="navigation-link"
+                           href="<%= @section %>.html">
+                           <span class="deform">
+                               <%= section_name %>
+                           </span>
+                        </a>
+                        <ol class="navigation-subpages">
+                            <% for @page in @subpages %>
+                                <% parent = @page[:parent].to_s.capitalize
+                                                          .gsub(/[0-9|-]/, '')
+                                %>
+                                <% if parent == section_name %>
+                                    <li class="navigation-subpage-item">
+                                        <a href="#" class="navigation-subpage-link">
+                                            <span class="deform">
+                                                <%= @page[:name] %>
+                                            </span>
+                                        </a>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ol>
+                    </li>
+                <% end %>
+            </ol>
+        </div>
+
+        <% if @imgs %>
+            <ul class="images">
+            <% for @img in @imgs %>
+                <li><img src="assets/imgs/<%= File.basename(@img) %>"></li>
+            <% end %>
+            </ul>
+        <% end %>
+
+        <% if @videos %>
+            <ul class="videos">
+            <% for @video in @videos %>
+                <li>
+                    <iframe width="560" 
+                            height="315"
+                            src="https://www.youtube.com/embed/<%= @video %>"
+                            frameborder="0" allowfullscreen>
+                    </iframe>
+                </li>
+            <% end %>
+            </ul>
+        <% end %>
+
+        <% if @texts %>
+            <ul class="texts">
+            <% for @text in @texts %>
+                <li>
+                    <a href="#"><%= File.basename(@text) %></a>
+                    <div class="text">
+                        <%= Kramdown::Document.new(File.read(@text)).to_html %>
+                    </div>
+                </li>
+            <% end %>
+            </ul>
+        <% end %>
+
+        <% if @externals %>
+            <ul class="externals">
+            <% for @external in @externals %>
+                <li>
+                    <iframe width="560" 
+                            height="315"
+                            src="<%= @external %>"
+                            frameborder="0">
+                    </iframe>
+                </li>
+            <% end %>
+            </ul>
+        <% end %>
+
+        <script src="js/bundle.js"></script>
+        </div>
+
+	</body>
+</html>

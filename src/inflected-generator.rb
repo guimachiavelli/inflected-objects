@@ -5,15 +5,16 @@ class InflectedGenerator
     attr_reader :parsed_sections
 
     PATH = File.dirname(__FILE__)
-    TPL_PATH = File.join(File.expand_path('..', PATH),
-                         'template',
-                         'html',
-                         'index.html.erb')
+
+    TPL_PATHS = {
+        index: 'index.html.erb',
+        exhibition: 'exhibition.html.erb',
+        text: 'text.html.erb'
+    }
 
     def initialize(sections, public_path)
         @public_path = public_path
-        @tpl = File.read(TPL_PATH)
-
+        @tpls = fetch_section_tpls
         @parsed_sections = {}
 
         sections.each do |name, section|
@@ -22,19 +23,36 @@ class InflectedGenerator
         end
     end
 
+    def fetch_section_tpls
+        common_path = File.expand_path('..', PATH)
+        common_path = File.join(common_path, 'template', 'html')
+
+        tpls = {}
+        TPL_PATHS.each do |type, path|
+            tpls[type] = File.read(File.join(common_path, path))
+        end
+
+        tpls
+    end
+
     def generate_section_page(section)
         return nil if section[:page] == nil
-        html = ERB.new(@tpl)
+        meta = section[:meta] || {}
+        type = meta['type'] || 'index'
+        type = type.to_sym
+
+        html = ERB.new(@tpls[type])
         page = File.join(section[:path], section[:page])
-        page = File.read(page)
+        page = File.read(page).gsub(/---(.|\n)*---/, '')
+
         @content = Kramdown::Document.new(page).to_html
         @name = section[:name]
+        @title = meta['title'] || ''
         @sections = section[:sections]
         @imgs = section[:media][:imgs]
         @videos = get_video_list(section[:media][:videos])
         @texts = section[:media][:texts]
         @externals = get_externals_list(section[:media][:externals])
-        @subpages = get_subpages(section[:subpages])
 
         section[:html] = html.result(binding)
 
