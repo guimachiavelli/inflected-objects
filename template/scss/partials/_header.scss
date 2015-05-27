@@ -8,17 +8,11 @@
 
 .header-title {
     font-size: 4em;
-    line-height: 2;
-    margin-left: -8px;
+    font-size: 5.5vw;
     letter-spacing: 0.5px;
-    width: 100%;
 
     .deform {
         display: block;
         transform: scaleY(1.5) skewX(45deg);
-    }
-
-    @media (min-width: 400px) {
-        font-size: 5em;
     }
 }

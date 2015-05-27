@@ -1,32 +1,13 @@
 .navigation-item {
     position: relative;
     width: 100%;
-
-    &:before {
-        content: counter(num);
-        counter-increment: num;
-        font-family: $highlight-font;
-        font-size: 2.2em;
-        min-width: 1em;
-        display: inline-block;
-        transform: skew(-45deg/2);
-        position: absolute;
-        left: 8px;
-        margin-top: 4px;
-    }
-
-    @media (min-width: 400px) {
-        &:before {
-            left: 50px;
-            margin-top: -2px;
-        }
-    }
 }
 
 
 // wobble animation setup
 .navigation-item {
-    .navigation-link {
+    .navigation-link,
+    .subnavigation-link {
         display: inline-block;
         @include wobble-animation;
     }
@@ -54,82 +35,32 @@
 
 .navigation-link {
     font-size: 1.2em;
-    text-transform: capitalize;
-    margin-left: 35px;
+    font-size: 3.75vw;
+    margin-left: 3vw;
     line-height: 3;
 
     .deform {
         display: inline-block;
-        transform: scaleY(1.4) skewX(-43deg);
+        transform: scaleY(1.4) skewX(45deg);
         letter-spacing: 1px;
     }
 
-    @media (min-width: 400px) {
-        font-size: 1.6em;
-        margin-left: 145px;
-        line-height: 1.5;
+    @media (min-width: $bp-mobile) {
+        font-size: 2.5vw;
+        line-height: 4vw;
     }
 }
 
-.navigation-subpages {
-    display: none;
-    counter-reset: subnum;
-
-    &.navigation-subpages--show {
-        display: block;
-        margin: 1em 0 2em;
-    }
+.subnavigation {
+    display: inline;
 }
 
-.navigation-item--artists .navigation-subpages--show {
-    margin-top: 2.5em;
-}
-
-.navigation-subpage-item {
-    &:before {
-        content: counter(num) ' .' counter(subnum);
-        counter-increment: subnum;
-        font-family: $highlight-font;
-        font-size: 3.2em;
-        display: inline-block;
-        transform: skew(-45deg/2);
-        left: 8px;
-        margin-top: -4px;
-        position: absolute;
-    }
-
-    .navigation-item--artists &:before {
-        content: '';
-    }
-
-    @media (min-width: 400px) {
-        &:before {
-            left: 142px;
-            margin-top: -4px;
-        }
-    }
-}
-
-.navigation-subpage-link {
-    font-size: 3em;
-    letter-spacing: 2px;
-    max-width: 60%;
-    padding-left: 20%;
+.subnavigation-item {
     display: inline-block;
-    line-height: 1;
-
-    .deform {
-        transform: scaleX(.7) skewX(-45deg);
-        display: inline-block;
-    }
-
-    .navigation-item--artists & {
-        transform: translateX(-10%) scaleX(.7) skewX(45deg);
-        padding: 0;
-    }
+    font-family: $highlight-font;
+    margin-left: 1vw;
 }
 
-.navigation-list {
-    max-width: 900px;
-    counter-reset: num;
+.subnavigation-link {
+    font-size: 3vw;
 }

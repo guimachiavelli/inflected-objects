@@ -30,10 +30,10 @@
                                </span>
                             </a>
                             <% if @section[:subsections] && @section[:subsections].count > 0 %>
-                            <ul class="">
+                            <ul class="subnavigation">
                                 <% for @subsection in @section[:subsections] %>
-                                    <li>
-                                        <a href="<%= @section[:path] %>/<%= @subsection[:path]  %>.html">
+                                    <li class="subnavigation-item">
+                                        <a class="subnavigation-link" href="<%= @section[:path] %>/<%= @subsection[:path]  %>.html">
                                             <%= @subsection[:title] %>
                                         </a>
                                     </li>
