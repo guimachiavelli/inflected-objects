@@ -1,5 +1,9 @@
 .header {
     margin-bottom: 5px;
+
+    .is--framed & {
+        display: none;
+    }
 }
 
 .header-title {

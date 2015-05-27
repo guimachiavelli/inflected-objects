@@ -1,104 +1,46 @@
 (function(){
     'use strict';
 
-    var section = require('./section');
-
-    var helpers = {
-        addEventListeners: function(nodeList, event, handler) {
-            var i, len;
-            for (i = 0, len = nodeList.length; i < len; i += 1) {
-                nodeList[i].addEventListener(event, handler);
-            }
-        },
-        toggleClass: function(node, className) {
-
-        }
-
-    };
+    var helpers = require('./helpers'),
+        modal = require('./modal');
 
     var site = {
         container: null,
-        navigation: null,
-        navItemsPrimary: null,
-        modal: null,
+        nav: null,
 
         init: function() {
+            this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
-            this.navigation = document.querySelector('.navigation');
             this.bindEvents();
+
+            if (this.isFramed() === true) {
+                document.body.className = 'is--framed';
+            }
+        },
+
+        isFramed: function() {
+            return window.parent.location !== window.location;
         },
 
         bindEvents: function() {
-            document.body.addEventListener('click',
-                                              this.onSectionLinkClick.bind(this));
+            if (this.nav) {
+                this.nav.addEventListener('click', this.onNavClick.bind(this));
+            }
         },
 
-        onSectionLinkClick: function(e) {
+        onNavClick: function(e) {
             e.preventDefault();
 
-            var el, container;
+            var target;
 
-            container = document.querySelector('.modal-container');
+            target = helpers.parentAnchor(e.target);
 
-            if  (container !== null) {
-                el = document.querySelector('.black-layer');
-                el.className = 'black-layer transition-out';
-                setTimeout(function() {
-                    document.body.removeChild(container);
-                }, 350);
+            if (target === false) {
+                console.warn('no enclosing anchor found');
                 return;
             }
 
-            container = document.createElement('div');
-            container.className = 'modal-container';
-
-            el = document.createElement('div');
-            el.className = 'black-layer';
-
-            container.appendChild(el);
-            document.body.appendChild(container);
-            el.offsetHeight;
-            el.className = 'black-layer transition-in';
-
-            //var el, targetSection, sectionEl, subNav;
-
-            //if (e.target.nodeName === 'SPAN') {
-                //el = e.target.parentNode;
-            //} else {
-                //el = e.target;
-            //}
-
-            //if (el.nodeName === 'SPAN') {
-                //el = el.parentNode;
-            //}
-
-            //if (el.nodeName !== 'A') {
-                //return;
-            //}
-
-            //subNav = el.parentNode.querySelectorAll('li');
-
-            //if (subNav !== null && subNav.length > 0) {
-                //el.parentNode.querySelector('.navigation-subpages')
-                            //.classList.toggle('navigation-subpages--show');
-                //return;
-            //}
-
-            //targetSection = el.href;
-            //console.log(targetSection.host);
-
-            //if (el.classList.contains('artist-link')) {
-                //window.location = targetSection;
-                //return;
-            //}
-
-            //if (!targetSection || targetSection.indexOf('#') > -1) {
-                //return;
-            //}
-
-            //this.modal = section.open(targetSection, this.modalClose);
-
-            //this.container.appendChild(this.modal);
+            modal.init(target.href);
         }
     };
 
