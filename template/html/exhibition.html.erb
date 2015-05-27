@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>Inflected Object</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Inflected Objects/<%= @title %></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/inflected-main.css" type="text/css">
 	</head>
 
@@ -13,51 +13,10 @@
 
         <div class="container">
 
-
         <div class="header">
-            <% if @name == 'root' %>
-                <h1 class="header-title">
-                    <span class="deform">Inflected objects</span>
-                </h1>
-            <% end %>
-        </div>
-
-        <div class="content">
-            <%= @content %>
-        </div>
-
-        <div class="navigation">
-            <ol class="navigation-list">
-                <% for @section in @sections %>
-                    <% section_name = @section.to_s.capitalize
-                                              .gsub(/[0-9|-]/, '')
-                    %>
-                    <li class="navigation-item navigation-item--<%= section_name %>">
-                        <a class="navigation-link"
-                           href="<%= @section %>.html">
-                           <span class="deform">
-                               <%= section_name %>
-                           </span>
-                        </a>
-                        <ol class="navigation-subpages">
-                            <% for @page in @subpages %>
-                                <% parent = @page[:parent].to_s.capitalize
-                                                          .gsub(/[0-9|-]/, '')
-                                %>
-                                <% if parent == section_name %>
-                                    <li class="navigation-subpage-item">
-                                        <a href="#" class="navigation-subpage-link">
-                                            <span class="deform">
-                                                <%= @page[:name] %>
-                                            </span>
-                                        </a>
-                                    </li>
-                                <% end %>
-                            <% end %>
-                        </ol>
-                    </li>
-                <% end %>
-            </ol>
+            <h1 class="header-title">
+                <span class="deform">Inflected objects</span>
+            </h1>
         </div>
 
         <% if @imgs %>
@@ -109,8 +68,9 @@
             </ul>
         <% end %>
 
-        <script src="js/bundle.js"></script>
         </div>
+
+        <script src="js/bundle.js"></script>
 
 	</body>
 </html>
