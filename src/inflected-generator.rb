@@ -15,6 +15,7 @@ class InflectedGenerator
     def initialize(sections, public_path)
         @public_path = public_path
         @tpls = fetch_section_tpls
+        @all_sections = sections
         @parsed_sections = {}
 
         sections.each do |name, section|
@@ -53,10 +54,22 @@ class InflectedGenerator
         @videos = get_video_list(section[:media][:videos])
         @texts = section[:media][:texts]
         @externals = get_externals_list(section[:media][:externals])
+        @sections = subsections(@sections)
+        puts @sections
 
         section[:html] = html.result(binding)
 
         section
+    end
+
+    def subsections(sections)
+        return [] if sections.nil?
+        sections.map do |section|
+            section_name = section[:path].to_sym
+            subsections = @all_sections[section_name]
+            section[:subsections] = subsections[:sections] unless subsections.nil?
+            section
+        end
     end
 
     def get_subpages(subpages)

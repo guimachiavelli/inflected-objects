@@ -9,7 +9,7 @@ class InflectedSite
     def initialize(public_html = './public', content = './content')
         @public = public_html
         @assets = File.join(@public, 'assets')
-        #@content = InflectedDownloader.new(content)
+        @content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new
         @site = InflectedGenerator.new @structure.sections, @public
 
@@ -28,8 +28,11 @@ class InflectedSite
         clear
         @site.parsed_sections.each do |section, content|
             puts content[:name]
+            dir = File.dirname(File.join(@public, content[:name]))
+            FileUtils.mkdir_p(dir) unless File.exists?(dir)
             name = content[:name] == 'root' ? 'index' : content[:name]
             path = File.join(@public, name  + '.html')
+
             File.write(path, content[:html])
 
             copy_media content[:media]
