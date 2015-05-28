@@ -21,13 +21,30 @@
         },
 
         close: function() {
+            var frame;
+
             console.log('modal:close');
-            this.remove();
+
+            frame = this.el.querySelector('.modal-content');
+            frame.className = 'modal-content';
+
+            setTimeout(function(){
+                this.remove();
+            }.bind(this), 300);
         },
 
         open: function() {
+            var frame;
             console.log('modal:open');
+
             this.render();
+            frame = this.el.querySelector('.modal-content');
+
+            setTimeout(function(){
+                frame.className += ' transition-in';
+            //fixme: 100ms delay so the http request does not affect
+            //       the slide-in animation
+            }.bind(this), 100);
         },
 
         render: function() {
@@ -41,16 +58,20 @@
         },
 
         template: function(url) {
-           var container, iframe;
+           var container, content, iframe;
 
            container = document.createElement('div');
            container.className = 'modal-container';
 
+           content = document.createElement('div');
+           content.className = 'modal-content';
+
            iframe = document.createElement('iframe');
-           iframe.className = 'modal-content'
+           iframe.className = 'modal-frame'
            iframe.src = url;
 
-           container.appendChild(iframe);
+           content.appendChild(iframe);
+           container.appendChild(content);
 
            return container;
         },

@@ -19,43 +19,45 @@
             </h1>
         </div>
 
+        <ul class="items">
         <% if @imgs %>
-            <ul class="images">
             <% for @img in @imgs %>
-                <li><img src="assets/imgs/<%= File.basename(@img) %>"></li>
-            <% end %>
-            </ul>
-        <% end %>
-
-        <% if @videos %>
-            <ul class="videos">
-            <% for @video in @videos %>
-                <li>
-                    <iframe width="560" 
-                            height="315"
-                            src="https://www.youtube.com/embed/<%= @video %>"
-                            frameborder="0" allowfullscreen>
-                    </iframe>
-                </li>
-            <% end %>
-            </ul>
-        <% end %>
-
-        <% if @texts %>
-            <ul class="texts">
-            <% for @text in @texts %>
-                <li>
-                    <a href="#"><%= File.basename(@text) %></a>
-                    <div class="text">
-                        <%= Kramdown::Document.new(File.read(@text)).to_html %>
+                <li class="item item--image">
+                    <div class="item-container">
+                        <div class="item-content">
+                            <img src="assets/imgs/<%= File.basename(@img) %>">
+                        </div>
                     </div>
                 </li>
             <% end %>
-            </ul>
+        <% end %>
+
+        <% if @videos %>
+            <% for @video in @videos %>
+                <li class="item item--video">
+                    <div class="item-content">
+                        <iframe width="560" 
+                            height="315"
+                            src="https://www.youtube.com/embed/<%= @video %>"
+                            frameborder="0" allowfullscreen />
+                    </div>
+                </li>
+            <% end %>
+        <% end %>
+
+        <% if @texts %>
+            <% for @text in @texts %>
+                <li class="item item--text">
+                    <div class="item-container">
+                        <div class="item-content">
+                            <%= Kramdown::Document.new(File.read(@text)).to_html %>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
         <% end %>
 
         <% if @externals %>
-            <ul class="externals">
             <% for @external in @externals %>
                 <li>
                     <iframe width="560" 
@@ -65,8 +67,8 @@
                     </iframe>
                 </li>
             <% end %>
-            </ul>
         <% end %>
+        </ul>
 
         </div>
 

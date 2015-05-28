@@ -8,6 +8,11 @@
         }
     }
 
+    function randomInt(max, min) {
+        min = min || 5;
+        return Math.floor(Math.random() * max) + min;
+    }
+
     function parentAnchor(el) {
         if (el.nodeName === 'A') {
             return el;
@@ -22,7 +27,8 @@
 
     module.exports = {
         addEventListeners: addEventListeners,
-        parentAnchor: parentAnchor
+        parentAnchor: parentAnchor,
+        randomInt: randomInt
     };
 
 }());

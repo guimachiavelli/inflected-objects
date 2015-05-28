@@ -2,6 +2,7 @@
     'use strict';
 
     var helpers = require('./helpers'),
+        exhibitionItems = require('./exhibition-items'),
         modal = require('./modal');
 
     var site = {
@@ -16,6 +17,8 @@
             if (this.isFramed() === true) {
                 document.body.className = 'is--framed';
             }
+
+            exhibitionItems.init(document.querySelectorAll('.item'));
         },
 
         isFramed: function() {
