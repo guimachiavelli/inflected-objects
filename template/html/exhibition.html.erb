@@ -13,63 +13,65 @@
 
         <div class="container">
 
-        <div class="header">
-            <h1 class="header-title">
-                <span class="deform">Inflected objects</span>
-            </h1>
-        </div>
+            <div class="header">
+                <h1 class="header-title">
+                    <span class="deform">Inflected objects</span>
+                </h1>
+            </div>
 
-        <ul class="items">
-        <% if @imgs %>
-            <% for @img in @imgs %>
-                <li class="item item--image">
-                    <div class="item-container">
-                        <div class="item-content">
-                            <img src="assets/imgs/<%= File.basename(@img) %>">
-                        </div>
-                    </div>
-                </li>
-            <% end %>
-        <% end %>
+            <div class="content">
+                <ul class="items">
+                <% if @imgs %>
+                    <% for @img in @imgs %>
+                        <li class="item item--image">
+                            <div class="item-container">
+                                <div class="item-content">
+                                    <img src="assets/imgs/<%= File.basename(@img) %>">
+                                </div>
+                            </div>
+                        </li>
+                    <% end %>
+                <% end %>
 
-        <% if @videos %>
-            <% for @video in @videos %>
-                <li class="item item--video">
-                    <div class="item-content">
-                        <iframe width="560" 
-                            height="315"
-                            src="https://www.youtube.com/embed/<%= @video %>"
-                            frameborder="0" allowfullscreen />
-                    </div>
-                </li>
-            <% end %>
-        <% end %>
+                <% if @videos %>
+                    <% for @video in @videos %>
+                        <li class="item item--video">
+                            <div class="item-content">
+                                <iframe width="560" 
+                                    height="315"
+                                    src="https://www.youtube.com/embed/<%= @video %>"
+                                    frameborder="0" allowfullscreen />
+                            </div>
+                        </li>
+                    <% end %>
+                <% end %>
 
-        <% if @texts %>
-            <% for @text in @texts %>
-                <li class="item item--text">
-                    <div class="item-container">
-                        <div class="item-content">
-                            <%= Kramdown::Document.new(File.read(@text)).to_html %>
-                        </div>
-                    </div>
-                </li>
-            <% end %>
-        <% end %>
+                <% if @texts %>
+                    <% for @text in @texts %>
+                        <li class="item item--text">
+                            <div class="item-container">
+                                <div class="item-content">
+                                    <%= Kramdown::Document.new(File.read(@text)).to_html %>
+                                </div>
+                            </div>
+                        </li>
+                    <% end %>
+                <% end %>
 
-        <% if @externals %>
-            <% for @external in @externals %>
-                <li>
-                    <iframe width="560" 
-                            height="315"
-                            src="<%= @external %>"
-                            frameborder="0">
-                    </iframe>
-                </li>
-            <% end %>
-        <% end %>
-        </ul>
+                <% if @externals %>
+                    <% for @external in @externals %>
+                        <li>
+                            <iframe width="560" 
+                                    height="315"
+                                    src="<%= @external %>"
+                                    frameborder="0">
+                            </iframe>
+                        </li>
+                    <% end %>
+                <% end %>
+                </ul>
 
+            </div>
         </div>
 
         <script src="js/bundle.js"></script>

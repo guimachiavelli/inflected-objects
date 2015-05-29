@@ -1,7 +1,8 @@
 (function(){
     'use strict';
 
-    var helpers = require('./helpers');
+    var helpers = require('./helpers'),
+        exhibitionItems = require('./exhibition-items');
 
     var modal;
 
@@ -11,18 +12,67 @@
 
         init: function(url) {
             console.log('modal:init:' + url);
+
             if (this.el !== null) {
                 this.close();
                 return;
             }
 
-            this.el = this.template(url);
+            this.fetchPage(url);
+        },
+
+        fetchPage: function(url) {
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.onload = this.onPageFetchSuccess.bind(this);
+            request.onerror = this.onPageFetchError;
+
+            request.send();
+        },
+
+        onPageFetchSuccess: function(e) {
+            var request, innerHTML, placeholderEl;
+            request = e.target;
+
+            if (request.status !== 200 || request.status > 400) {
+                return;
+            }
+
+            innerHTML = request.responseText;
+            placeholderEl = document.createElement('div');
+            placeholderEl.innerHTML = innerHTML;
+            placeholderEl = placeholderEl.querySelector('.content');
+
+            this.el = this.template(placeholderEl.innerHTML);
             this.open();
+            exhibitionItems.init(this.el.querySelectorAll('.item'));
+        },
+
+        template: function(innerHTML) {
+            var container, content, bg;
+
+            container = document.createElement('div');
+            container.className = 'modal-container';
+
+            bg = document.createElement('div');
+            bg.className = 'modal-bg';
+
+            content = document.createElement('div');
+            content.className = 'modal-content';
+            content.innerHTML = innerHTML;
+
+            container.appendChild(bg);
+            container.appendChild(content);
+
+            return container;
+        },
+
+        onPageFetchError: function(err) {
+            console.error(err);
         },
 
         close: function() {
             var frame;
-
             console.log('modal:close');
 
             frame = this.el.querySelector('.modal-content');
@@ -57,27 +107,21 @@
             this.el = null;
         },
 
-        template: function(url) {
-           var container, content, iframe;
-
-           container = document.createElement('div');
-           container.className = 'modal-container';
-
-           content = document.createElement('div');
-           content.className = 'modal-content';
-
-           iframe = document.createElement('iframe');
-           iframe.className = 'modal-frame'
-           iframe.src = url;
-
-           content.appendChild(iframe);
-           container.appendChild(content);
-
-           return container;
+        bind: function() {
+            //FIXME should probably cache these elements?
+            var bg, content;
+            bg = this.el.querySelector('.modal-bg');
+            content = this.el.querySelector('.modal-content');
+            bg.addEventListener('click', this.close.bind(this));
+            content.addEventListener('click',
+                                     this.onContentClick.bind(this, content));
         },
 
-        bind: function() {
-            this.el.addEventListener('click', this.close.bind(this));
+        onContentClick: function(self, e) {
+            if (e.target !== self) {
+                return;
+            }
+            this.close();
         }
 
     };
