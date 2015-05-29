@@ -23,26 +23,94 @@
            }
         },
 
+        clearItem: function() {
+            var el, container;
+
+            el = document.querySelector('.item--active');
+
+            if (!el) {
+                return;
+            }
+
+            container = el.querySelector('.item-container');
+
+            this.hideItem(el, container);
+
+        },
+
         setClipping: function(item, itemClipper) {
             var width, height;
-            width = helpers.randomInt(20) + 'vw';
-            height = helpers.randomInt(20) + 'vw';
+            width = helpers.randomInt(35) + 'vw';
+            height = helpers.randomInt(35) + 'vw';
 
             item.style.width = width;
             item.style.height = height;
 
-            item.style.webkitAnimationDuration = ((Math.random() * 2.5) + 1) + 's';
+            itemClipper.style.clip = this.generateClip(width, height);
+        },
+
+        generateClip: function(width, height) {
+            return 'rect(0 ' + width + ' ' + height + ' 0)';
         },
 
         onItemClick: function(item, itemClipper) {
-            var prevEl = document.querySelector('.is--active');
+            var prevEl, container;
 
-            if (prevEl && prevEl !== item) {
-                prevEl.classList.remove('is--active');
+            prevEl = document.querySelector('.item--active');
+            container = item.querySelector('.item-container');
+
+            if (prevEl && prevEl === item) {
+                this.hideItem(item, container);
+                return;
             }
 
-            item.classList.toggle('is--active');
+            this.showItem(item, container);
+        },
+
+        hideItem: function(item, container) {
+            item.classList.remove('item--show');
+            container.style.transform = '';
+            setTimeout(function(){
+                item.classList.remove('item--active');
+            }, 300);
+        },
+
+        showItem: function(item, container) {
+            var offset = [
+                this.distanceFromViewport(item, container),
+                this.distanceFromViewport(item, container, 'offsetTop')
+            ];
+
+            offset = this.addImageMargin(offset).join(',');
+
+            item.classList.add('item--active');
+            item.classList.add('item--show');
+            container.style.transform = 'translate(' + offset + ')';
+            setTimeout(function(){
+                //item.classList.remove('item--showing');
+            }, 300);
+        },
+
+        distanceFromViewport: function(item, container, offset) {
+            var distance;
+            distance = 0;
+            offset = offset || 'offsetLeft';
+
+            while(item) {
+                distance -= item[offset];
+                item = item.offsetParent;
+            }
+
+            return distance + 'px';
+        },
+
+        addImageMargin: function(offset) {
+            return offset.map(function(axis){
+                return 'calc(' + axis + ' + 5vh)';
+            });
         }
+
+
 
     };
 

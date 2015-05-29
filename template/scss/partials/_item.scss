@@ -1,0 +1,78 @@
+$item-width: 30vw;
+$item-height: 40vw;
+
+.item {
+    width: $item-width;
+    height: $item-height;
+    float: right;
+    overflow: hidden;
+    /*@include wobble-animation;*/
+}
+
+.item-container {
+    width: $item-width * 1.5;
+    height: $item-width * 1.5;
+    clip: rect(0 $item-width * 1.5 $item-width * 1.5 0);
+    transition: all 300ms $animation-material-timing;
+
+    .item--show & {
+        clip: rect(0 100vw 100vh 0) !important;
+    }
+
+    .item--active & {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+}
+
+.item-content {
+    .item--active & {
+
+    }
+
+    img {
+        height: 90vh;
+    }
+}
+
+.item--image {
+}
+
+.item--text {
+    .item-container{ 
+        width: 40vw;
+        background: black;
+        color: white;
+        font-family: $secondary-font;
+        font-size: 2vw;
+        overflow-y: scroll;
+    transform: translateZ(0);
+    }
+
+    p {
+        margin: 1em;
+    }
+}
+
+.single-content {
+    width: 50vw;
+    height: 60vw;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: 2em;
+    font-size: 2.5vw;
+    overflow-y: scroll;
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+
+    p, br {
+        margin-bottom: 2em;
+    }
+}
