@@ -48,31 +48,10 @@ $item-height: 40vw;
         font-family: $secondary-font;
         font-size: 2vw;
         overflow-y: scroll;
-    transform: translateZ(0);
+        transform: translateZ(0);
     }
 
     p {
         margin: 1em;
-    }
-}
-
-.single-content {
-    width: 50vw;
-    height: 60vw;
-    background: black;
-    position: absolute;
-    bottom: 0;
-    color: white;
-    padding: 2em;
-    font-size: 2.5vw;
-    overflow-y: scroll;
-
-    a {
-        color: white;
-        text-decoration: underline;
-    }
-
-    p, br {
-        margin-bottom: 2em;
     }
 }

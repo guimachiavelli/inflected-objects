@@ -1,0 +1,21 @@
+.content-text {
+    width: 50vh;
+    height: 60vh;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: 2em;
+    font-size: 1.5vw;
+    overflow-y: scroll;
+    font-family: $secondary-font;
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+
+    p, br {
+        margin-bottom: 2em;
+    }
+}
