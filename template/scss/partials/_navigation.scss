@@ -63,4 +63,10 @@
 
 .subnavigation-link {
     font-size: 3vw;
+    letter-spacing: 1px;
+
+    .deform {
+        display: inline-block;
+        transform: skewX(45deg) scaleY(1.4);
+    }
 }

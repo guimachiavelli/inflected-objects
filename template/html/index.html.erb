@@ -34,7 +34,9 @@
                                 <% for @subsection in @section[:subsections] %>
                                     <li class="subnavigation-item">
                                         <a class="subnavigation-link" href="<%= @section[:path] %>/<%= @subsection[:path]  %>.html">
-                                            <%= @subsection[:title] %>
+                                            <span class="deform">
+                                                <%= @subsection[:title] %>
+                                            </span>
                                         </a>
                                     </li>
                                 <% end %>
