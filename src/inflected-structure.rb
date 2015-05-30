@@ -7,10 +7,10 @@ class InflectedStructure
 
     def initialize(dir = './content')
         @content = dir
-        @sections = get_content('root', File.join(@content, '**'), nil, {})
+        @sections = get_content('root', File.join(@content, '**'))
     end
 
-    def get_content(page, path = nil, parent = nil, tree)
+    def get_content(page, path = nil)
         path ||= File.join(@content, '**')
         dir = Dir.glob(path)
         path = path.gsub('*', '')
@@ -19,18 +19,19 @@ class InflectedStructure
             name: page,
             path: path,
             page: nil,
-            sections: [],
-            media: {},
-            parent: parent
+            children: {},
+            media: {}
         }
 
-        contents = dir.each_with_object(content) do |item, content|
+        dir.each_with_object(content) do |item, content|
             basename = File.basename(item)
-            symbol = basename.gsub('_', '').gsub('.md', '').to_sym
 
             if section?(item, basename)
-                content[:sections] << section_metadata(item, basename)
+                section, section_path = section_metadata(item, basename)
+                section = File.join(path, section, '**')
+                content[:children][basename] = get_content(basename, section)
             elsif media?(item, basename)
+                symbol = basename.gsub('_', '').to_sym
                 content[:media][symbol] = get_media(item)
             elsif index?(basename, content) || page?(basename, page)
                 content[:page] = basename
@@ -38,19 +39,6 @@ class InflectedStructure
             end
         end
 
-        tree[page.to_sym] = contents
-
-        if (contents[:sections] && contents[:sections].count > 0)
-            contents[:sections].each do |section|
-                parent = contents[:name].to_s
-                section = section[:path]
-                section = File.join(parent, section) if parent != 'root'
-                section_path = File.join(@content, section, '**')
-                get_content(section, section_path, contents[:name], tree)
-            end
-        end
-
-        tree
     end
 
     def get_sections(root)
@@ -62,7 +50,7 @@ class InflectedStructure
     end
 
     def section_metadata(item, basename)
-        section = { path: basename, title: basename.gsub(/[0-9|-]/, '') }
+        section = [ basename, basename.gsub(/[0-9|-]/, '') ]
         section_content = section_page(item, basename)
         return section if section_content.nil?
 
@@ -72,7 +60,7 @@ class InflectedStructure
 
         yaml = YAML.load header
         return section if yaml['title'].nil? || yaml['title'].empty?
-        section[:title] = yaml['title'].to_s
+        section[1] = yaml['title'].to_s
 
         section
     end
@@ -103,7 +91,6 @@ class InflectedStructure
     end
 
     def page?(basename, page)
-        puts basename if page == '01.1a,b,c'
         page = page.gsub(/[0-9]-?/, '')
         basename == page + '.md'
     end
