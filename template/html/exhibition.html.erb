@@ -21,17 +21,25 @@
 
             <div class="content">
                 <ul class="items">
-                <% if @imgs %>
                     <% for @img in @imgs %>
                         <li class="item item--image">
                             <div class="item-container">
                                 <div class="item-content">
+                                <% if @img.class == Array %>
+                                    <ul>
+                                    <% for @carousel in @img %>
+                                        <li class="car">
+                                            <img src="assets/imgs/<%= File.basename(@carousel) %>">
+                                        </li>
+                                    <% end %>
+                                    </ul>
+                                <% else %>
                                     <img src="assets/imgs/<%= File.basename(@img) %>">
+                                <% end %>
                                 </div>
                             </div>
                         </li>
                     <% end %>
-                <% end %>
 
                 <% if @videos %>
                     <% for @video in @videos %>

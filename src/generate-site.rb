@@ -26,17 +26,20 @@ class InflectedSite
 
     def publish
         clear
-        @site.parsed_sections.each do |section, content|
-            puts content[:name]
-            dir = File.dirname(File.join(@public, content[:name]))
-            FileUtils.mkdir_p(dir) unless File.exists?(dir)
-            name = content[:name] == 'root' ? 'index' : content[:name]
-            path = File.join(@public, name  + '.html')
+        create_page(@site.parsed_sections)
+    end
 
-            File.write(path, content[:html])
+    def create_page(page)
+        dir = File.dirname(File.join(@public, page[:name]))
+        FileUtils.mkdir_p(dir) unless File.exists?(dir)
+        name = page[:name] == 'root' ? 'index' : page[:name]
+        path = File.join(@public, name  + '.html')
 
-            copy_media content[:media]
-        end
+        File.write(path, page[:html])
+
+        copy_media page[:media]
+
+        page[:children].each { |name, content| create_page(content)  }
     end
 
     def copy_media(media_type)
@@ -46,9 +49,12 @@ class InflectedSite
             dir = File.join(@assets, type)
             Dir.mkdir(dir) unless Dir.exists? dir
 
+            media = media.flatten
             media.each do |medium|
-                path = File.join(dir, File.basename(medium))
-                FileUtils.copy medium, path
+                dest = File.join(dir, File.basename(medium))
+                parent_dir = File.expand_path('..', dest)
+                FileUtils.mkdir_p(parent_dir) unless Dir.exists?(parent_dir)
+                FileUtils.copy medium, dest
             end
         end
     end

@@ -85,10 +85,19 @@ class InflectedStructure
         return nil
     end
 
-
     def get_media(type)
         return type unless File.directory? type
-        Dir.glob(File.join(type, '**'))
+        entries = Dir.glob(File.join(type, '**'))
+        basename = File.basename(type)
+        entries = carousels(entries) if basename == '_imgs'
+        entries
+    end
+
+    def carousels(entries)
+        entries.map do |entry|
+            next entry unless File.directory? entry
+            Dir.glob(File.join(entry, '*'))
+        end
     end
 
     def index?(basename, content)
