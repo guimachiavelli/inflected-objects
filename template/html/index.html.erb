@@ -21,19 +21,19 @@
 
             <div class="navigation">
                 <ol class="navigation-list">
-                    <% for @section in @sections %>
-                        <li class="navigation-item navigation-item--<%= @section[:path] %>">
+                    <% for @section_name, @section in @sections %>
+                        <li class="navigation-item navigation-item--<%= @section[:public_path] %>">
                             <a class="navigation-link"
-                               href="<%= @section[:path] %>.html">
+                               href="<%= @section[:public_path] %>.html">
                                <span class="deform">
                                    <%= @section[:title] %>
                                </span>
                             </a>
-                            <% if @section[:subsections] && @section[:subsections].count > 0 %>
+                            <% if @section[:children] %>
                             <ul class="subnavigation">
-                                <% for @subsection in @section[:subsections] %>
+                                <% for @subsection_name, @subsection in @section[:children] %>
                                     <li class="subnavigation-item">
-                                        <a class="subnavigation-link" href="<%= @section[:path] %>/<%= @subsection[:path]  %>.html">
+                                        <a class="subnavigation-link" href="<%= @subsection[:public_path] %>.html">
                                             <span class="deform">
                                                 <%= @subsection[:title] %>
                                             </span>

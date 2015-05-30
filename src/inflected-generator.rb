@@ -15,13 +15,8 @@ class InflectedGenerator
     def initialize(sections, public_path)
         @public_path = public_path
         @tpls = fetch_section_tpls
-        @all_sections = sections
-        @parsed_sections = {}
 
-        sections.each do |name, section|
-            parsed_section = generate_section_page(section)
-            @parsed_sections[name] = parsed_section if parsed_section != nil
-        end
+        @parsed_sections = generate_section_page(sections)
     end
 
     def fetch_section_tpls
@@ -38,6 +33,7 @@ class InflectedGenerator
 
     def generate_section_page(section)
         return nil if section[:page] == nil
+
         meta = section[:meta] || {}
         type = meta['type'] || 'index'
         type = type.to_sym
@@ -54,32 +50,15 @@ class InflectedGenerator
         @videos = get_video_list(section[:media][:videos])
         @texts = section[:media][:texts]
         @externals = get_externals_list(section[:media][:externals])
-        @sections = subsections(@sections)
-        puts @sections
+        @sections = section[:children]
 
         section[:html] = html.result(binding)
 
+        unless section[:children].nil? || section.empty?
+            section[:children].each {|name, child|  generate_section_page(child) }
+        end
+
         section
-    end
-
-    def subsections(sections)
-        return [] if sections.nil?
-        sections.map do |section|
-            section_name = section[:path].to_sym
-            subsections = @all_sections[section_name]
-            section[:subsections] = subsections[:sections] unless subsections.nil?
-            section
-        end
-    end
-
-    def get_subpages(subpages)
-        subpages.map do |page|
-            {
-                :name => File.basename(page[:name]).gsub('.md', ''),
-                :content => Kramdown::Document.new(page[:name]).to_html,
-                :parent => page[:parent]
-            }
-        end
     end
 
     def get_video_list(file)

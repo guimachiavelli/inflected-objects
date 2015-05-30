@@ -18,6 +18,8 @@ class InflectedStructure
         content = {
             name: page,
             path: path,
+            public_path: File.basename(path),
+            title: nil,
             page: nil,
             children: {},
             media: {}
@@ -35,10 +37,13 @@ class InflectedStructure
                 content[:media][symbol] = get_media(item)
             elsif index?(basename, content) || page?(basename, page)
                 content[:page] = basename
-                content = page_header(content)
+                content[:meta] = page_header(content)
+                content[:title] = basename.gsub('.md', '')
+                if content[:meta]['title'] != nil && content[:meta]['title'] != ''
+                    content[:title] = content[:meta]['title']
+                end
             end
         end
-
     end
 
     def get_sections(root)
@@ -107,13 +112,10 @@ class InflectedStructure
         file = File.join content[:path], content[:page]
         page = File.read(file)
 
-        return content if !has_page_header?(page)
+        return {} if !has_page_header?(page)
 
         header = page[/---(.|\n)*---/]
-        yaml = YAML.load header
-        content[:meta] = yaml
-
-        return content
+        YAML.load header
     end
 
     def has_page_header?(page_content)
