@@ -13,6 +13,29 @@
         return Math.floor(Math.random() * max) + min;
     }
 
+    function firstElementChild(parentNode, index, children) {
+        children = children || parentNode.childNodes;
+        index = index || 0;
+
+        if (children[index].nodeName === '#text') {
+            return firstElementChild(parentNode, index + 1, children);
+        }
+
+        return children[index];
+    }
+
+    function closestAncestorWithClass(el, className) {
+        if (el.classList.contains(className)) {
+            return el;
+        }
+
+        if (el.nodeName === 'BODY') {
+            return null;
+        }
+
+        return closestAncestorWithClass(el.parentNode, className);
+    }
+
     function parentAnchor(el) {
         if (el.nodeName === 'A') {
             return el;
@@ -28,7 +51,9 @@
     module.exports = {
         addEventListeners: addEventListeners,
         parentAnchor: parentAnchor,
-        randomInt: randomInt
+        randomInt: randomInt,
+        closestAncestorWithClass: closestAncestorWithClass,
+        firstElementChild: firstElementChild
     };
 
 }());

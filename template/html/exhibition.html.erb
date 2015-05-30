@@ -26,9 +26,9 @@
                             <div class="item-container">
                                 <div class="item-content">
                                 <% if @img.class == Array %>
-                                    <ul>
+                                    <ul class="carousel">
                                     <% for @carousel in @img %>
-                                        <li class="car">
+                                        <li class="carousel-image">
                                             <img src="assets/imgs/<%= File.basename(@carousel) %>">
                                         </li>
                                     <% end %>

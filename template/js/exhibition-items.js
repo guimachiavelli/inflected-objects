@@ -53,14 +53,21 @@
             return 'rect(0 ' + width + ' ' + height + ' 0)';
         },
 
-        onItemClick: function(item, itemClipper) {
-            var prevEl, container;
+        onItemClick: function(item, itemClipper, e) {
+            var prevEl, container, target, targetAncestor;
+
+            target = e.srcElement;
+            targetAncestor = helpers.closestAncestorWithClass(target, 'item--active');
+
+            if (target.nodeName === 'IMG' && targetAncestor !== null) {
+                return;
+            }
 
             prevEl = document.querySelector('.item--active');
             container = item.querySelector('.item-container');
 
-            if (prevEl && prevEl === item) {
-                this.hideItem(item, container);
+            if (prevEl) {
+                this.hideItem(prevEl, container);
                 return;
             }
 

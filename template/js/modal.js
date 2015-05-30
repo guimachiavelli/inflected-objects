@@ -2,7 +2,9 @@
     'use strict';
 
     var helpers = require('./helpers'),
-        exhibitionItems = require('./exhibition-items');
+        exhibitionItems = require('./exhibition-items'),
+        carousel = require('./carousel');
+
 
     var modal;
 
@@ -46,6 +48,7 @@
             this.el = this.template(placeholderEl.innerHTML);
             this.open();
             exhibitionItems.init(this.el.querySelectorAll('.item'));
+            carousel.init(this.el.querySelector('.carousel'));
         },
 
         template: function(innerHTML) {
