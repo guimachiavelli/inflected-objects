@@ -5,12 +5,14 @@ require_relative './inflected-dropbox.rb'
 
 class InflectedSite
     attr_reader :structure
+    PATH = File.dirname(File.expand_path('..', __FILE__))
 
-    def initialize(public_html = './public', content = './content')
-        @public = public_html
+    def initialize(public_html = 'public', content = 'content')
+        @public = File.join(PATH, public_html)
+        content = File.join(PATH, content)
         @assets = File.join(@public, 'assets')
         @content = InflectedDownloader.new(content)
-        @structure = InflectedStructure.new
+        @structure = InflectedStructure.new(content)
         @site = InflectedGenerator.new @structure.sections, @public
 
         Dir.mkdir(@public) unless Dir.exist? @public
