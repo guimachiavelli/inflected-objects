@@ -2,6 +2,10 @@ require 'yaml'
 
 class InflectedStructure
     MARK = '_'
+    WHITELIST = {
+        'imgs' => ['.jpg', '.gif', '.png', '.jpeg', '.webp'],
+        'texts' => ['.txt', '.md', '.mdown', '.markdown']
+    }
 
     attr_reader :sections
 
@@ -89,6 +93,7 @@ class InflectedStructure
         return type unless File.directory? type
         entries = Dir.glob(File.join(type, '**'))
         basename = File.basename(type)
+        entries = filter(entries, basename)
         entries = carousels(entries) if basename == '_imgs'
         entries
     end
@@ -97,6 +102,13 @@ class InflectedStructure
         entries.map do |entry|
             next entry unless File.directory? entry
             Dir.glob(File.join(entry, '*'))
+        end
+    end
+
+    def filter(entries, type)
+        accepted_files = WHITELIST[type.gsub('_','')]
+        entries.select do |entry|
+            accepted_files.include?(File.extname(entry)) || File.directory?(entry)
         end
     end
 
