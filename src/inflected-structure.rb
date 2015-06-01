@@ -12,7 +12,7 @@ class InflectedStructure
 
     def get_content(page, path = nil)
         path ||= File.join(@content, '**')
-        dir = Dir.glob(path)
+        dir = Dir.glob(path).sort
         path = path.gsub('*', '')
 
         content = {
