@@ -30,11 +30,7 @@ a {
 .container {
     min-height: 100%;
     background: #fff;
-    @include animation(site-wobble 10s 
-                       cubic-bezier(0.45, 0.05, 0.55, 0.95) 
+    @include animation(site-wobble (20 * $animation-duration) 
+                       $animation-material-timing
                        infinite alternate);
-    .is--framed & {
-        @include animation('');
-        background: transparent;
-    }
 }

@@ -1,4 +1,5 @@
-@mixin wobble-animation($duration: 1.5s) {
+@mixin wobble-animation($multiplier: 1) {
+    $duration: $multiplier * $animation-duration;
     @include animation(wobble $duration cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate);
 }
 

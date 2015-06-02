@@ -9,27 +9,27 @@
     .navigation-link,
     .subnavigation-link {
         display: inline-block;
-        @include wobble-animation;
+        @include wobble-animation(1);
     }
 
     &:first-child .navigation-link {
-        @include wobble-animation(1.75s);
+        @include wobble-animation(1.75);
     }
 
     &:last-child .navigation-link {
-        @include wobble-animation(2.25s);
+        @include wobble-animation(2.25);
     }
 
     &:nth-child(2n) .navigation-link {
-        @include wobble-animation(2s);
+        @include wobble-animation(2);
     }
 
     &:nth-child(3n) .navigation-link {
-        @include wobble-animation(2.5s);
+        @include wobble-animation(2.5);
     }
 
     &:nth-child(4) .navigation-link {
-        @include wobble-animation(1.65s);
+        @include wobble-animation(1.65);
     }
 }
 
