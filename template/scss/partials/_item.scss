@@ -6,7 +6,6 @@ $item-height: 40vw;
     height: $item-height;
     float: right;
     overflow: hidden;
-    /*@include wobble-animation;*/
 
     &.item--active {
         &:before {
@@ -39,16 +38,27 @@ $item-height: 40vw;
 }
 
 .item-content {
-    .item--active & {
-
-    }
+    background: black;
+    width: 95vw;
+    text-align: center;
+    position: relative;
 
     img {
         height: 90vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .item--show & {
+        img {
+            position: static;
+        }
     }
 }
 
 .item--image {
+
 }
 
 .item--text {
@@ -62,8 +72,13 @@ $item-height: 40vw;
         transform: translateZ(0);
     }
 
+    .item-content {
+        width: auto;
+    }
+
     p {
         margin: 1em;
+        text-align: left;
     }
 }
 
@@ -72,10 +87,13 @@ $item-height: 40vw;
 }
 
 .carousel-image {
+    background: black;
     position: absolute;
     top: 0;
     left: 0;
     display: none;
+    width: 100%;
+    text-align: center;
 
     &.carousel--active {
         display: block;

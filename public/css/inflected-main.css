@@ -199,8 +199,7 @@ a {
   width: 30vw;
   height: 40vw;
   float: right;
-  overflow: hidden;
-  /*@include wobble-animation;*/ }
+  overflow: hidden; }
   .item.item--active:before {
     content: '';
     position: fixed;
@@ -223,8 +222,18 @@ a {
     height: 100%;
     z-index: 1; }
 
-.item-content img {
-  height: 90vh; }
+.item-content {
+  background: black;
+  width: 95vw;
+  text-align: center;
+  position: relative; }
+  .item-content img {
+    height: 90vh;
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .item--show .item-content img {
+    position: static; }
 
 .item--text .item-container {
   width: 40vw;
@@ -236,17 +245,24 @@ a {
   -webkit-transform: translateZ(0);
           transform: translateZ(0); }
 
+.item--text .item-content {
+  width: auto; }
+
 .item--text p {
-  margin: 1em; }
+  margin: 1em;
+  text-align: left; }
 
 .carousel {
   position: relative; }
 
 .carousel-image {
+  background: black;
   position: absolute;
   top: 0;
   left: 0;
-  display: none; }
+  display: none;
+  width: 100%;
+  text-align: center; }
   .carousel-image.carousel--active {
     display: block; }
 

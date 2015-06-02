@@ -126,7 +126,6 @@
             container = el.querySelector('.item-container');
 
             this.hideItem(el, container);
-
         },
 
         setClipping: function(item, itemClipper) {
