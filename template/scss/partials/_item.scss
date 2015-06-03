@@ -40,7 +40,6 @@ $item-height: 40vw;
 .item-content {
     background: black;
     width: 95vw;
-    text-align: center;
     position: relative;
 
     img {
@@ -48,6 +47,8 @@ $item-height: 40vw;
         position: absolute;
         left: 0;
         top: 0;
+        display: block;
+        margin: 0 auto;
     }
 
     .item--show & {
@@ -78,7 +79,6 @@ $item-height: 40vw;
 
     p {
         margin: 1em;
-        text-align: left;
     }
 }
 

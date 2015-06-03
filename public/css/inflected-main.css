@@ -80,8 +80,8 @@ a {
 .container {
   min-height: 100%;
   background: #fff;
-  -webkit-animation: site-wobble 35s cubic-bezier(0, 0, 0.21, 1) infinite alternate;
-  animation: site-wobble 35s cubic-bezier(0, 0, 0.21, 1) infinite alternate; }
+  -webkit-animation: site-wobble 26.25s cubic-bezier(0, 0, 0.21, 1) infinite alternate;
+  animation: site-wobble 26.25s cubic-bezier(0, 0, 0.21, 1) infinite alternate; }
 
 .header {
   margin-bottom: 5px; }
@@ -117,7 +117,8 @@ a {
 
 .navigation-item {
   position: relative;
-  width: 100%; }
+  width: 100%;
+  z-index: 2; }
 
 .navigation-item .navigation-link,
 .navigation-item .subnavigation-link {
@@ -225,13 +226,14 @@ a {
 .item-content {
   background: black;
   width: 95vw;
-  text-align: center;
   position: relative; }
   .item-content img {
     height: 90vh;
     position: absolute;
     left: 0;
-    top: 0; }
+    top: 0;
+    display: block;
+    margin: 0 auto; }
   .item--show .item-content img {
     position: static; }
 
@@ -249,8 +251,7 @@ a {
   width: auto; }
 
 .item--text p {
-  margin: 1em;
-  text-align: left; }
+  margin: 1em; }
 
 .carousel {
   position: relative; }
@@ -307,3 +308,61 @@ a {
             transition-duration: 300ms;
     -webkit-transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75);
             transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75); }
+
+.instagram {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 25%; }
+
+.instagram-photo {
+  height: 25vh; }
+
+.photo--in .instagram-image {
+  -webkit-transform: translateY(25vh);
+      -ms-transform: translateY(25vh);
+          transform: translateY(25vh); }
+
+.photo--in .instagram-caption {
+  -webkit-transition-delay: 150ms;
+          transition-delay: 150ms;
+  opacity: 1; }
+
+.photo--out .instagram-image {
+  -webkit-transition-delay: 105.26316ms;
+          transition-delay: 105.26316ms;
+  -webkit-transform: translateY(105vh);
+      -ms-transform: translateY(105vh);
+          transform: translateY(105vh); }
+
+.photo--out .instagram-caption {
+  -webkit-transition-delay: 150ms;
+          transition-delay: 150ms;
+  opacity: 0; }
+
+.photo--no-transition .instagram-image, .photo--no-transition .instagram-caption {
+  -webkit-transition: none;
+          transition: none; }
+
+.instagram-image {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: block;
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.21, 1);
+          transition: transform 300ms cubic-bezier(0, 0, 0.21, 1);
+  -webkit-transform: translateY(-100vh);
+      -ms-transform: translateY(-100vh);
+          transform: translateY(-100vh); }
+
+.instagram-caption {
+  position: absolute;
+  top: 25vh;
+  font-size: 2.5vw;
+  color: yellow;
+  /*transform: translateY(-100vh);*/
+  -webkit-transition: opacity 0ms;
+          transition: opacity 0ms;
+  opacity: 0; }

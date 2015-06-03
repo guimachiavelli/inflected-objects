@@ -2,7 +2,7 @@
     'use strict';
 
     var helpers = require('./helpers'),
-        exhibitionItems = require('./exhibition-items'),
+        instagramFeed = require('./instagram-feed'),
         modal = require('./modal');
 
     var site = {
@@ -13,6 +13,7 @@
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
             this.bindEvents();
+            instagramFeed.init();
         },
 
         bindEvents: function() {

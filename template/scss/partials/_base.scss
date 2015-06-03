@@ -30,7 +30,7 @@ a {
 .container {
     min-height: 100%;
     background: #fff;
-    @include animation(site-wobble (20 * $animation-duration) 
+    @include animation(site-wobble (15 * $animation-duration) 
                        $animation-material-timing
                        infinite alternate);
 }
