@@ -8,6 +8,18 @@
         }
     }
 
+    function findArrayItem(haystack, needle) {
+        var i, len;
+
+        for (i = 0, len = haystack.length; i < len; i += 1) {
+            if (haystack[i][0] === needle[0] && haystack[i][1] === needle[1]) {
+                return i;
+            }
+        }
+
+        return false;
+    }
+
     function randomInt(max, min) {
         min = min || 5;
         return Math.floor(Math.random() * max) + min;
@@ -53,7 +65,8 @@
         parentAnchor: parentAnchor,
         randomInt: randomInt,
         closestAncestorWithClass: closestAncestorWithClass,
-        firstElementChild: firstElementChild
+        firstElementChild: firstElementChild,
+        findArrayItem: findArrayItem
     };
 
 }());

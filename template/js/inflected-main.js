@@ -3,6 +3,7 @@
 
     var helpers = require('./helpers'),
         instagramFeed = require('./instagram-feed'),
+        life = require('./life'),
         modal = require('./modal');
 
     var site = {
@@ -13,7 +14,8 @@
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
             this.bindEvents();
-            instagramFeed.init();
+            //instagramFeed.init();
+            life.init(this.container);
         },
 
         bindEvents: function() {

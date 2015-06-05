@@ -366,3 +366,11 @@ a {
   -webkit-transition: opacity 0ms;
           transition: opacity 0ms;
   opacity: 0; }
+
+.life {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0; }
