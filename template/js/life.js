@@ -5,7 +5,7 @@
     var life, config;
 
     config = {
-        cellSize: 20,
+        cellSize: 10,
         canvas: [500, 500]
     };
 
@@ -18,10 +18,13 @@
 
         init: function(container) {
             container = container || document.body;
+            var el = document.createElement('div');
+            el.className = 'life';
             this.canvas = document.createElement('canvas');
             this.ctx = this.canvas.getContext('2d');
             this.canvas = this.configuredCanvas(this.canvas);
-            container.appendChild(this.canvas);
+            el.appendChild(this.canvas);
+            container.appendChild(el);
 
             this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
@@ -32,7 +35,7 @@
         },
 
         configuredCanvas: function(canvas) {
-            canvas.className = 'life';
+            canvas.className = 'life-canvas';
             canvas.width = config.canvas[0] * window.devicePixelRatio;
             canvas.height = config.canvas[1] * window.devicePixelRatio;
 
@@ -40,7 +43,7 @@
         },
 
         setup: function(ctx) {
-            this.setGrid(ctx);
+            //this.setGrid(ctx);
             this.draw(ctx);
         },
 
@@ -48,12 +51,10 @@
             if (this.cells.length < 1) {
                 this.cells = this.seed();
             }
-            //ctx.fillStyle = 'white';
-            ctx.fillRect(0,0,config.canvas[0], config.canvas[1]);
-
+            ctx.clearRect(0,0,config.canvas[0], config.canvas[1]);
             this.cells.forEach(this.drawCell.bind(this, ctx));
 
-            setInterval(function(){
+            setTimeout(function(){
                 this.live(ctx);
             }.bind(this), 500);
         },
@@ -62,15 +63,8 @@
             this.cells = this.cells.map(function(cell) {
                 var livingNeighbours;
                 livingNeighbours = cell.neighbours.filter(function(neighbour){
-                    var neighbourCell;
-                    neighbourCell = this.cells.filter(function(nCell) {
-                        return nCell.id === neighbour;
-                    });
-                    if (neighbourCell.length === 0) {
-                        return false;
-                    }
-                    return neighbourCell[0].alive;
-                }.bind(this));
+                    return neighbour.alive;
+                });
 
                 if (cell.alive === true) {
                     if (this.shouldDie(livingNeighbours)) {
@@ -84,7 +78,7 @@
                 return cell;
             }.bind(this));
 
-            this.cells.forEach(this.drawCell.bind(this, ctx));
+            this.draw(ctx);
         },
 
         shouldDie: function(neighbours) {
@@ -129,40 +123,24 @@
                         x: rows,
                         y: columns,
                         alive: Math.floor(Math.random() * 10) % 17 === 0,
-                        neighbours: this.neighbours(rows, columns)
+                        neighbourIds: this.neighbours(rows, columns)
                     });
                 }
             }
 
+            cells.forEach(function(cell){
+                cell.neighbours = cells.filter(function(filterCell){
+                    return cell.neighbourIds.indexOf(filterCell.id) > -1;
+                });
+            });
+
             return cells;
-        },
-
-
-        setGrid: function(ctx) {
-            var rows, columns;
-            rows = this.rows;
-            columns = this.columns;
-
-            ctx.beginPath();
-            while(rows > 0) {
-                ctx.moveTo(0, rows * config.cellSize);
-                ctx.lineTo(config.canvas[0], rows * config.cellSize);
-                ctx.stroke();
-                rows -= 1;
-            }
-            while(columns > 0) {
-                ctx.moveTo(columns * config.cellSize, 0);
-                ctx.lineTo(columns * config.cellSize, config.canvas[1]);
-                ctx.stroke();
-                columns -= 1;
-            }
-            ctx.closePath();
         },
 
         drawCell: function(ctx, cell) {
             var position;
 
-            ctx.fillStyle = cell.alive === true ? 'black' : 'white';
+            ctx.fillStyle = cell.alive === true ? 'rgba(0,0,0,0)' : 'white';
             position = [cell.x * config.cellSize, cell.y * config.cellSize]
             ctx.fillRect(position[0], position[1], config.cellSize, config.cellSize);
 

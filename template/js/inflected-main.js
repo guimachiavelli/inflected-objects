@@ -14,7 +14,7 @@
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
             this.bindEvents();
-            //instagramFeed.init();
+            instagramFeed.init();
             life.init(this.container);
         },
 
