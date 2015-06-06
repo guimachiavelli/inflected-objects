@@ -24,13 +24,15 @@ body {
 
 a {
     text-decoration: none;
-    color: $text-colour;
+    color: $colour-text;
 }
 
 .container {
     min-height: 100%;
-    background: #fff;
-    @include animation(site-wobble (15 * $animation-duration) 
-                       $animation-material-timing
-                       infinite alternate);
+    background: $background-colour;
+    @media (min-width: $bp-mobile) {
+        @include animation(site-wobble (15 * $animation-duration) 
+                           $animation-material-timing
+                           infinite alternate);
+    }
 }

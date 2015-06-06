@@ -2,8 +2,8 @@
     position: relative;
     display: table;
     z-index: 2;
+    white-space: nowrap;
 }
-
 
 // wobble animation setup
 .navigation-item {
@@ -49,6 +49,12 @@
     @media (min-width: $bp-mobile) {
         font-size: 2.5vw;
         line-height: 4vw;
+    }
+}
+
+.navigation-item--01-abstraction {
+    .navigation-link {
+        font-size: 3.6vw;
     }
 }
 

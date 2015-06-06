@@ -2,104 +2,119 @@ $item-width: 30vw;
 $item-height: 40vw;
 
 .item {
-    width: $item-width;
-    height: $item-height;
-    float: right;
-    overflow: hidden;
+    margin-top: 2em;
 
-    &.item--active {
-        &:before {
-            content: '';
-            position: fixed;
-            left: -5vw;
-            top: -5vh;
-            width: 100%;
-            height: 100%;
+    @media(min-width: $bp-mobile) {
+        width: $item-width;
+        height: $item-height;
+        float: right;
+        overflow: hidden;
+
+        &.item--active {
+            &:before {
+                content: '';
+                position: fixed;
+                left: -5vw;
+                top: -5vh;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }
 
 .item-container {
-    width: $item-width * 1.5;
-    height: $item-width * 1.5;
-    clip: rect(0 $item-width * 1.5 $item-width * 1.5 0);
-    transition: all 300ms $animation-material-timing;
+    @media(min-width: $bp-mobile) {
+        width: $item-width * 1.5;
+        height: $item-width * 1.5;
+        transition: all 300ms $animation-material-timing;
+        clip: rect(0 $item-width * 1.5 $item-width * 1.5 0);
 
-    .item--show & {
-        clip: rect(0 100vw 100vh 0) !important;
-    }
+        .item--show & {
+            clip: rect(0 100vw 100vh 0) !important;
+        }
 
-    .item--active & {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
+        .item--active & {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
     }
 }
 
 .item-content {
-    background: black;
-    width: 95vw;
-    position: relative;
-
     img {
-        height: 90vh;
-        position: absolute;
-        left: 0;
-        top: 0;
         display: block;
-        margin: 0 auto;
+        width: 100%;
+        margin: 2em auto 0 auto;
+
     }
 
-    .item--show & {
+    @media(min-width: $bp-mobile) {
+        background: black;
+        width: 95vw;
+        position: relative;
+
         img {
-            position: static;
+            height: 90vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .item--show & {
+            img {
+                position: static;
+            }
         }
     }
 }
 
 .item--video {
-    .item-container {
-        position: absolute;
-        &:after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            display: block;
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            left: 0;
-        }
-    }
-
-    &.item--active {
-        .item-container:after {
-            content: none;
-        }
-    }
-
     iframe {
         position: relative;
         z-index: 0;
-        width: 90vw;
-        height: 90vh;
+        width: 100%;
     }
-}
 
-.item--image {
+    @media(min-width: $bp-mobile) {
+        .item-container {
+            position: absolute;
+            &:after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+            }
+        }
 
+        &.item--active {
+            .item-container:after {
+                content: none;
+            }
+        }
+
+    }
 }
 
 .item--text {
     .item-container{ 
-        width: 40vw;
         background: black;
         color: white;
         font-family: $secondary-font;
-        font-size: 2vw;
+        font-size: 6vw;
         overflow-y: scroll;
         transform: translateZ(0);
+
+        @media(min-width: $bp-mobile) {
+            width: 40vw;
+            font-size: 2vw;
+        }
     }
 
     .item-content {
@@ -116,15 +131,17 @@ $item-height: 40vw;
 }
 
 .carousel-image {
-    background: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    width: 100%;
-    text-align: center;
+    @media (min-width: $bp-mobile) {
+        background: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        text-align: center;
 
-    &.carousel--active {
-        display: block;
+        &.carousel--active {
+            display: block;
+        }
     }
 }

@@ -8,8 +8,10 @@
 
 .header-title {
     font-size: 4em;
-    font-size: 5.5vw;
+    font-size: 6.5vw;
     letter-spacing: 0.5px;
+    display: table;
+    white-space: nowrap;
 
     .deform {
         display: block;

@@ -14,6 +14,17 @@
         init: function() {
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
+
+            //old IE
+            if (!this.container.firsElementChild) {
+                return;
+            }
+
+            //simpler view for mobile
+            if (window.innerWidth < 480) {
+                return;
+            }
+
             this.bindEvents();
             instagramFeed.init();
             life.init(this.container);
@@ -451,7 +462,8 @@
 
     config = {
         cellSize: 10,
-        canvas: [500, 500]
+        canvas: [500, 500],
+        pixelRatio: window.devicePixelRatio || 1
     };
 
     life = {
@@ -471,12 +483,13 @@
 
             ctx = canvas.getContext('2d');
             canvas = this.configuredCanvas(canvas);
-            this.bind(canvas, audio);
             el.appendChild(canvas);
             el.appendChild(audio);
             container.appendChild(el);
 
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            ctx.scale(config.pixelRatio, config.pixelRatio);
+
+            this.bind(canvas, audio);
 
             this.rows = Math.floor(config.canvas[0]/config.cellSize);
             this.columns = Math.floor(config.canvas[1]/config.cellSize);
@@ -515,14 +528,13 @@
 
         configuredCanvas: function(canvas) {
             canvas.className = 'life-canvas';
-            canvas.width = config.canvas[0] * window.devicePixelRatio;
-            canvas.height = config.canvas[1] * window.devicePixelRatio;
+            canvas.width = config.canvas[0] * config.pixelRatio;
+            canvas.height = config.canvas[1] * config.pixelRatio;
 
             return canvas;
         },
 
         setup: function(ctx) {
-            //this.setGrid(ctx);
             this.draw(ctx);
         },
 
@@ -624,7 +636,6 @@
             ctx.fillRect(position[0], position[1], config.cellSize, config.cellSize);
 
         }
-
 
     };
 

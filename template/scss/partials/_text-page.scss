@@ -1,21 +1,30 @@
 .content-text {
-    width: 50vh;
-    height: 60vh;
-    background: black;
-    position: absolute;
     bottom: 0;
-    color: white;
-    padding: 2em;
-    font-size: 1.5vw;
-    overflow-y: scroll;
+    font-size: 5vw;
+    padding: 1em;
     font-family: $secondary-font;
 
     a {
-        color: white;
         text-decoration: underline;
     }
 
     p, br {
         margin-bottom: 2em;
+    }
+
+
+    @media(min-width: $bp-mobile) {
+        width: 50vh;
+        height: 60vh;
+        color: white;
+        background: black;
+        position: absolute;
+        font-size: 1.5vw;
+        overflow-y: scroll;
+        padding: 2em;
+
+        a {
+            color: white;
+        }
     }
 }
