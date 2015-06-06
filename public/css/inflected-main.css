@@ -90,10 +90,11 @@ html {
 body {
   background: lightgrey;
   font-family: Helvetica, Arial, sans-serif;
-  height: 100%; }
-  body.is--framed {
-    background: transparent;
-    font-family: "ITC Century Std", Helvetica; }
+  height: 100%;
+  padding-bottom: 2em; }
+  @media (max-width: 480px) {
+    body {
+      max-width: 479px; } }
 
 a {
   text-decoration: none;
@@ -189,8 +190,9 @@ a {
       font-size: 2.5vw;
       line-height: 4vw; } }
 
-.navigation-item--01-abstraction .navigation-link {
-  font-size: 3.6vw; }
+@media (max-width: 480px) {
+  .navigation-item--01-abstraction .navigation-link {
+    font-size: 3.6vw; } }
 
 .subnavigation {
   display: inline; }
@@ -235,6 +237,7 @@ a {
   margin-top: 2em; }
   @media (min-width: 480px) {
     .item {
+      margin-top: 0;
       width: 30vw;
       height: 40vw;
       float: right;
@@ -273,6 +276,8 @@ a {
     width: 95vw;
     position: relative; }
     .item-content img {
+      width: auto;
+      margin: 0 auto;
       height: 90vh;
       position: absolute;
       left: 0;
@@ -297,6 +302,11 @@ a {
       z-index: 1;
       top: 0;
       left: 0; }
+  .item--video iframe {
+    position: relative;
+    z-index: 0;
+    width: 90vw;
+    height: 90vh; }
   .item--video.item--active .item-container:after {
     content: none; } }
 

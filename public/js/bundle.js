@@ -16,10 +16,11 @@
             this.container = document.querySelector('.container');
 
             //old IE
-            if (!this.container.firsElementChild) {
+            if (!!this.container.firsElementChild) {
                 return;
             }
 
+            console.log(window.innerWidth)
             //simpler view for mobile
             if (window.innerWidth < 480) {
                 return;

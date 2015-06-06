@@ -53,8 +53,10 @@
 }
 
 .navigation-item--01-abstraction {
-    .navigation-link {
-        font-size: 3.6vw;
+    @media (max-width: $bp-mobile) {
+        .navigation-link {
+            font-size: 3.6vw;
+        }
     }
 }
 
