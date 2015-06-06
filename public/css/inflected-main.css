@@ -429,9 +429,8 @@ a {
     position: absolute;
     content: '';
     display: block;
-    /*background: red;*/
-    background: url(http://www.istockphoto.com/image-zoom/20233989/3/380/314/zoom-20233989-3.jpg);
-    /*@include animation(test (15 * $animation-duration) $animation-material-timing infinite alternate);*/ }
+    background: url("../extras/amoeba.jpg");
+    background-size: cover; }
 
 .life-canvas {
   width: 500px;
