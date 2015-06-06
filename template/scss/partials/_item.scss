@@ -58,6 +58,35 @@ $item-height: 40vw;
     }
 }
 
+.item--video {
+    .item-container {
+        position: absolute;
+        &:after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    &.item--active {
+        .item-container:after {
+            content: none;
+        }
+    }
+
+    iframe {
+        position: relative;
+        z-index: 0;
+        width: 90vw;
+        height: 90vh;
+    }
+}
+
 .item--image {
 
 }

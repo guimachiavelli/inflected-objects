@@ -147,6 +147,7 @@
         },
 
         onItemClick: function(item, itemClipper, e) {
+            console.log('click')
             var prevEl, container, target, targetAncestor;
 
             target = e.srcElement;

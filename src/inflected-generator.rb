@@ -63,7 +63,7 @@ class InflectedGenerator
 
     def get_video_list(file)
         return if file == nil
-        File.readlines(file).map { |line| line.split('v=')[1] }
+        File.readlines(file)
     end
 
     def get_externals_list(file)

@@ -44,11 +44,13 @@
                 <% if @videos %>
                     <% for @video in @videos %>
                         <li class="item item--video">
-                            <div class="item-content">
-                                <iframe width="560" 
-                                    height="315"
-                                    src="https://www.youtube.com/embed/<%= @video %>"
-                                    frameborder="0" allowfullscreen />
+                            <div class="item-container">
+                                <div class="item-content">
+                                    <iframe width="560" 
+                                        height="315"
+                                        src="<%= @video %>"
+                                        frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                                </div>
                             </div>
                         </li>
                     <% end %>

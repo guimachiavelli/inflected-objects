@@ -37,7 +37,7 @@ class InflectedStructure
                 section = File.join(path, section, '**')
                 content[:children][basename] = get_content(basename, section)
             elsif media?(item, basename)
-                symbol = basename.gsub('_', '').to_sym
+                symbol = basename.gsub('_', '').gsub('.md','').to_sym
                 content[:media][symbol] = get_media(item)
             elsif index?(basename, content) || page?(basename, page)
                 content[:page] = basename

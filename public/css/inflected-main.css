@@ -259,6 +259,27 @@ a {
   .item--show .item-content img {
     position: static; }
 
+.item--video .item-container {
+  position: absolute; }
+  .item--video .item-container:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0; }
+
+.item--video.item--active .item-container:after {
+  content: none; }
+
+.item--video iframe {
+  position: relative;
+  z-index: 0;
+  width: 90vw;
+  height: 90vh; }
+
 .item--text .item-container {
   width: 40vw;
   background: black;
