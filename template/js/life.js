@@ -10,28 +10,62 @@
     };
 
     life = {
-        canvas: null,
-        ctx: null,
         cells: [],
         rows: 0,
         columns: 0,
 
         init: function(container) {
+            var el, canvas, ctx, audio;
             container = container || document.body;
-            var el = document.createElement('div');
+
+            el = document.createElement('div');
             el.className = 'life';
-            this.canvas = document.createElement('canvas');
-            this.ctx = this.canvas.getContext('2d');
-            this.canvas = this.configuredCanvas(this.canvas);
-            el.appendChild(this.canvas);
+
+            canvas = document.createElement('canvas');
+            audio = this.audio();
+
+            ctx = canvas.getContext('2d');
+            canvas = this.configuredCanvas(canvas);
+            this.bind(canvas, audio);
+            el.appendChild(canvas);
+            el.appendChild(audio);
             container.appendChild(el);
 
-            this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
             this.rows = Math.floor(config.canvas[0]/config.cellSize);
             this.columns = Math.floor(config.canvas[1]/config.cellSize);
 
-            this.setup(this.ctx);
+            this.setup(ctx);
+        },
+
+        audio: function() {
+            var audio, mp3, ogg;
+
+            audio = document.createElement('audio');
+            mp3 = document.createElement('source');
+            ogg = document.createElement('source');
+
+            mp3.src = 'extras/life.mp3';
+            ogg.src = 'extras/life.ogg';
+
+            audio.appendChild(mp3);
+            audio.appendChild(ogg);
+
+            return audio;
+        },
+
+        bind: function(canvas, audio) {
+            canvas.addEventListener('mouseenter', this.playAudio.bind(this, audio));
+            canvas.addEventListener('mouseleave', this.stopAudio.bind(this, audio));
+        },
+
+        playAudio: function(audio) {
+            audio.play();
+        },
+
+        stopAudio: function(audio) {
+            audio.pause();
         },
 
         configuredCanvas: function(canvas) {
