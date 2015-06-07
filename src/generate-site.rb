@@ -51,12 +51,11 @@ class InflectedSite
             dir = File.join(@assets, type)
             Dir.mkdir(dir) unless Dir.exists? dir
 
-            media = media.flatten
-            media.each do |medium|
-                dest = File.join(dir, File.basename(medium))
+            media.flatten.each do |medium|
+                dest = File.join(dir, File.basename(medium[:path]))
                 parent_dir = File.expand_path('..', dest)
                 FileUtils.mkdir_p(parent_dir) unless Dir.exists?(parent_dir)
-                FileUtils.copy medium, dest
+                FileUtils.copy medium[:path], dest
             end
         end
     end

@@ -140,6 +140,14 @@ $item-height: 40vw;
     }
 }
 
+.item-caption {
+    font-size: 3vw;
+    color: yellow;
+    position: absolute;
+    bottom: 0;
+    text-align: left;
+}
+
 .carousel {
     position: relative;
 }

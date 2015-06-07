@@ -93,8 +93,10 @@ class InflectedStructure
         return type unless File.directory? type
         entries = Dir.glob(File.join(type, '**'))
         basename = File.basename(type)
+        media_captions = captions(entries)
         entries = filter(entries, basename)
         entries = carousels(entries) if basename == '_imgs'
+        entries = assign_captions_to_entries(media_captions, entries)
         entries
     end
 
@@ -127,6 +129,28 @@ class InflectedStructure
 
     def media?(item, basename)
         basename.start_with?(MARK)
+    end
+
+    def captions(entries)
+        entries.each_with_object({}) do |entry, caption|
+            next entry if (entry.class == Array ||
+                File.basename(entry) != 'captions.md')
+            File.readlines(entry).each do |line|
+                next if line == "\n"
+                key, value = line.split(':')
+                caption[key.strip] = value.strip
+            end
+        end
+    end
+
+    def assign_captions_to_entries(captions, entries)
+        entries.map do |entry|
+            if entry.class == Array
+                assign_captions_to_entries(captions, entry)
+            else
+                {path: entry, caption: captions[File.basename(entry)]}
+            end
+        end
     end
 
     def page_header(content)

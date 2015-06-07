@@ -29,12 +29,14 @@
                                     <ul class="carousel">
                                     <% for @carousel in @img %>
                                         <li class="carousel-image">
-                                            <img src="assets/imgs/<%= File.basename(@carousel) %>">
+                                            <img src="assets/imgs/<%= File.basename(@carousel[:path]) %>">
+                                            <p class="item-caption"><%= @carousel[:caption] %></p>
                                         </li>
                                     <% end %>
                                     </ul>
                                 <% else %>
-                                    <img src="assets/imgs/<%= File.basename(@img) %>">
+                                    <img src="assets/imgs/<%= File.basename(@img[:path]) %>">
+                                    <p class="item-caption"><%= @carousel[:caption] %></p>
                                 <% end %>
                                 </div>
                             </div>
@@ -61,7 +63,7 @@
                         <li class="item item--text">
                             <div class="item-container">
                                 <div class="item-content">
-                                    <%= Kramdown::Document.new(File.read(@text)).to_html %>
+                                    <%= Kramdown::Document.new(File.read(@text[:path])).to_html %>
                                 </div>
                             </div>
                         </li>
@@ -73,7 +75,7 @@
                         <li>
                             <iframe width="560" 
                                     height="315"
-                                    src="<%= @external %>"
+                                    src="<%= @external[:path] %>"
                                     frameborder="0">
                             </iframe>
                         </li>
