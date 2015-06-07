@@ -1,6 +1,8 @@
 (function(){
     'use strict';
 
+    require('./classlist-polyfill');
+
     var helpers = require('./helpers'),
         instagramFeed = require('./instagram-feed'),
         life = require('./life'),
