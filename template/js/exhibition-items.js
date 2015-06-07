@@ -67,6 +67,7 @@
             container = item.querySelector('.item-container');
 
             if (prevEl) {
+                container = prevEl.querySelector('.item-container');
                 this.hideItem(prevEl, container);
                 return;
             }
