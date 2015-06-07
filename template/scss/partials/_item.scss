@@ -123,6 +123,8 @@ $item-height: 40vw;
         @media(min-width: $bp-mobile) {
             width: 40vw;
             font-size: 2vw;
+            overflow: hidden;
+
             p {
                 transform: translateZ(0);
             }

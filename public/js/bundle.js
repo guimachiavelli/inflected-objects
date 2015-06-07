@@ -22,7 +22,6 @@
                 return;
             }
 
-            console.log(window.innerWidth)
             //simpler view for mobile
             if (window.innerWidth < 480) {
                 return;
