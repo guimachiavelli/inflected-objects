@@ -83,13 +83,14 @@ $item-height: 40vw;
     @media(min-width: $bp-mobile) {
         .item-container {
             position: absolute;
+
             &:after {
                 content: '';
                 width: 100%;
                 height: 100%;
                 display: block;
                 position: absolute;
-                z-index: 1;
+                z-index: 0;
                 top: 0;
                 left: 0;
             }
@@ -118,11 +119,13 @@ $item-height: 40vw;
         font-family: $secondary-font;
         font-size: 6vw;
         overflow-y: scroll;
-        transform: translateZ(0);
 
         @media(min-width: $bp-mobile) {
             width: 40vw;
             font-size: 2vw;
+            p {
+                transform: translateZ(0);
+            }
         }
     }
 

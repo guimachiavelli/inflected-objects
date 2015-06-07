@@ -199,9 +199,6 @@
             item.classList.add('item--active');
             item.classList.add('item--show');
             container.style.transform = 'translate(' + offset + ')';
-            setTimeout(function(){
-                //item.classList.remove('item--showing');
-            }, 300);
         },
 
         distanceFromViewport: function(item, container, offset) {

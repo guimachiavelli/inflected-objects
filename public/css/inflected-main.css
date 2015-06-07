@@ -142,6 +142,9 @@ a {
     line-height: 0;
     height: 20px; }
 
+.navigation {
+  padding-bottom: 10em; }
+
 .navigation-item {
   position: relative;
   display: table;
@@ -219,6 +222,8 @@ a {
   .content-text a {
     text-decoration: underline; }
   .content-text p, .content-text br {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
     margin-bottom: 2em; }
   @media (min-width: 480px) {
     .content-text {
@@ -299,7 +304,7 @@ a {
       height: 100%;
       display: block;
       position: absolute;
-      z-index: 1;
+      z-index: 0;
       top: 0;
       left: 0; }
   .item--video iframe {
@@ -315,13 +320,14 @@ a {
   color: white;
   font-family: "ITC Century Std", Helvetica;
   font-size: 6vw;
-  overflow-y: scroll;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0); }
+  overflow-y: scroll; }
   @media (min-width: 480px) {
     .item--text .item-container {
       width: 40vw;
-      font-size: 2vw; } }
+      font-size: 2vw; }
+      .item--text .item-container p {
+        -webkit-transform: translateZ(0);
+                transform: translateZ(0); } }
 
 .item--text .item-content {
   width: auto; }
