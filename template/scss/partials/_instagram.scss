@@ -26,7 +26,7 @@
 .photo--out {
     .instagram-image {
         transition-delay: (300ms/2.85);
-        transform: translateY(105vh);
+        transform: translateY(155vh);
     }
 
     .instagram-caption {
@@ -51,11 +51,29 @@
 }
 
 .instagram-caption {
-    position: absolute;
-    top: 25vh;
-    font-size: 2.75vw;
-    color: yellow;
-    /*transform: translateY(-100vh);*/
     transition: opacity 0ms;
     opacity: 0;
+    position: absolute;
+    top: 25vh;
+
+    p {
+        font-size: 2vw;
+        letter-spacing: -0.5px;
+        color: yellow;
+        text-align: justify;
+        text-align-last: justify;
+        margin-bottom: -1em;
+        &:after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 1px;
+        }
+    }
+
+    strong {
+        color: red;
+    }
+
+
 }

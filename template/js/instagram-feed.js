@@ -7,8 +7,8 @@
 
     config = {
         clientID: '050fd5a405a14c8ca6e160892ddf119a',
-        accessToken: '10295251.050fd5a.0df78a1ec668433c981c2d6cbc626e97',
-        endpoint: 'https://api.instagram.com/v1/users/10295251/media/recent/',
+        accessToken: '1922142485.050fd5a.918c6442a9d04928a754532dde856033',
+        endpoint: 'https://api.instagram.com/v1/users/1922142485/media/recent/',
         count: 10
     };
 
@@ -37,6 +37,10 @@
 
             if (response.meta.code !== 200) {
                 self.onFeedFetchError(response.meta);
+                return;
+            }
+
+            if (!response.data.length || response.data.length < 1) {
                 return;
             }
 
@@ -134,10 +138,12 @@
         },
 
         caption: function(text) {
-            var caption;
-            caption = document.createElement('p');
+            var caption, paragraph;
+            paragraph = document.createElement('p');
+            paragraph.innerHTML = text;
+            caption = document.createElement('div');
             caption.className = 'instagram-caption';
-            caption.innerHTML = text;
+            caption.appendChild(paragraph);
             return caption;
         }
 

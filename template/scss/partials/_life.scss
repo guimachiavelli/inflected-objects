@@ -1,7 +1,7 @@
 .life {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 375px;
+    height: 375px;
     top: 0;
     right: 0;
     z-index: 0;
@@ -10,24 +10,29 @@
 
     &:after {
         z-index: 1;
-        width: 500px;
-        height: 500px;
-        left: 0;
-        top: 0;
+        width: 374px;
+        height: 374px;
+        left: 1px;
+        top: 0px;
         position: absolute;
         content: '';
         display: block;
-        background: url('../extras/amoeba.jpg');
+        background: url('../extras/amoeba2.jpg');
         background-size: cover;
     }
 }
 
 .life-canvas {
-    width: 500px;
-    height: 500px;
+    width: 375px ;
+    height: 375px;
     position: absolute;
     z-index: 2;
     background: transparent;
+}
 
-
+.life-caption {
+    color: black;
+    font-size: 2vw;
+    position: relative;
+    z-index: 2;
 }

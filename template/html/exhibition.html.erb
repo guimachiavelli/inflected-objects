@@ -30,13 +30,13 @@
                                     <% for carousel in @img %>
                                         <li class="carousel-image">
                                             <img src="assets/imgs/<%= File.basename(carousel[:path]) %>">
-                                            <p class="item-caption"><%= carousel[:caption] %></p>
+                                            <div class="item-caption"><%= carousel[:caption] %></div>
                                         </li>
                                     <% end %>
                                     </ul>
                                 <% else %>
                                     <img src="assets/imgs/<%= File.basename(@img[:path]) %>">
-                                    <p class="item-caption"><%= @img[:caption] %></p>
+                                    <div class="item-caption"><%= @img[:caption] %></div>
                                 <% end %>
                                 </div>
                             </div>
@@ -50,8 +50,9 @@
                                 <div class="item-content">
                                     <iframe width="560" 
                                         height="315"
-                                        src="<%= @video %>"
+                                        src="<%= @video[:embed] %>"
                                         frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                                    <div class="item-caption"><%= @video[:caption] %></div>
                                 </div>
                             </div>
                         </li>

@@ -20,6 +20,20 @@
         return false;
     }
 
+    function capitalisedString(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function updatePrefixedStyle(el, property, style) {
+        var prefixes;
+
+        prefixes = ['moz', 'webkit', 'o', 'ms'];
+
+        prefixes.forEach(function(prefix){
+            el.style[prefix + capitalisedString(property)] = style;
+        });
+    }
+
     function randomInt(max, min) {
         min = min || 5;
         return Math.floor(Math.random() * max) + min;
@@ -66,7 +80,8 @@
         randomInt: randomInt,
         closestAncestorWithClass: closestAncestorWithClass,
         firstElementChild: firstElementChild,
-        findArrayItem: findArrayItem
+        findArrayItem: findArrayItem,
+        updatePrefixedStyle: updatePrefixedStyle
     };
 
 }());

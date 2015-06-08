@@ -1,4 +1,5 @@
 require 'yaml'
+require 'kramdown'
 
 class InflectedStructure
     MARK = '_'
@@ -138,7 +139,7 @@ class InflectedStructure
             File.readlines(entry).each do |line|
                 next if line == "\n"
                 key, value = line.split(':')
-                caption[key.strip] = value.strip
+                caption[key.strip] = Kramdown::Document.new(value).to_html
             end
         end
     end

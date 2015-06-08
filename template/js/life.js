@@ -6,7 +6,7 @@
 
     config = {
         cellSize: 10,
-        canvas: [500, 500],
+        canvas: [400, 400],
         pixelRatio: window.devicePixelRatio || 1
     };
 
@@ -16,7 +16,7 @@
         columns: 0,
 
         init: function(container) {
-            var el, canvas, ctx, audio;
+            var el, canvas, ctx, audio, paragraph;
             container = container || document.body;
 
             el = document.createElement('div');
@@ -25,10 +25,15 @@
             canvas = document.createElement('canvas');
             audio = this.audio();
 
+            paragraph = document.createElement('p');
+            paragraph.className = 'life-caption';
+            paragraph.innerHTML = '01.7';
+
             ctx = canvas.getContext('2d');
             canvas = this.configuredCanvas(canvas);
             el.appendChild(canvas);
             el.appendChild(audio);
+            el.appendChild(paragraph);
             container.appendChild(el);
 
             ctx.scale(config.pixelRatio, config.pixelRatio);

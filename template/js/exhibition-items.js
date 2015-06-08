@@ -77,23 +77,26 @@
 
         hideItem: function(item, container) {
             item.classList.remove('item--show');
-            container.style.transform = '';
+            helpers.updatePrefixedStyle(container, 'transform', '');
             setTimeout(function(){
                 item.classList.remove('item--active');
             }, 300);
         },
 
         showItem: function(item, container) {
-            var offset = [
+            var offset;
+
+            offset = [
                 this.distanceFromViewport(item, container),
                 this.distanceFromViewport(item, container, 'offsetTop')
             ];
 
             offset = this.addImageMargin(offset).join(',');
+            offset = 'translate(' + offset + ')';
 
             item.classList.add('item--active');
             item.classList.add('item--show');
-            container.style.transform = 'translate(' + offset + ')';
+            helpers.updatePrefixedStyle(container, 'transform', offset);
         },
 
         distanceFromViewport: function(item, container, offset) {

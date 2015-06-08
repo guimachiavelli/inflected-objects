@@ -422,23 +422,26 @@ if (objCtr.defineProperty) {
 
         hideItem: function(item, container) {
             item.classList.remove('item--show');
-            container.style.transform = '';
+            helpers.updatePrefixedStyle(container, 'transform', '');
             setTimeout(function(){
                 item.classList.remove('item--active');
             }, 300);
         },
 
         showItem: function(item, container) {
-            var offset = [
+            var offset;
+
+            offset = [
                 this.distanceFromViewport(item, container),
                 this.distanceFromViewport(item, container, 'offsetTop')
             ];
 
             offset = this.addImageMargin(offset).join(',');
+            offset = 'translate(' + offset + ')';
 
             item.classList.add('item--active');
             item.classList.add('item--show');
-            container.style.transform = 'translate(' + offset + ')';
+            helpers.updatePrefixedStyle(container, 'transform', offset);
         },
 
         distanceFromViewport: function(item, container, offset) {
@@ -490,6 +493,20 @@ if (objCtr.defineProperty) {
         return false;
     }
 
+    function capitalisedString(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function updatePrefixedStyle(el, property, style) {
+        var prefixes;
+
+        prefixes = ['moz', 'webkit', 'o', 'ms'];
+
+        prefixes.forEach(function(prefix){
+            el.style[prefix + capitalisedString(property)] = style;
+        });
+    }
+
     function randomInt(max, min) {
         min = min || 5;
         return Math.floor(Math.random() * max) + min;
@@ -536,7 +553,8 @@ if (objCtr.defineProperty) {
         randomInt: randomInt,
         closestAncestorWithClass: closestAncestorWithClass,
         firstElementChild: firstElementChild,
-        findArrayItem: findArrayItem
+        findArrayItem: findArrayItem,
+        updatePrefixedStyle: updatePrefixedStyle
     };
 
 }());
@@ -551,8 +569,8 @@ if (objCtr.defineProperty) {
 
     config = {
         clientID: '050fd5a405a14c8ca6e160892ddf119a',
-        accessToken: '10295251.050fd5a.0df78a1ec668433c981c2d6cbc626e97',
-        endpoint: 'https://api.instagram.com/v1/users/10295251/media/recent/',
+        accessToken: '1922142485.050fd5a.918c6442a9d04928a754532dde856033',
+        endpoint: 'https://api.instagram.com/v1/users/1922142485/media/recent/',
         count: 10
     };
 
@@ -581,6 +599,10 @@ if (objCtr.defineProperty) {
 
             if (response.meta.code !== 200) {
                 self.onFeedFetchError(response.meta);
+                return;
+            }
+
+            if (!response.data.length || response.data.length < 1) {
                 return;
             }
 
@@ -678,10 +700,12 @@ if (objCtr.defineProperty) {
         },
 
         caption: function(text) {
-            var caption;
-            caption = document.createElement('p');
+            var caption, paragraph;
+            paragraph = document.createElement('p');
+            paragraph.innerHTML = text;
+            caption = document.createElement('div');
             caption.className = 'instagram-caption';
-            caption.innerHTML = text;
+            caption.appendChild(paragraph);
             return caption;
         }
 
@@ -700,7 +724,7 @@ if (objCtr.defineProperty) {
 
     config = {
         cellSize: 10,
-        canvas: [500, 500],
+        canvas: [400, 400],
         pixelRatio: window.devicePixelRatio || 1
     };
 
@@ -710,7 +734,7 @@ if (objCtr.defineProperty) {
         columns: 0,
 
         init: function(container) {
-            var el, canvas, ctx, audio;
+            var el, canvas, ctx, audio, paragraph;
             container = container || document.body;
 
             el = document.createElement('div');
@@ -719,10 +743,15 @@ if (objCtr.defineProperty) {
             canvas = document.createElement('canvas');
             audio = this.audio();
 
+            paragraph = document.createElement('p');
+            paragraph.className = 'life-caption';
+            paragraph.innerHTML = '01.7';
+
             ctx = canvas.getContext('2d');
             canvas = this.configuredCanvas(canvas);
             el.appendChild(canvas);
             el.appendChild(audio);
+            el.appendChild(paragraph);
             container.appendChild(el);
 
             ctx.scale(config.pixelRatio, config.pixelRatio);

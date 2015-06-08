@@ -319,8 +319,7 @@ a {
   background: black;
   color: white;
   font-family: "ITC Century Std", Helvetica;
-  font-size: 6vw;
-  overflow-y: scroll; }
+  font-size: 6vw; }
   @media (min-width: 480px) {
     .item--text .item-container {
       width: 40vw;
@@ -331,17 +330,32 @@ a {
                 transform: translateZ(0); } }
 
 .item--text .item-content {
-  width: auto; }
+  width: auto;
+  height: 100%; }
+  @media (min-width: 480px) {
+    .item--text .item-content {
+      overflow-y: scroll; } }
 
 .item--text p {
   margin: 1em; }
 
 .item-caption {
-  font-size: 3vw;
+  font-size: 2vw;
+  letter-spacing: -0.5px;
   color: yellow;
   position: absolute;
   bottom: 0;
-  text-align: left; }
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  margin-bottom: -1em; }
+  .item-caption strong {
+    color: red; }
+  .item-caption:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 1px; }
 
 .carousel {
   position: relative; }
@@ -425,9 +439,9 @@ a {
 .photo--out .instagram-image {
   -webkit-transition-delay: 105.26316ms;
           transition-delay: 105.26316ms;
-  -webkit-transform: translateY(105vh);
-      -ms-transform: translateY(105vh);
-          transform: translateY(105vh); }
+  -webkit-transform: translateY(155vh);
+      -ms-transform: translateY(155vh);
+          transform: translateY(155vh); }
 
 .photo--out .instagram-caption {
   -webkit-transition-delay: 150ms;
@@ -450,19 +464,31 @@ a {
           transform: translateY(-100vh); }
 
 .instagram-caption {
-  position: absolute;
-  top: 25vh;
-  font-size: 2.75vw;
-  color: yellow;
-  /*transform: translateY(-100vh);*/
   -webkit-transition: opacity 0ms;
           transition: opacity 0ms;
-  opacity: 0; }
+  opacity: 0;
+  position: absolute;
+  top: 25vh; }
+  .instagram-caption p {
+    font-size: 2vw;
+    letter-spacing: -0.5px;
+    color: yellow;
+    text-align: justify;
+    -moz-text-align-last: justify;
+         text-align-last: justify;
+    margin-bottom: -1em; }
+    .instagram-caption p:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+      height: 1px; }
+  .instagram-caption strong {
+    color: red; }
 
 .life {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 375px;
+  height: 375px;
   top: 0;
   right: 0;
   z-index: 0;
@@ -470,19 +496,25 @@ a {
   overflow: hidden; }
   .life:after {
     z-index: 1;
-    width: 500px;
-    height: 500px;
-    left: 0;
-    top: 0;
+    width: 374px;
+    height: 374px;
+    left: 1px;
+    top: 0px;
     position: absolute;
     content: '';
     display: block;
-    background: url("../extras/amoeba.jpg");
+    background: url("../extras/amoeba2.jpg");
     background-size: cover; }
 
 .life-canvas {
-  width: 500px;
-  height: 500px;
+  width: 375px;
+  height: 375px;
   position: absolute;
   z-index: 2;
   background: transparent; }
+
+.life-caption {
+  color: black;
+  font-size: 2vw;
+  position: relative;
+  z-index: 2; }
