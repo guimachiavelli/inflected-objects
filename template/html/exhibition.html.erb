@@ -27,16 +27,16 @@
                                 <div class="item-content">
                                 <% if @img.class == Array %>
                                     <ul class="carousel">
-                                    <% for @carousel in @img %>
+                                    <% for carousel in @img %>
                                         <li class="carousel-image">
-                                            <img src="assets/imgs/<%= File.basename(@carousel[:path]) %>">
-                                            <p class="item-caption"><%= @carousel[:caption] %></p>
+                                            <img src="assets/imgs/<%= File.basename(carousel[:path]) %>">
+                                            <p class="item-caption"><%= carousel[:caption] %></p>
                                         </li>
                                     <% end %>
                                     </ul>
                                 <% else %>
                                     <img src="assets/imgs/<%= File.basename(@img[:path]) %>">
-                                    <p class="item-caption"><%= @carousel[:caption] %></p>
+                                    <p class="item-caption"><%= @img[:caption] %></p>
                                 <% end %>
                                 </div>
                             </div>
