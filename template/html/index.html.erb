@@ -22,7 +22,7 @@
             <div class="navigation">
                 <ol class="navigation-list">
                     <% for @section_name, @section in @sections %>
-                        <li class="navigation-item navigation-item--<%= @section[:public_path] %>">
+                        <li class="navigation-item navigation-item--<%= @section[:meta]['type'] %>">
                             <a class="navigation-link"
                                href="<%= @section[:public_path] %>.html">
                                <span class="deform">

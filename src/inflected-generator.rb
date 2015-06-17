@@ -9,7 +9,10 @@ class InflectedGenerator
     TPL_PATHS = {
         index: 'index.html.erb',
         exhibition: 'exhibition.html.erb',
-        text: 'text.html.erb'
+        image: 'image.html.erb',
+        text: 'text.html.erb',
+        sound: 'sound.html.erb',
+        video: 'video.html.erb'
     }
 
     def initialize(sections, public_path)
@@ -49,8 +52,10 @@ class InflectedGenerator
         @imgs = section[:media][:imgs]
         @videos = get_video_list(section[:media][:videos])
         @texts = section[:media][:texts]
+        @sounds = section[:media][:sounds]
         @externals = get_externals_list(section[:media][:externals])
         @sections = section[:children]
+        puts section if type == :sound
 
         section[:html] = html.result(binding)
 

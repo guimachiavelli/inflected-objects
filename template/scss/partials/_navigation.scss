@@ -1,5 +1,9 @@
 .navigation {
     padding-bottom: 10em;
+
+    a:hover {
+        color: red;
+    }
 }
 
 .navigation-item {
@@ -56,22 +60,31 @@
     }
 }
 
-.navigation-item--01-abstraction {
-    @media (max-width: $bp-mobile) {
-        .navigation-link {
-            font-size: 3.6vw;
-        }
-    }
-}
-
 .subnavigation {
     display: inline;
+
+    .navigation-item--exhibition & {
+        display: block;
+        max-height: 2.5*11vw;
+        transition: max-height 400ms $animation-material-timing;
+        overflow: hidden;
+    }
+
+    .navigation-item--closed & {
+        max-height: 0;
+    }
 }
 
 .subnavigation-item {
     display: inline-block;
     font-family: $highlight-font;
     margin-left: 1vw;
+
+    .navigation-item--exhibition & {
+        display: block;
+        margin-left: 15vw;
+        font-family: $main-font;
+    }
 }
 
 .subnavigation-link {
@@ -80,6 +93,14 @@
 
     .deform {
         display: inline-block;
-        transform: skewX(45deg) scaleY(1.4);
     }
+
+    .navigation-item--exhibition & {
+        font-size: 2.5vw;
+        padding-bottom: .75vw;
+        .deform {
+            transform: scaleY(1.4) skewX(45deg);
+        }
+    }
+
 }

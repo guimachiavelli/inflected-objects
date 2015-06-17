@@ -144,6 +144,8 @@ a {
 
 .navigation {
   padding-bottom: 10em; }
+  .navigation a:hover {
+    color: red; }
 
 .navigation-item {
   position: relative;
@@ -193,26 +195,38 @@ a {
       font-size: 2.5vw;
       line-height: 4vw; } }
 
-@media (max-width: 480px) {
-  .navigation-item--01-abstraction .navigation-link {
-    font-size: 3.6vw; } }
-
 .subnavigation {
   display: inline; }
+  .navigation-item--exhibition .subnavigation {
+    display: block;
+    max-height: 27.5vw;
+    -webkit-transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
+            transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
+    overflow: hidden; }
+  .navigation-item--closed .subnavigation {
+    max-height: 0; }
 
 .subnavigation-item {
   display: inline-block;
   font-family: "Snell Roundhand", Zapfino;
   margin-left: 1vw; }
+  .navigation-item--exhibition .subnavigation-item {
+    display: block;
+    margin-left: 15vw;
+    font-family: Helvetica, Arial, sans-serif; }
 
 .subnavigation-link {
   font-size: 3vw;
   letter-spacing: 1px; }
   .subnavigation-link .deform {
-    display: inline-block;
-    -webkit-transform: skewX(45deg) scaleY(1.4);
-        -ms-transform: skewX(45deg) scaleY(1.4);
-            transform: skewX(45deg) scaleY(1.4); }
+    display: inline-block; }
+  .navigation-item--exhibition .subnavigation-link {
+    font-size: 2.5vw;
+    padding-bottom: .75vw; }
+    .navigation-item--exhibition .subnavigation-link .deform {
+      -webkit-transform: scaleY(1.4) skewX(45deg);
+          -ms-transform: scaleY(1.4) skewX(45deg);
+              transform: scaleY(1.4) skewX(45deg); }
 
 .content-text {
   bottom: 0;
@@ -238,37 +252,15 @@ a {
       .content-text a {
         color: white; } }
 
+@media (min-width: 480px) {
+  .items {
+    width: 90vw;
+    height: 90vh;
+    margin: 5vh 5vw;
+    overflow: hidden; } }
+
 .item {
   margin-top: 2em; }
-  @media (min-width: 480px) {
-    .item {
-      margin-top: 0;
-      width: 30vw;
-      height: 40vw;
-      float: right;
-      overflow: hidden; }
-      .item.item--active:before {
-        content: '';
-        position: fixed;
-        left: -5vw;
-        top: -5vh;
-        width: 100%;
-        height: 100%; } }
-
-@media (min-width: 480px) {
-  .item-container {
-    width: 45vw;
-    height: 45vw;
-    -webkit-transition: all 300ms cubic-bezier(0, 0, 0.21, 1);
-            transition: all 300ms cubic-bezier(0, 0, 0.21, 1);
-    clip: rect(0 45vw 45vw 0); }
-    .item--show .item-container {
-      clip: rect(0 100vw 100vh 0) !important; }
-    .item--active .item-container {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: 1; } }
 
 .item-content img {
   display: block;
@@ -278,17 +270,25 @@ a {
 @media (min-width: 480px) {
   .item-content {
     background: black;
-    width: 95vw;
-    position: relative; }
+    width: 100%;
+    margin: 0 auto; }
     .item-content img {
       width: auto;
-      margin: 0 auto;
       height: 90vh;
-      position: absolute;
-      left: 0;
-      top: 0; }
+      margin-top: 0; }
     .item--show .item-content img {
       position: static; } }
+
+.item--audio .item-content {
+  text-align: center;
+  height: 90vh;
+  line-height: 90vh;
+  background: black;
+  position: relative; }
+
+.item--audio .item-caption {
+  line-height: 1;
+  margin-bottom: 1vw; }
 
 .item--video iframe {
   position: relative;
@@ -298,15 +298,6 @@ a {
 @media (min-width: 480px) {
   .item--video .item-container {
     position: absolute; }
-    .item--video .item-container:after {
-      content: '';
-      width: 100%;
-      height: 100%;
-      display: block;
-      position: absolute;
-      z-index: 0;
-      top: 0;
-      left: 0; }
   .item--video iframe {
     position: relative;
     z-index: 0;
@@ -347,8 +338,7 @@ a {
   bottom: 0;
   text-align: justify;
   -moz-text-align-last: justify;
-       text-align-last: justify;
-  margin-bottom: -1em; }
+       text-align-last: justify; }
   .item-caption strong {
     color: red; }
   .item-caption:after {
@@ -360,17 +350,19 @@ a {
 .carousel {
   position: relative; }
 
-@media (min-width: 480px) {
-  .carousel-image {
-    background: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    width: 100%;
-    text-align: center; }
-    .carousel-image.carousel--active {
-      display: block; } }
+.carousel-image {
+  position: relative; }
+  @media (min-width: 480px) {
+    .carousel-image {
+      background: black;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      width: 100%;
+      text-align: center; }
+      .carousel-image.carousel--active {
+        display: block; } }
 
 .modal-container {
   position: fixed;

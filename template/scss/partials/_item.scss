@@ -1,47 +1,17 @@
 $item-width: 30vw;
 $item-height: 40vw;
 
-.item {
-    margin-top: 2em;
-
+.items {
     @media(min-width: $bp-mobile) {
-        margin-top: 0;
-        width: $item-width;
-        height: $item-height;
-        float: right;
+        width: 90vw;
+        height: 90vh;
+        margin: 5vh 5vw;
         overflow: hidden;
-
-        &.item--active {
-            &:before {
-                content: '';
-                position: fixed;
-                left: -5vw;
-                top: -5vh;
-                width: 100%;
-                height: 100%;
-            }
-        }
     }
 }
 
-.item-container {
-    @media(min-width: $bp-mobile) {
-        width: $item-width * 1.5;
-        height: $item-width * 1.5;
-        transition: all 300ms $animation-material-timing;
-        clip: rect(0 $item-width * 1.5 $item-width * 1.5 0);
-
-        .item--show & {
-            clip: rect(0 100vw 100vh 0) !important;
-        }
-
-        .item--active & {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-    }
+.item {
+    margin-top: 2em;
 }
 
 .item-content {
@@ -53,16 +23,13 @@ $item-height: 40vw;
 
     @media(min-width: $bp-mobile) {
         background: black;
-        width: 95vw;
-        position: relative;
+        width: 100%;
+        margin: 0 auto;
 
         img {
             width: auto;
-            margin: 0 auto;
             height: 90vh;
-            position: absolute;
-            left: 0;
-            top: 0;
+            margin-top: 0;
         }
 
         .item--show & {
@@ -70,6 +37,21 @@ $item-height: 40vw;
                 position: static;
             }
         }
+    }
+}
+
+.item--audio {
+    .item-content {
+        text-align: center;
+        height: 90vh;
+        line-height: 90vh;
+        background: black;
+        position: relative;
+    }
+
+    .item-caption {
+        line-height: 1;
+        margin-bottom: 1vw;
     }
 }
 
@@ -83,17 +65,6 @@ $item-height: 40vw;
     @media(min-width: $bp-mobile) {
         .item-container {
             position: absolute;
-
-            &:after {
-                content: '';
-                width: 100%;
-                height: 100%;
-                display: block;
-                position: absolute;
-                z-index: 0;
-                top: 0;
-                left: 0;
-            }
         }
 
         iframe {
@@ -152,7 +123,6 @@ $item-height: 40vw;
     bottom: 0;
     text-align: justify;
     text-align-last: justify;
-    margin-bottom: -1em;
 
     strong {
         color: red;
@@ -171,6 +141,8 @@ $item-height: 40vw;
 }
 
 .carousel-image {
+    position: relative;
+
     @media (min-width: $bp-mobile) {
         background: black;
         position: absolute;

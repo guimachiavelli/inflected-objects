@@ -5,7 +5,8 @@ class InflectedStructure
     MARK = '_'
     WHITELIST = {
         'imgs' => ['.jpg', '.gif', '.png', '.jpeg', '.webp'],
-        'texts' => ['.txt', '.md', '.mdown', '.markdown']
+        'texts' => ['.txt', '.md', '.mdown', '.markdown'],
+        'sounds' => ['.mp3', '.ogg']
     }
 
     attr_reader :sections

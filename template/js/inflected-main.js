@@ -25,10 +25,19 @@
             if (window.innerWidth < 480) {
                 return;
             }
-
+            this.hideExhibitionSubNav();
             this.bindEvents();
             instagramFeed.init();
             life.init(this.container);
+
+        },
+
+        hideExhibitionSubNav: function() {
+            var exhibitionItems, i, len;
+            exhibitionItems = this.nav.querySelectorAll('.navigation-item--exhibition');
+            for (i = 0, len = exhibitionItems.length; i < len; i += 1) {
+                exhibitionItems[i].className += ' navigation-item--closed';
+            }
         },
 
         bindEvents: function() {
@@ -40,9 +49,17 @@
         onNavClick: function(e) {
             e.preventDefault();
 
-            var target;
+            var target, parent, ancestor;
 
+            ancestor = helpers.closestAncestorWithClass(e.target, 'navigation-item--exhibition');
+            parent = helpers.closestAncestorWithClass(e.target, 'subnavigation');
             target = helpers.parentAnchor(e.target);
+
+            console.log(parent, ancestor);
+            if (parent === null && ancestor !== null) {
+                ancestor.classList.toggle('navigation-item--closed');
+                return;
+            }
 
             if (target === false) {
                 console.warn('no enclosing anchor found');

@@ -44,48 +44,7 @@
                         </li>
                     <% end %>
                     <% end %>
-
-                <% if @videos %>
-                    <% for @video in @videos %>
-                        <li class="item item--video">
-                            <div class="item-container">
-                                <div class="item-content">
-                                    <iframe width="560" 
-                                        height="315"
-                                        src="<%= @video[:embed] %>"
-                                        frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-                                    <div class="item-caption"><%= @video[:caption] %></div>
-                                </div>
-                            </div>
-                        </li>
-                    <% end %>
-                <% end %>
-
-                <% if @texts %>
-                    <% for @text in @texts %>
-                        <li class="item item--text">
-                            <div class="item-container">
-                                <div class="item-content">
-                                    <%= Kramdown::Document.new(File.read(@text[:path])).to_html %>
-                                </div>
-                            </div>
-                        </li>
-                    <% end %>
-                <% end %>
-
-                <% if @externals %>
-                    <% for @external in @externals %>
-                        <li>
-                            <iframe width="560" 
-                                    height="315"
-                                    src="<%= @external[:path] %>"
-                                    frameborder="0">
-                            </iframe>
-                        </li>
-                    <% end %>
-                <% end %>
                 </ul>
-
             </div>
         </div>
 

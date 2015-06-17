@@ -15,11 +15,11 @@
             for (i = 0, len = items.length; i < len; i += 1) {
                 item = items[i];
                 itemClipper = item.querySelector('.item-container');
-                this.setClipping(item, itemClipper);
-                item.addEventListener('click',
-                                      this.onItemClick.bind(this,
-                                                            item,
-                                                            itemClipper));
+                //this.setClipping(item, itemClipper);
+                //item.addEventListener('click',
+                                      //this.onItemClick.bind(this,
+                                                            //item,
+                                                            //itemClipper));
            }
         },
 
