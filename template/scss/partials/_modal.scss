@@ -27,7 +27,7 @@
     transform: translateX(-150%);
     transform-origin: right top;
     transition: transform 350ms cubic-bezier(0, 0, 0, 1);
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 
     &.transition-in {
         transform: translateX(0);
