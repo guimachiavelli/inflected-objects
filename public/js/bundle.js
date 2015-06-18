@@ -934,7 +934,6 @@ if (objCtr.defineProperty) {
         exhibitionItems = require('./exhibition-items'),
         carousel = require('./carousel');
 
-
     var modal;
 
     modal = {

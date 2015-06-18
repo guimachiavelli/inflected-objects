@@ -48,6 +48,7 @@ class InflectedStructure
                 if content[:meta]['title'] != nil && content[:meta]['title'] != ''
                     content[:title] = content[:meta]['title']
                 end
+                content[:public_path] = '#' if content[:meta]['type'] == 'exhibition'
             end
         end
     end

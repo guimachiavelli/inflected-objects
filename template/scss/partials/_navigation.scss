@@ -65,9 +65,13 @@
 
     .navigation-item--exhibition & {
         display: block;
-        max-height: 2.5*11vw;
+        max-height: 5*13vw;
         transition: max-height 400ms $animation-material-timing;
         overflow: hidden;
+
+        @media (min-width: $bp-mobile) {
+            max-height: 2.5*13vw;
+        }
     }
 
     .navigation-item--closed & {
@@ -79,25 +83,40 @@
     display: inline-block;
     font-family: $highlight-font;
     margin-left: 1vw;
+    margin-bottom: 3vw;
 
     .navigation-item--exhibition & {
         display: block;
         margin-left: 15vw;
         font-family: $main-font;
     }
+
+    @media (min-width: $bp-mobile) {
+        margin-bottom: 0;
+    }
+
 }
 
 .subnavigation-link {
-    font-size: 3vw;
+    font-size: 5vw;
     letter-spacing: 1px;
+
+    @media (min-width: $bp-mobile) {
+        font-size: 3vw;
+    }
 
     .deform {
         display: inline-block;
     }
 
     .navigation-item--exhibition & {
-        font-size: 2.5vw;
+        font-size: 4vw;
         padding-bottom: .75vw;
+
+        @media (min-width: $bp-mobile) {
+            font-size: 2.5vw;
+        }
+
         .deform {
             transform: scaleY(1.4) skewX(45deg);
         }
