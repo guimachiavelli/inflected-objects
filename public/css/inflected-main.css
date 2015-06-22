@@ -105,8 +105,8 @@ a {
   background: #fff; }
   @media (min-width: 480px) {
     .container {
-      -webkit-animation: site-wobble 26.25s cubic-bezier(0, 0, 0.21, 1) infinite alternate;
-      animation: site-wobble 26.25s cubic-bezier(0, 0, 0.21, 1) infinite alternate; } }
+      -webkit-animation: site-wobble 37.5s cubic-bezier(0, 0, 0.21, 1) infinite alternate;
+      animation: site-wobble 37.5s cubic-bezier(0, 0, 0.21, 1) infinite alternate; } }
 
 .header {
   margin-bottom: 5px; }
@@ -138,6 +138,16 @@ a {
     display: inline-block;
     text-transform: none;
     margin-right: .5em; }
+  .footer .social {
+    margin-bottom: 1em;
+    overflow: hidden; }
+  .footer .social-link {
+    float: left;
+    font-family: "ITC Century Std", Helvetica;
+    font-size: 1.5vw;
+    margin-right: 1em; }
+    .footer .social-link:hover {
+      color: red; }
   .footer img {
     line-height: 0;
     height: 20px; }
@@ -156,28 +166,28 @@ a {
 .navigation-item .navigation-link,
 .navigation-item .subnavigation-link {
   display: inline-block;
-  -webkit-animation: wobble 1.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 1.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:first-child .navigation-link {
-  -webkit-animation: wobble 3.0625s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.0625s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:last-child .navigation-link {
-  -webkit-animation: wobble 3.9375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.9375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:nth-child(2n) .navigation-link {
-  -webkit-animation: wobble 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:nth-child(3n) .navigation-link {
   -webkit-animation: wobble 4.375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 4.375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
+.navigation-item:last-child .navigation-link {
+  -webkit-animation: wobble 5.625s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 5.625s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(2n) .navigation-link {
+  -webkit-animation: wobble 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(3n) .navigation-link {
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
 .navigation-item:nth-child(4) .navigation-link {
-  -webkit-animation: wobble 2.8875s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 2.8875s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-link {
   font-size: 1.2em;
@@ -408,6 +418,8 @@ a {
           transform-origin: right top;
   -webkit-transition: -webkit-transform 350ms cubic-bezier(0, 0, 0, 1);
           transition: transform 350ms cubic-bezier(0, 0, 0, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
+          transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
   /*overflow-y: scroll;*/ }
   .modal-content.transition-in {
     -webkit-transform: translateX(0);
@@ -417,7 +429,9 @@ a {
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
     -webkit-transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75);
-            transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75); }
+            transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75);
+    -webkit-transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
+            transition-timing-function: cubic-bezier(0, 0, 0.21, 1); }
 
 .instagram {
   position: fixed;

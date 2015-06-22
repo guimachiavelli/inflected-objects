@@ -15,6 +15,21 @@
         margin-right: .5em;
     }
 
+    .social {
+        margin-bottom: 1em;
+        overflow: hidden;
+    }
+
+    .social-link {
+        float: left;
+        font-family: $secondary-font;
+        font-size: 1.5vw;
+        margin-right: 1em;
+        &:hover {
+            color: red;
+        }
+    }
+
     img {
         line-height: 0;
         height: 20px;

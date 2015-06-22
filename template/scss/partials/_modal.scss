@@ -27,6 +27,7 @@
     transform: translateX(-150%);
     transform-origin: right top;
     transition: transform 350ms cubic-bezier(0, 0, 0, 1);
+    transition-timing-function: $animation-material-timing;
     /*overflow-y: scroll;*/
 
     &.transition-in {
@@ -36,5 +37,6 @@
     &.transition-out {
         transition-duration: 300ms;
         transition-timing-function: cubic-bezier(0.5, 0, 1, 0.75);
+        transition-timing-function: $animation-material-timing;
     }
 }
