@@ -623,6 +623,15 @@ if (objCtr.defineProperty) {
                 return;
             }
 
+            if (response.data.length === 2) {
+                response.data.push(response.data[0]);
+            }
+
+            if (response.data.length === 1) {
+                response.data.push(response.data[0]);
+                response.data.push(response.data[0]);
+            }
+
             self.parse(response.data);
         },
 
