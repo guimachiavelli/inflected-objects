@@ -282,8 +282,9 @@ a {
     margin: 5vh 5vw;
     overflow: hidden; } }
 
-.item {
-  margin-top: 2em; }
+@media (max-width: 480px) {
+  .item {
+    margin-top: 2em; } }
 
 .item-content img {
   display: block;

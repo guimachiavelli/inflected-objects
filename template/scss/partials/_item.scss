@@ -11,7 +11,9 @@ $item-height: 40vw;
 }
 
 .item {
-    margin-top: 2em;
+    @media(max-width: $bp-mobile) {
+        margin-top: 2em;
+    }
 }
 
 .item-content {

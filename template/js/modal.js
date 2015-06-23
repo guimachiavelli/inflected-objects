@@ -12,7 +12,6 @@
         parent: document.body,
 
         init: function(url) {
-            console.log('modal:init:' + url);
 
             if (this.el !== null) {
                 this.close();
@@ -75,7 +74,6 @@
 
         close: function() {
             var frame;
-            console.log('modal:close');
 
             frame = this.el.querySelector('.modal-content');
             frame.className = 'modal-content';
@@ -87,7 +85,6 @@
 
         open: function() {
             var frame;
-            console.log('modal:open');
 
             this.render();
             frame = this.el.querySelector('.modal-content');
