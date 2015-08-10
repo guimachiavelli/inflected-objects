@@ -45,7 +45,7 @@ class InflectedGenerator
         page = File.join(section[:path], section[:page])
         page = File.read(page).gsub(/---(.|\n)*---/, '')
 
-        @content = Kramdown::Document.new(page).to_html
+        @content = Kramdown::Document.new(page, {auto_ids: false}).to_html
         @name = section[:name]
         @title = meta['title'] || ''
         @sections = section[:sections]

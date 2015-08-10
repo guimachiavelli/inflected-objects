@@ -3,6 +3,7 @@
 
     var helpers = require('./helpers'),
         exhibitionItems = require('./exhibition-items'),
+        pagination = require('./pagination'),
         carousel = require('./carousel');
 
     var modal;
@@ -47,6 +48,7 @@
             this.open();
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
+            pagination.init(this.el.querySelector('.content-text'));
         },
 
         template: function(innerHTML) {
@@ -81,6 +83,15 @@
             setTimeout(function(){
                 this.remove();
             }.bind(this), 300);
+        },
+
+        onResize: function() {
+            console.log(this);
+            if (!this.el) {
+                return;
+            }
+
+            this.close();
         },
 
         open: function() {

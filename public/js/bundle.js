@@ -28,7 +28,7 @@
             }
             this.hideExhibitionSubNav();
             this.bindEvents();
-            instagramFeed.init();
+            //instagramFeed.init();
             life.init(this.container);
 
         },
@@ -45,6 +45,10 @@
             if (this.nav) {
                 this.nav.addEventListener('click', this.onNavClick.bind(this));
             }
+
+            window.addEventListener('resize', helpers.debounce(
+                modal.onResize.bind(modal), 300));
+
         },
 
         onNavClick: function(e) {
@@ -75,7 +79,7 @@
 
 }());
 
-},{"./classlist-polyfill":3,"./helpers":5,"./instagram-feed":6,"./life":7,"./modal":8}],2:[function(require,module,exports){
+},{"./classlist-polyfill":3,"./helpers":6,"./instagram-feed":7,"./life":8,"./modal":9}],2:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -121,7 +125,7 @@
 
 }());
 
-},{"./helpers":5}],3:[function(require,module,exports){
+},{"./helpers":6}],3:[function(require,module,exports){
 /*
  * classList.js: Cross-browser full element.classList implementation.
  * 1.1.20150312
@@ -487,9 +491,56 @@ if (objCtr.defineProperty) {
     module.exports = exhibitionItems;
 }());
 
-},{"./helpers":5}],5:[function(require,module,exports){
+},{"./helpers":6}],5:[function(require,module,exports){
 (function(){
     'use strict';
+
+    var helpers = require('./helpers');
+
+    var fontStretch;
+
+    fontStretch = {
+
+        init: function(el) {
+            var i, len, children, size;
+            children = el.children;
+
+            for (i = 0, len = children.length; i < len; i += 1) {
+                this.stretch(children[i], el);
+            }
+        },
+
+        stretch: function(el, parent) {
+            var y;
+
+            y = (parent.offsetHeight - 50)/el.offsetHeight;
+            y = Math.min(y, 10);
+            el.style.transform = 'scaleY(' + y + ')';
+        },
+    };
+
+    module.exports = fontStretch;
+
+}());
+
+},{"./helpers":6}],6:[function(require,module,exports){
+(function(){
+    'use strict';
+
+    function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+	};
+};
 
     function addEventListeners(nodeList, event, handler) {
         var i, len;
@@ -552,6 +603,31 @@ if (objCtr.defineProperty) {
         return closestAncestorWithClass(el.parentNode, className);
     }
 
+    function nextSiblingOfType(el, nodeName) {
+        if (el.nextSibling === null) {
+            return null;
+        }
+
+        if (el.nextSibling.nodeName === nodeName) {
+            return el.nextSibling;
+        }
+
+        return nextSiblingOfType(el.nextSibling, nodeName);
+    }
+
+    function previousSiblingOfType(el, nodeName) {
+        if (el.previousSibling === null) {
+            return null;
+        }
+
+        if (el.previousSibling.nodeName === nodeName) {
+            return el.previousSibling;
+        }
+
+        return previousSiblingOfType(el.previousSibling, nodeName);
+    }
+
+
     function parentAnchor(el) {
         if (el.nodeName === 'A') {
             return el;
@@ -566,17 +642,20 @@ if (objCtr.defineProperty) {
 
     module.exports = {
         addEventListeners: addEventListeners,
+        debounce: debounce,
         parentAnchor: parentAnchor,
         randomInt: randomInt,
         closestAncestorWithClass: closestAncestorWithClass,
         firstElementChild: firstElementChild,
         findArrayItem: findArrayItem,
-        updatePrefixedStyle: updatePrefixedStyle
+        updatePrefixedStyle: updatePrefixedStyle,
+        nextSiblingOfType: nextSiblingOfType,
+        previousSiblingOfType: previousSiblingOfType
     };
 
 }());
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -741,7 +820,7 @@ if (objCtr.defineProperty) {
     module.exports = instagramFeed;
 }());
 
-},{"./helpers":5}],7:[function(require,module,exports){
+},{"./helpers":6}],8:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -935,12 +1014,13 @@ if (objCtr.defineProperty) {
     module.exports = life;
 }());
 
-},{"./helpers":5}],8:[function(require,module,exports){
+},{"./helpers":6}],9:[function(require,module,exports){
 (function(){
     'use strict';
 
     var helpers = require('./helpers'),
         exhibitionItems = require('./exhibition-items'),
+        pagination = require('./pagination'),
         carousel = require('./carousel');
 
     var modal;
@@ -985,6 +1065,7 @@ if (objCtr.defineProperty) {
             this.open();
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
+            pagination.init(this.el.querySelector('.content-text'));
         },
 
         template: function(innerHTML) {
@@ -1019,6 +1100,15 @@ if (objCtr.defineProperty) {
             setTimeout(function(){
                 this.remove();
             }.bind(this), 300);
+        },
+
+        onResize: function() {
+            console.log(this);
+            if (!this.el) {
+                return;
+            }
+
+            this.close();
         },
 
         open: function() {
@@ -1067,4 +1157,91 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./carousel":2,"./exhibition-items":4,"./helpers":5}]},{},[1]);
+},{"./carousel":2,"./exhibition-items":4,"./helpers":6,"./pagination":10}],10:[function(require,module,exports){
+(function(){
+    'use strict';
+
+    var helpers = require('./helpers'),
+        fontStretch = require('./font-stretch.js');
+
+    var pagination;
+
+    pagination = {
+        init: function(el) {
+            this.addButtons(el);
+            this.bind(el);
+
+            fontStretch.init(el);
+            el.querySelector('p').classList.add('carousel--active');
+            el.className += ' pagination';
+        },
+
+        bind: function(el) {
+            var parent, next, previous;
+            parent = el.parentNode;
+
+            next = parent.querySelector('.pagination-button--next');
+            next.addEventListener('click', this.advance.bind(this, el));
+
+            previous = parent.querySelector('.pagination-button--previous');
+            previous.addEventListener('click', this.revert.bind(this, el));
+        },
+
+        addButtons: function(el) {
+            var next, prev, fragment;
+
+            fragment = document.createDocumentFragment();
+            fragment.appendChild(this.button('previous'));
+            fragment.appendChild(this.button('next'));
+
+            el.parentNode.appendChild(fragment);
+        },
+
+        button: function(type){
+            var btn;
+
+            btn = document.createElement('button');
+            btn.className = 'pagination-button--' + type;
+            btn.innerHTML = type + ' page';
+
+            return btn;
+        },
+
+        advance: function(el, e) {
+            var target, next;
+            e.preventDefault();
+
+            target = el.querySelector('.carousel--active');
+
+            next = helpers.nextSiblingOfType(target, 'P');
+
+            if (next === null) {
+                return;
+            }
+
+            next.classList.add('carousel--active');
+            target.classList.remove('carousel--active');
+        },
+
+        revert: function(el, e) {
+            var target, previous;
+            e.preventDefault();
+
+            target = el.querySelector('.carousel--active');
+
+            previous = helpers.previousSiblingOfType(target, 'P');
+
+            if (previous === null) {
+                return;
+            }
+
+            previous.classList.add('carousel--active');
+            target.classList.remove('carousel--active');
+        }
+
+    };
+
+    module.exports = pagination;
+}());
+
+},{"./font-stretch.js":5,"./helpers":6}]},{},[1]);

@@ -1,6 +1,21 @@
 (function(){
     'use strict';
 
+    function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+	};
+};
+
     function addEventListeners(nodeList, event, handler) {
         var i, len;
         for (i = 0, len = nodeList.length; i < len; i += 1) {
@@ -62,6 +77,31 @@
         return closestAncestorWithClass(el.parentNode, className);
     }
 
+    function nextSiblingOfType(el, nodeName) {
+        if (el.nextSibling === null) {
+            return null;
+        }
+
+        if (el.nextSibling.nodeName === nodeName) {
+            return el.nextSibling;
+        }
+
+        return nextSiblingOfType(el.nextSibling, nodeName);
+    }
+
+    function previousSiblingOfType(el, nodeName) {
+        if (el.previousSibling === null) {
+            return null;
+        }
+
+        if (el.previousSibling.nodeName === nodeName) {
+            return el.previousSibling;
+        }
+
+        return previousSiblingOfType(el.previousSibling, nodeName);
+    }
+
+
     function parentAnchor(el) {
         if (el.nodeName === 'A') {
             return el;
@@ -76,12 +116,15 @@
 
     module.exports = {
         addEventListeners: addEventListeners,
+        debounce: debounce,
         parentAnchor: parentAnchor,
         randomInt: randomInt,
         closestAncestorWithClass: closestAncestorWithClass,
         firstElementChild: firstElementChild,
         findArrayItem: findArrayItem,
-        updatePrefixedStyle: updatePrefixedStyle
+        updatePrefixedStyle: updatePrefixedStyle,
+        nextSiblingOfType: nextSiblingOfType,
+        previousSiblingOfType: previousSiblingOfType
     };
 
 }());

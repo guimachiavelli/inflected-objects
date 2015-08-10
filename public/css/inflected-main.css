@@ -251,29 +251,70 @@ a {
           -ms-transform: scaleY(1.4) skewX(45deg);
               transform: scaleY(1.4) skewX(45deg); }
 
-.content-text {
+.content-text-container {
   bottom: 0;
   font-size: 5vw;
   padding: 1em;
   font-family: "ITC Century Std", Helvetica; }
-  .content-text a {
+  .content-text-container a {
     text-decoration: underline; }
-  .content-text p, .content-text br {
+  .content-text-container p, .content-text-container br {
     -webkit-transform: translateZ(0);
             transform: translateZ(0);
     margin-bottom: 2em; }
   @media (min-width: 480px) {
-    .content-text {
-      width: 50vh;
-      height: 60vh;
+    .content-text-container {
+      width: auto;
+      height: 90vh;
+      margin: 5vh 5vw;
+      box-sizing: border-box;
       color: white;
       background: black;
-      position: absolute;
       font-size: 1.5vw;
-      overflow: scroll;
-      padding: 2em; }
-      .content-text a {
-        color: white; } }
+      overflow-y: scroll;
+      padding: 2em;
+      position: relative; }
+      .content-text-container a {
+        color: white; }
+      .content-text-container p {
+        position: absolute;
+        left: 2em;
+        top: 2em;
+        right: 2em;
+        -webkit-transform-origin: top;
+            -ms-transform-origin: top;
+                transform-origin: top;
+        letter-spacing: 2px; }
+      .content-text-container .carousel--active {
+        display: block; } }
+
+.content-text {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  margin: 0 auto; }
+
+.pagination p {
+  display: none; }
+
+.pagination-button--next,
+.pagination-button--previous {
+  position: absolute;
+  bottom: 2em;
+  text-transform: capitalize;
+  background: none;
+  border: 0;
+  font-family: "ITC Century Std", Helvetica;
+  color: white; }
+  .pagination-button--next:focus,
+  .pagination-button--previous:focus {
+    outline: none; }
+
+.pagination-button--next {
+  right: 2em; }
+
+.pagination-button--previous {
+  left: 2em; }
 
 @media (min-width: 480px) {
   .items {

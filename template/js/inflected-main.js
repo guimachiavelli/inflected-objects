@@ -27,7 +27,7 @@
             }
             this.hideExhibitionSubNav();
             this.bindEvents();
-            instagramFeed.init();
+            //instagramFeed.init();
             life.init(this.container);
 
         },
@@ -44,6 +44,10 @@
             if (this.nav) {
                 this.nav.addEventListener('click', this.onNavClick.bind(this));
             }
+
+            window.addEventListener('resize', helpers.debounce(
+                modal.onResize.bind(modal), 300));
+
         },
 
         onNavClick: function(e) {

@@ -1,4 +1,6 @@
-.content-text {
+$content-text-padding: 2em;
+
+.content-text-container {
     bottom: 0;
     font-size: 5vw;
     padding: 1em;
@@ -10,22 +12,72 @@
 
     p, br {
         transform: translateZ(0);
-        margin-bottom: 2em;
+        margin-bottom: $content-text-padding;
     }
 
-
     @media(min-width: $bp-mobile) {
-        width: 50vh;
-        height: 60vh;
+        width: auto;
+        height: 90vh;
+        margin: 5vh 5vw;
+        box-sizing: border-box;
         color: white;
         background: black;
-        position: absolute;
         font-size: 1.5vw;
-        overflow: scroll;
-        padding: 2em;
+        overflow-y: scroll;
+        padding: $content-text-padding;
+        position: relative;
 
         a {
             color: white;
         }
+
+        p {
+            position: absolute;
+            left: $content-text-padding;
+            top: $content-text-padding;
+            right: $content-text-padding;
+            transform-origin: top;
+            letter-spacing: 2px;
+        }
+
+        .carousel--active {
+            display: block;
+        }
     }
+}
+
+.content-text {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.pagination {
+    p {
+        display: none;
+    }
+}
+
+.pagination-button--next,
+.pagination-button--previous {
+    position: absolute;
+    bottom: $content-text-padding;
+    text-transform: capitalize;
+    background: none;
+    border: 0;
+    font-family: $secondary-font;
+    color: white;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.pagination-button--next {
+    right: $content-text-padding;
+}
+
+.pagination-button--previous {
+    left: $content-text-padding;
 }
