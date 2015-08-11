@@ -72,6 +72,10 @@ $content-text-padding: 2em;
     &:focus {
         outline: none;
     }
+
+    &:disabled {
+        display: none;
+    }
 }
 
 .pagination-button--next {

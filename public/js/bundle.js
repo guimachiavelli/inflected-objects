@@ -1167,11 +1167,19 @@ if (objCtr.defineProperty) {
     var pagination;
 
     pagination = {
+        nextButton: null,
+        prevButton: null,
+
         init: function(el) {
+            fontStretch.init(el);
+
+            if (el.querySelectorAll('p').length < 2) {
+                return;
+            }
+
             this.addButtons(el);
             this.bind(el);
 
-            fontStretch.init(el);
             el.querySelector('p').classList.add('carousel--active');
             el.className += ' pagination';
         },
@@ -1188,11 +1196,15 @@ if (objCtr.defineProperty) {
         },
 
         addButtons: function(el) {
-            var next, prev, fragment;
+            var next, previous, fragment;
+
+            this.previousButton = this.button('previous');
+            this.previousButton.disabled = true;
+            this.nextButton = this.button('next');
 
             fragment = document.createDocumentFragment();
-            fragment.appendChild(this.button('previous'));
-            fragment.appendChild(this.button('next'));
+            fragment.appendChild(this.previousButton);
+            fragment.appendChild(this.nextButton);
 
             el.parentNode.appendChild(fragment);
         },
@@ -1208,12 +1220,14 @@ if (objCtr.defineProperty) {
         },
 
         advance: function(el, e) {
-            var target, next;
+            var target, next, previous;
             e.preventDefault();
 
             target = el.querySelector('.carousel--active');
 
             next = helpers.nextSiblingOfType(target, 'P');
+            previous = helpers.previousSiblingOfType(next, 'P');
+
 
             if (next === null) {
                 return;
@@ -1221,15 +1235,17 @@ if (objCtr.defineProperty) {
 
             next.classList.add('carousel--active');
             target.classList.remove('carousel--active');
+            this.updateButtons(helpers.nextSiblingOfType(next, 'P'), previous);
         },
 
         revert: function(el, e) {
-            var target, previous;
+            var target, previous, next;
             e.preventDefault();
 
             target = el.querySelector('.carousel--active');
 
             previous = helpers.previousSiblingOfType(target, 'P');
+            next = helpers.nextSiblingOfType(target, 'P');
 
             if (previous === null) {
                 return;
@@ -1237,6 +1253,13 @@ if (objCtr.defineProperty) {
 
             previous.classList.add('carousel--active');
             target.classList.remove('carousel--active');
+            this.updateButtons(next, helpers.previousSiblingOfType(previous, 'P'));
+        },
+
+        updateButtons: function(next, prev) {
+            this.nextButton.disabled = !next;
+            this.previousButton.disabled = !prev;
+            console.log(this.nextButton)
         }
 
     };

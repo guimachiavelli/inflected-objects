@@ -1,5 +1,6 @@
 .navigation {
     padding-bottom: 10em;
+    counter-reset: first-level -1;
 
     a:hover {
         color: red;
@@ -11,6 +12,99 @@
     display: table;
     z-index: 2;
     white-space: nowrap;
+    counter-increment: first-level;
+    counter-reset: second-level 0;
+}
+
+.navigation-link {
+    font-size: 1.2em;
+    font-size: 3.75vw;
+    margin-left: 3vw;
+    line-height: 3;
+
+    .deform {
+        display: inline-block;
+        transform: scaleY(1.4) skewX(45deg);
+        letter-spacing: 1px;
+
+        &:before {
+            content: "#" counters(first-level, ".") " ";
+        }
+    }
+
+    @media (min-width: $bp-mobile) {
+        font-size: 2.5vw;
+        line-height: 4vw;
+    }
+}
+
+.subnavigation {
+    display: inline;
+
+    .navigation-item--exhibition & {
+        display: block;
+        max-height: 5*13vw;
+        transition: max-height 400ms $animation-material-timing;
+        overflow: hidden;
+
+        @media (min-width: $bp-mobile) {
+            /*max-height: 2.5*13vw;*/
+        }
+    }
+
+    .navigation-item--closed & {
+        max-height: 0;
+    }
+}
+
+.subnavigation-item {
+    display: inline-block;
+    font-family: $highlight-font;
+    margin-left: 1vw;
+    margin-bottom: 3vw;
+    counter-increment: second-level;
+
+    .navigation-item--exhibition & {
+        display: block;
+        margin-left: 15vw;
+        font-family: $main-font;
+    }
+
+    @media (min-width: $bp-mobile) {
+        margin-bottom: 0;
+    }
+
+}
+
+.subnavigation-link {
+    font-size: 5vw;
+    letter-spacing: 1px;
+
+    @media (min-width: $bp-mobile) {
+        font-size: 3vw;
+    }
+
+    .deform {
+        display: inline-block;
+
+        &:before {
+            content: "#" counter(first-level) "." counter(second-level) " ";
+        }
+    }
+
+    .navigation-item--exhibition & {
+        font-size: 4vw;
+        padding-bottom: .75vw;
+
+        @media (min-width: $bp-mobile) {
+            font-size: 2.5vw;
+        }
+
+        .deform {
+            transform: scaleY(1.4) skewX(45deg);
+        }
+    }
+
 }
 
 // wobble animation setup
@@ -40,86 +134,4 @@
     &:nth-child(4) .navigation-link {
         @include wobble-animation(1.65);
     }
-}
-
-.navigation-link {
-    font-size: 1.2em;
-    font-size: 3.75vw;
-    margin-left: 3vw;
-    line-height: 3;
-
-    .deform {
-        display: inline-block;
-        transform: scaleY(1.4) skewX(45deg);
-        letter-spacing: 1px;
-    }
-
-    @media (min-width: $bp-mobile) {
-        font-size: 2.5vw;
-        line-height: 4vw;
-    }
-}
-
-.subnavigation {
-    display: inline;
-
-    .navigation-item--exhibition & {
-        display: block;
-        max-height: 5*13vw;
-        transition: max-height 400ms $animation-material-timing;
-        overflow: hidden;
-
-        @media (min-width: $bp-mobile) {
-            max-height: 2.5*13vw;
-        }
-    }
-
-    .navigation-item--closed & {
-        max-height: 0;
-    }
-}
-
-.subnavigation-item {
-    display: inline-block;
-    font-family: $highlight-font;
-    margin-left: 1vw;
-    margin-bottom: 3vw;
-
-    .navigation-item--exhibition & {
-        display: block;
-        margin-left: 15vw;
-        font-family: $main-font;
-    }
-
-    @media (min-width: $bp-mobile) {
-        margin-bottom: 0;
-    }
-
-}
-
-.subnavigation-link {
-    font-size: 5vw;
-    letter-spacing: 1px;
-
-    @media (min-width: $bp-mobile) {
-        font-size: 3vw;
-    }
-
-    .deform {
-        display: inline-block;
-    }
-
-    .navigation-item--exhibition & {
-        font-size: 4vw;
-        padding-bottom: .75vw;
-
-        @media (min-width: $bp-mobile) {
-            font-size: 2.5vw;
-        }
-
-        .deform {
-            transform: scaleY(1.4) skewX(45deg);
-        }
-    }
-
 }

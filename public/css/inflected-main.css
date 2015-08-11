@@ -153,7 +153,8 @@ a {
     height: 20px; }
 
 .navigation {
-  padding-bottom: 10em; }
+  padding-bottom: 10em;
+  counter-reset: first-level -1; }
   .navigation a:hover {
     color: red; }
 
@@ -161,7 +162,76 @@ a {
   position: relative;
   display: table;
   z-index: 2;
-  white-space: nowrap; }
+  white-space: nowrap;
+  counter-increment: first-level;
+  counter-reset: second-level 0; }
+
+.navigation-link {
+  font-size: 1.2em;
+  font-size: 3.75vw;
+  margin-left: 3vw;
+  line-height: 3; }
+  .navigation-link .deform {
+    display: inline-block;
+    -webkit-transform: scaleY(1.4) skewX(45deg);
+        -ms-transform: scaleY(1.4) skewX(45deg);
+            transform: scaleY(1.4) skewX(45deg);
+    letter-spacing: 1px; }
+    .navigation-link .deform:before {
+      content: "#" counters(first-level, ".") " "; }
+  @media (min-width: 480px) {
+    .navigation-link {
+      font-size: 2.5vw;
+      line-height: 4vw; } }
+
+.subnavigation {
+  display: inline; }
+  .navigation-item--exhibition .subnavigation {
+    display: block;
+    max-height: 65vw;
+    -webkit-transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
+            transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
+    overflow: hidden; }
+
+.navigation-item--exhibition .subnavigation {
+  /*max-height: 2.5*13vw;*/ }
+  .navigation-item--closed .subnavigation {
+    max-height: 0; }
+
+.subnavigation-item {
+  display: inline-block;
+  font-family: "Snell Roundhand", Zapfino;
+  margin-left: 1vw;
+  margin-bottom: 3vw;
+  counter-increment: second-level; }
+  .navigation-item--exhibition .subnavigation-item {
+    display: block;
+    margin-left: 15vw;
+    font-family: Helvetica, Arial, sans-serif; }
+  @media (min-width: 480px) {
+    .subnavigation-item {
+      margin-bottom: 0; } }
+
+.subnavigation-link {
+  font-size: 5vw;
+  letter-spacing: 1px; }
+  @media (min-width: 480px) {
+    .subnavigation-link {
+      font-size: 3vw; } }
+  .subnavigation-link .deform {
+    display: inline-block; }
+    .subnavigation-link .deform:before {
+      content: "#" counter(first-level) "." counter(second-level) " "; }
+  .navigation-item--exhibition .subnavigation-link {
+    font-size: 4vw;
+    padding-bottom: .75vw; }
+    @media (min-width: 480px) {
+      .navigation-item--exhibition .subnavigation-link {
+        font-size: 2.5vw; } }
+    .navigation-item--exhibition .subnavigation-link .deform {
+      -webkit-transform: scaleY(1.4) skewX(45deg);
+          -ms-transform: scaleY(1.4) skewX(45deg);
+              transform: scaleY(1.4) skewX(45deg); }
 
 .navigation-item .navigation-link,
 .navigation-item .subnavigation-link {
@@ -188,68 +258,6 @@ a {
 .navigation-item:nth-child(4) .navigation-link {
   -webkit-animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-link {
-  font-size: 1.2em;
-  font-size: 3.75vw;
-  margin-left: 3vw;
-  line-height: 3; }
-  .navigation-link .deform {
-    display: inline-block;
-    -webkit-transform: scaleY(1.4) skewX(45deg);
-        -ms-transform: scaleY(1.4) skewX(45deg);
-            transform: scaleY(1.4) skewX(45deg);
-    letter-spacing: 1px; }
-  @media (min-width: 480px) {
-    .navigation-link {
-      font-size: 2.5vw;
-      line-height: 4vw; } }
-
-.subnavigation {
-  display: inline; }
-  .navigation-item--exhibition .subnavigation {
-    display: block;
-    max-height: 65vw;
-    -webkit-transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
-            transition: max-height 400ms cubic-bezier(0, 0, 0.21, 1);
-    overflow: hidden; }
-    @media (min-width: 480px) {
-      .navigation-item--exhibition .subnavigation {
-        max-height: 32.5vw; } }
-  .navigation-item--closed .subnavigation {
-    max-height: 0; }
-
-.subnavigation-item {
-  display: inline-block;
-  font-family: "Snell Roundhand", Zapfino;
-  margin-left: 1vw;
-  margin-bottom: 3vw; }
-  .navigation-item--exhibition .subnavigation-item {
-    display: block;
-    margin-left: 15vw;
-    font-family: Helvetica, Arial, sans-serif; }
-  @media (min-width: 480px) {
-    .subnavigation-item {
-      margin-bottom: 0; } }
-
-.subnavigation-link {
-  font-size: 5vw;
-  letter-spacing: 1px; }
-  @media (min-width: 480px) {
-    .subnavigation-link {
-      font-size: 3vw; } }
-  .subnavigation-link .deform {
-    display: inline-block; }
-  .navigation-item--exhibition .subnavigation-link {
-    font-size: 4vw;
-    padding-bottom: .75vw; }
-    @media (min-width: 480px) {
-      .navigation-item--exhibition .subnavigation-link {
-        font-size: 2.5vw; } }
-    .navigation-item--exhibition .subnavigation-link .deform {
-      -webkit-transform: scaleY(1.4) skewX(45deg);
-          -ms-transform: scaleY(1.4) skewX(45deg);
-              transform: scaleY(1.4) skewX(45deg); }
 
 .content-text-container {
   bottom: 0;
@@ -309,6 +317,9 @@ a {
   .pagination-button--next:focus,
   .pagination-button--previous:focus {
     outline: none; }
+  .pagination-button--next:disabled,
+  .pagination-button--previous:disabled {
+    display: none; }
 
 .pagination-button--next {
   right: 2em; }
