@@ -52,22 +52,22 @@
         },
 
         onNavClick: function(e) {
-            e.preventDefault();
-
             var target, parent, ancestor;
 
-            ancestor = helpers.closestAncestorWithClass(e.target, 'navigation-item--exhibition');
-            parent = helpers.closestAncestorWithClass(e.target, 'subnavigation');
+            e.preventDefault();
+
+            ancestor = helpers.closestAncestorWithClass(e.target,
+                                                'navigation-item--exhibition');
+            parent = helpers.closestAncestorWithClass(e.target,
+                                                      'subnavigation');
             target = helpers.parentAnchor(e.target);
 
-            console.log(parent, ancestor);
             if (parent === null && ancestor !== null) {
                 ancestor.classList.toggle('navigation-item--closed');
                 return;
             }
 
             if (target === false) {
-                console.warn('no enclosing anchor found');
                 return;
             }
 
@@ -1030,7 +1030,6 @@ if (objCtr.defineProperty) {
         parent: document.body,
 
         init: function(url) {
-
             if (this.el !== null) {
                 this.close();
                 return;
@@ -1103,7 +1102,6 @@ if (objCtr.defineProperty) {
         },
 
         onResize: function() {
-            console.log(this);
             if (!this.el) {
                 return;
             }

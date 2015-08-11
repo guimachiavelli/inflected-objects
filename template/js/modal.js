@@ -13,7 +13,6 @@
         parent: document.body,
 
         init: function(url) {
-
             if (this.el !== null) {
                 this.close();
                 return;
@@ -86,7 +85,6 @@
         },
 
         onResize: function() {
-            console.log(this);
             if (!this.el) {
                 return;
             }

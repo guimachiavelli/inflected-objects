@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Inflected Objects/<%= @title %></title>
+        <meta name="description" content="">
+		<meta name="viewport" content="width=device-width initial-scale=1.0">
+        <link rel="stylesheet" href="css/inflected-main.css" type="text/css">
+	</head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="header">
+                <h1 class="header-title">
+                    <span class="deform">Inflected objects</span>
+                </h1>
+            </div>
+
+            <div class="content">
+                <ul class="social-items">
+
+                    <% if @social_items %> 
+                        <% for @item in @social_items %>
+                            <li class="social-item 
+                                       social-item--<%= @item[:type] %>">
+                                <% if @item[:image] %>
+                                    <figure class="social-item-image">
+                                        <img src="<%= @item[:image] %>"
+                                             alt="">
+                                    </figure>
+                                <% end %>
+
+                                <% if @item[:text] %>
+                                    <p><%= @item[:text] %></p>
+                                <% end %>
+                            </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+
+        <script src="js/bundle.js"></script>
+
+	</body>
+</html>

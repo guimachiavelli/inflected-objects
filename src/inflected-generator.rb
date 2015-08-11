@@ -2,7 +2,7 @@ require 'kramdown'
 require 'erb'
 
 class InflectedGenerator
-    attr_reader :parsed_sections
+    attr_accessor :parsed_sections
 
     PATH = File.dirname(__FILE__)
 
@@ -55,7 +55,6 @@ class InflectedGenerator
         @sounds = section[:media][:sounds]
         @externals = get_externals_list(section[:media][:externals])
         @sections = section[:children]
-        puts section if type == :sound
 
         section[:html] = html.result(binding)
 

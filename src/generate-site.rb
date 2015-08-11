@@ -2,6 +2,7 @@ require 'fileutils'
 require_relative './inflected-structure.rb'
 require_relative './inflected-generator.rb'
 require_relative './inflected-dropbox.rb'
+require_relative './inflected-social.rb'
 
 class InflectedSite
     attr_reader :structure
@@ -14,6 +15,10 @@ class InflectedSite
         @content = InflectedDownloader.new(content)
         @structure = InflectedStructure.new(content)
         @site = InflectedGenerator.new @structure.sections, @public
+
+        social = InflectedSocial.new
+        social.fetch
+        @site.parsed_sections[:children]["99-social"] = social.page
 
         Dir.mkdir(@public) unless Dir.exist? @public
         Dir.mkdir(@assets) unless Dir.exist? @assets
