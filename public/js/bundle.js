@@ -1065,6 +1065,15 @@ if (objCtr.defineProperty) {
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
             pagination.init(this.el.querySelector('.content-text'));
+
+            var feed, i, len;
+            feed = this.el.querySelectorAll('.social-item');
+
+            if (feed) {
+                for (i = 0, len = feed.length; i < len; i +=1) {
+                    feed[i].style.width = helpers.randomInt(15, 10) + '%';
+                }
+            }
         },
 
         template: function(innerHTML) {
@@ -1169,6 +1178,10 @@ if (objCtr.defineProperty) {
         prevButton: null,
 
         init: function(el) {
+            if (el === null) {
+                return;
+            }
+
             fontStretch.init(el);
 
             if (el.querySelectorAll('p').length < 2) {

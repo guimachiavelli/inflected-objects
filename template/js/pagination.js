@@ -11,6 +11,10 @@
         prevButton: null,
 
         init: function(el) {
+            if (el === null) {
+                return;
+            }
+
             fontStretch.init(el);
 
             if (el.querySelectorAll('p').length < 2) {

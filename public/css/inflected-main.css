@@ -486,6 +486,39 @@ a {
     -webkit-transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
             transition-timing-function: cubic-bezier(0, 0, 0.21, 1); }
 
+.social-item {
+  width: 20%;
+  float: right;
+  background: red;
+  margin: 0 10px 10px 0;
+  overflow: hidden; }
+
+.social-item--instagram {
+  position: relative; }
+  .social-item--instagram .social-item-text {
+    position: absolute;
+    bottom: 0; }
+
+.social-item-image {
+  line-height: 0; }
+  .social-item-image img {
+    width: 100%; }
+
+.social-item-text {
+  font-size: 2vw;
+  letter-spacing: -0.5px;
+  color: yellow;
+  text-align: justify;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  margin-bottom: -1em;
+  word-wrap: break-word; }
+  .social-item-text:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 1px; }
+
 .instagram {
   position: fixed;
   z-index: 0;
