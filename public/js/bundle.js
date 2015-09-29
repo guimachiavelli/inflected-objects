@@ -2,87 +2,6 @@
 (function(){
     'use strict';
 
-    require('./classlist-polyfill');
-
-    var helpers = require('./helpers'),
-        instagramFeed = require('./instagram-feed'),
-        life = require('./life'),
-        modal = require('./modal');
-
-    var site = {
-        container: null,
-        nav: null,
-
-        init: function() {
-            this.nav = document.querySelector('.navigation');
-            this.container = document.querySelector('.container');
-
-            //old IE
-            if (!!this.container.firsElementChild) {
-                return;
-            }
-
-            //simpler view for mobile
-            if (window.innerWidth < 480) {
-                return;
-            }
-            this.hideExhibitionSubNav();
-            this.bindEvents();
-            //instagramFeed.init();
-            life.init(this.container);
-
-        },
-
-        hideExhibitionSubNav: function() {
-            var exhibitionItems, i, len;
-            exhibitionItems = this.nav.querySelectorAll('.navigation-item--exhibition');
-            for (i = 0, len = exhibitionItems.length; i < len; i += 1) {
-                exhibitionItems[i].className += ' navigation-item--closed';
-            }
-        },
-
-        bindEvents: function() {
-            if (this.nav) {
-                this.nav.addEventListener('click', this.onNavClick.bind(this));
-            }
-
-            window.addEventListener('resize', helpers.debounce(
-                modal.onResize.bind(modal), 300));
-
-        },
-
-        onNavClick: function(e) {
-            var target, parent, ancestor;
-
-            e.preventDefault();
-
-            ancestor = helpers.closestAncestorWithClass(e.target,
-                                                'navigation-item--exhibition');
-            parent = helpers.closestAncestorWithClass(e.target,
-                                                      'subnavigation');
-            target = helpers.parentAnchor(e.target);
-
-            if (parent === null && ancestor !== null) {
-                ancestor.classList.toggle('navigation-item--closed');
-                return;
-            }
-
-            if (target === false) {
-                return;
-            }
-
-            modal.init(target.href);
-        }
-    };
-
-    site.init();
-
-}());
-
-},{"./classlist-polyfill":3,"./helpers":6,"./instagram-feed":7,"./life":8,"./modal":9}],2:[function(require,module,exports){
-(function(){
-    'use strict';
-
     var helpers = require('./helpers');
 
     var carousel;
@@ -125,7 +44,7 @@
 
 }());
 
-},{"./helpers":6}],3:[function(require,module,exports){
+},{"./helpers":5}],2:[function(require,module,exports){
 /*
  * classList.js: Cross-browser full element.classList implementation.
  * 1.1.20150312
@@ -363,7 +282,7 @@ if (objCtr.defineProperty) {
 }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -491,7 +410,7 @@ if (objCtr.defineProperty) {
     module.exports = exhibitionItems;
 }());
 
-},{"./helpers":6}],5:[function(require,module,exports){
+},{"./helpers":5}],4:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -502,7 +421,7 @@ if (objCtr.defineProperty) {
     fontStretch = {
 
         init: function(el) {
-            var i, len, children, size;
+            var i, len, children;
             children = el.children;
 
             for (i = 0, len = children.length; i < len; i += 1) {
@@ -512,9 +431,7 @@ if (objCtr.defineProperty) {
 
         stretch: function(el, parent) {
             var y;
-
             y = (parent.offsetHeight - 50)/el.offsetHeight;
-            y = Math.min(y, 10);
             el.style.transform = 'scaleY(' + y + ')';
         },
     };
@@ -523,7 +440,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./helpers":6}],6:[function(require,module,exports){
+},{"./helpers":5}],5:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -655,7 +572,88 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+(function(){
+    'use strict';
+
+    require('./classlist-polyfill');
+
+    var helpers = require('./helpers'),
+        instagramFeed = require('./instagram-feed'),
+        life = require('./life'),
+        modal = require('./modal');
+
+    var site = {
+        container: null,
+        nav: null,
+
+        init: function() {
+            this.nav = document.querySelector('.navigation');
+            this.container = document.querySelector('.container');
+
+            //old IE
+            if (!!this.container.firsElementChild) {
+                return;
+            }
+
+            //simpler view for mobile
+            if (window.innerWidth < 480) {
+                return;
+            }
+            this.hideExhibitionSubNav();
+            this.bindEvents();
+            //instagramFeed.init();
+            life.init(this.container);
+
+        },
+
+        hideExhibitionSubNav: function() {
+            var exhibitionItems, i, len;
+            exhibitionItems = this.nav.querySelectorAll('.navigation-item--exhibition');
+            for (i = 0, len = exhibitionItems.length; i < len; i += 1) {
+                exhibitionItems[i].className += ' navigation-item--closed';
+            }
+        },
+
+        bindEvents: function() {
+            if (this.nav) {
+                this.nav.addEventListener('click', this.onNavClick.bind(this));
+            }
+
+            window.addEventListener('resize', helpers.debounce(
+                modal.onResize.bind(modal), 300));
+
+        },
+
+        onNavClick: function(e) {
+            var target, parent, ancestor;
+
+            e.preventDefault();
+
+            ancestor = helpers.closestAncestorWithClass(e.target,
+                                                'navigation-item--exhibition');
+            parent = helpers.closestAncestorWithClass(e.target,
+                                                      'subnavigation');
+            target = helpers.parentAnchor(e.target);
+
+            if (parent === null && ancestor !== null) {
+                ancestor.classList.toggle('navigation-item--closed');
+                return;
+            }
+
+            if (target === false) {
+                return;
+            }
+
+            modal.init(target.href);
+        }
+    };
+
+    site.init();
+
+}());
+
+},{"./classlist-polyfill":2,"./helpers":5,"./instagram-feed":7,"./life":8,"./modal":9}],7:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -820,7 +818,7 @@ if (objCtr.defineProperty) {
     module.exports = instagramFeed;
 }());
 
-},{"./helpers":6}],8:[function(require,module,exports){
+},{"./helpers":5}],8:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1014,7 +1012,7 @@ if (objCtr.defineProperty) {
     module.exports = life;
 }());
 
-},{"./helpers":6}],9:[function(require,module,exports){
+},{"./helpers":5}],9:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1164,7 +1162,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./carousel":2,"./exhibition-items":4,"./helpers":6,"./pagination":10}],10:[function(require,module,exports){
+},{"./carousel":1,"./exhibition-items":3,"./helpers":5,"./pagination":10}],10:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1256,11 +1254,12 @@ if (objCtr.defineProperty) {
             target = el.querySelector('.carousel--active');
 
             previous = helpers.previousSiblingOfType(target, 'P');
-            next = helpers.nextSiblingOfType(target, 'P');
 
             if (previous === null) {
                 return;
             }
+
+            next = helpers.nextSiblingOfType(previous, 'P');
 
             previous.classList.add('carousel--active');
             target.classList.remove('carousel--active');
@@ -1270,7 +1269,6 @@ if (objCtr.defineProperty) {
         updateButtons: function(next, prev) {
             this.nextButton.disabled = !next;
             this.previousButton.disabled = !prev;
-            console.log(this.nextButton)
         }
 
     };
@@ -1278,4 +1276,4 @@ if (objCtr.defineProperty) {
     module.exports = pagination;
 }());
 
-},{"./font-stretch.js":5,"./helpers":6}]},{},[1]);
+},{"./font-stretch.js":4,"./helpers":5}]},{},[6]);

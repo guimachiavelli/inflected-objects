@@ -89,11 +89,12 @@
             target = el.querySelector('.carousel--active');
 
             previous = helpers.previousSiblingOfType(target, 'P');
-            next = helpers.nextSiblingOfType(target, 'P');
 
             if (previous === null) {
                 return;
             }
+
+            next = helpers.nextSiblingOfType(previous, 'P');
 
             previous.classList.add('carousel--active');
             target.classList.remove('carousel--active');
@@ -103,7 +104,6 @@
         updateButtons: function(next, prev) {
             this.nextButton.disabled = !next;
             this.previousButton.disabled = !prev;
-            console.log(this.nextButton)
         }
 
     };

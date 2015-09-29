@@ -109,7 +109,9 @@ a {
       animation: site-wobble 37.5s cubic-bezier(0, 0, 0.21, 1) infinite alternate; } }
 
 .header {
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 1; }
   .is--framed .header {
     display: none; }
 
@@ -178,7 +180,10 @@ a {
             transform: scaleY(1.4) skewX(45deg);
     letter-spacing: 1px; }
     .navigation-link .deform:before {
-      content: "#" counters(first-level, ".") " "; }
+      content: "#" counters(first-level, ".") " ";
+      font-family: "Snell Roundhand", Zapfino;
+      display: inline-block;
+      margin-right: 0.5em; }
   @media (min-width: 480px) {
     .navigation-link {
       font-size: 2.5vw;
@@ -221,7 +226,10 @@ a {
   .subnavigation-link .deform {
     display: inline-block; }
     .subnavigation-link .deform:before {
-      content: "#" counter(first-level) "." counter(second-level) " "; }
+      content: "#" counter(first-level) "." counter(second-level) " ";
+      font-family: "Snell Roundhand", Zapfino;
+      display: inline-block;
+      margin-right: 0.5em; }
   .navigation-item--exhibition .subnavigation-link {
     font-size: 4vw;
     padding-bottom: .75vw; }
@@ -239,6 +247,106 @@ a {
   -webkit-animation: wobble 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
+.navigation-item:nth-child(20n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(20) .subnavigation-link {
+  -webkit-animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(19n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(19) .subnavigation-link {
+  -webkit-animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(18n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(18) .subnavigation-link {
+  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(17n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(17) .subnavigation-link {
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(16n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(16) .subnavigation-link {
+  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(15n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(15) .subnavigation-link {
+  -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(14n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(14) .subnavigation-link {
+  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(13n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(13) .subnavigation-link {
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(12n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(12) .subnavigation-link {
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(11n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(11) .subnavigation-link {
+  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(10n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(10) .subnavigation-link {
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(9n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(9) .subnavigation-link {
+  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(8n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(8) .subnavigation-link {
+  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(7n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(7) .subnavigation-link {
+  -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(6n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(6) .subnavigation-link {
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(5n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(5) .subnavigation-link {
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(4n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(4) .subnavigation-link {
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(3n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(3) .subnavigation-link {
+  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(2n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(2) .subnavigation-link {
+  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(1n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(1) .subnavigation-link {
+  -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
 .navigation-item:first-child .navigation-link {
   -webkit-animation: wobble 4.375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 4.375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
@@ -255,7 +363,7 @@ a {
   -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
-.navigation-item:nth-child(4) .navigation-link {
+.navigation-item:nth-child(4n) .navigation-link {
   -webkit-animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 4.125s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
@@ -299,8 +407,9 @@ a {
 .content-text {
   position: relative;
   width: 50%;
-  height: 100%;
-  margin: 0 auto; }
+  height: 60%;
+  margin: 0 auto;
+  top: 15%; }
 
 .pagination p {
   display: none; }
@@ -312,8 +421,12 @@ a {
   text-transform: capitalize;
   background: none;
   border: 0;
-  font-family: "ITC Century Std", Helvetica;
-  color: white; }
+  font-family: "Snell Roundhand", Zapfino;
+  color: white;
+  font-size: 20px;
+  -webkit-transform: scaleY(1.2) skewX(45deg);
+      -ms-transform: scaleY(1.2) skewX(45deg);
+          transform: scaleY(1.2) skewX(45deg); }
   .pagination-button--next:focus,
   .pagination-button--previous:focus {
     outline: none; }
@@ -472,8 +585,7 @@ a {
   -webkit-transition: -webkit-transform 350ms cubic-bezier(0, 0, 0, 1);
           transition: transform 350ms cubic-bezier(0, 0, 0, 1);
   -webkit-transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
-          transition-timing-function: cubic-bezier(0, 0, 0.21, 1);
-  /*overflow-y: scroll;*/ }
+          transition-timing-function: cubic-bezier(0, 0, 0.21, 1); }
   .modal-content.transition-in {
     -webkit-transform: translateX(0);
         -ms-transform: translateX(0);

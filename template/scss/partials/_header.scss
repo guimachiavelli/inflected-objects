@@ -1,5 +1,7 @@
 .header {
     margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
 
     .is--framed & {
         display: none;

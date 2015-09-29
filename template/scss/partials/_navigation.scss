@@ -29,6 +29,9 @@
 
         &:before {
             content: "#" counters(first-level, ".") " ";
+            font-family: $highlight-font;
+            display: inline-block;
+            margin-right: 0.5em;
         }
     }
 
@@ -89,6 +92,9 @@
 
         &:before {
             content: "#" counter(first-level) "." counter(second-level) " ";
+            font-family: $highlight-font;
+            display: inline-block;
+            margin-right: 0.5em;
         }
     }
 
@@ -115,6 +121,15 @@
         @include wobble-animation(1);
     }
 
+    $types: 20;
+    @while $types > 0 {
+        &:nth-child(#{$types}n) .navigation-link,
+        .subnavigation-item:nth-child(#{$types}) .subnavigation-link {
+            @include wobble-animation(random(7) + 2 * 0.25);
+            $types: $types - 1;
+        }
+    }
+
     &:first-child .navigation-link {
         @include wobble-animation(1.75);
     }
@@ -131,7 +146,7 @@
         @include wobble-animation(2.5);
     }
 
-    &:nth-child(4) .navigation-link {
+    &:nth-child(4n) .navigation-link {
         @include wobble-animation(1.65);
     }
 }
