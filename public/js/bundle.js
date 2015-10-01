@@ -432,7 +432,7 @@ if (objCtr.defineProperty) {
         stretch: function(el, parent) {
             var y;
             y = (parent.offsetHeight - 50)/el.offsetHeight;
-            el.style.transform = 'scaleY(' + y + ')';
+            helpers.updatePrefixedStyle(el, 'transform', 'scaleY(' + y + ')');
         },
     };
 
