@@ -33,11 +33,29 @@
                             <ul class="subnavigation">
                                 <% for @subsection_name, @subsection in @section[:children] %>
                                     <li class="subnavigation-item">
-                                        <a class="subnavigation-link" href="<%= @subsection[:public_path] %>.html">
+                                        <a
+                                        <% if @subsection[:children].empty? %>
+                                              href="<%= @subsection[:public_path] %>.html"
+                                        <% end%>
+                                        class="subnavigation-link">
                                             <span class="deform">
                                                 <%= @subsection[:title] %>
                                             </span>
                                         </a>
+
+                                        <% if @subsection[:children] %>
+                                        <ul class="subnavigation">
+                                            <% for @subsubsection_name, @subsubsection in @subsection[:children] %>
+                                                <li class="subnavigation-item">
+                                                    <a class="subnavigation-link" href="<%= @subsubsection[:public_path] %>.html">
+                                                        <span class="deform">
+                                                            <%= @subsubsection[:title] %>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                        <% end %>
                                     </li>
                                 <% end %>
                             </ul>

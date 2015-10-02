@@ -79,6 +79,10 @@
 
 }
 
+
+
+
+
 .subnavigation-link {
     font-size: 5vw;
     letter-spacing: 1px;
@@ -110,6 +114,14 @@
             transform: scaleY(1.4) skewX(45deg);
         }
     }
+
+    &:not([href]) {
+        .deform:before {
+            content: '';
+        }
+    }
+
+
 
 }
 
