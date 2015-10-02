@@ -243,8 +243,10 @@ a {
       -webkit-transform: scaleY(1.4) skewX(45deg);
           -ms-transform: scaleY(1.4) skewX(45deg);
               transform: scaleY(1.4) skewX(45deg); }
-  .subnavigation-link:not([href]) .deform:before {
-    content: ''; }
+  .subnavigation-link:not([href]) {
+    counter-increment: second-level -1; }
+    .subnavigation-link:not([href]) .deform:before {
+      content: ''; }
 
 .navigation-item .navigation-link,
 .navigation-item .subnavigation-link {
@@ -254,8 +256,8 @@ a {
 
 .navigation-item:nth-child(20n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(20) .subnavigation-link {
-  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(19n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(19) .subnavigation-link {
@@ -264,23 +266,23 @@ a {
 
 .navigation-item:nth-child(18n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(18) .subnavigation-link {
-  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(17n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(17) .subnavigation-link {
-  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(16n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(16) .subnavigation-link {
-  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(15n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(15) .subnavigation-link {
-  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(14n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(14) .subnavigation-link {
@@ -289,33 +291,33 @@ a {
 
 .navigation-item:nth-child(13n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(13) .subnavigation-link {
-  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(12n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(12) .subnavigation-link {
-  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:nth-child(11n) .navigation-link,
-.navigation-item .subnavigation-item:nth-child(11) .subnavigation-link {
-  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:nth-child(10n) .navigation-link,
-.navigation-item .subnavigation-item:nth-child(10) .subnavigation-link {
-  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
-
-.navigation-item:nth-child(9n) .navigation-link,
-.navigation-item .subnavigation-item:nth-child(9) .subnavigation-link {
   -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
+.navigation-item:nth-child(11n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(11) .subnavigation-link {
+  -webkit-animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 8.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(10n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(10) .subnavigation-link {
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
+.navigation-item:nth-child(9n) .navigation-link,
+.navigation-item .subnavigation-item:nth-child(9) .subnavigation-link {
+  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+
 .navigation-item:nth-child(8n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(8) .subnavigation-link {
-  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(7n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(7) .subnavigation-link {
@@ -329,28 +331,28 @@ a {
 
 .navigation-item:nth-child(5n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(5) .subnavigation-link {
-  -webkit-animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 16.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 18.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(4n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(4) .subnavigation-link {
-  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(3n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(3) .subnavigation-link {
-  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(2n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(2) .subnavigation-link {
-  -webkit-animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 3.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 13.75s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:nth-child(1n) .navigation-link,
 .navigation-item .subnavigation-item:nth-child(1) .subnavigation-link {
-  -webkit-animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
-  animation: wobble 11.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
+  -webkit-animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation: wobble 6.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate; }
 
 .navigation-item:first-child .navigation-link {
   -webkit-animation: wobble 4.375s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;

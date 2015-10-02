@@ -76,11 +76,7 @@
     @media (min-width: $bp-mobile) {
         margin-bottom: 0;
     }
-
 }
-
-
-
 
 
 .subnavigation-link {
@@ -116,6 +112,7 @@
     }
 
     &:not([href]) {
+        counter-increment: second-level -1;
         .deform:before {
             content: '';
         }
