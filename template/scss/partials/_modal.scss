@@ -28,6 +28,7 @@
     transform-origin: right top;
     transition: transform 350ms cubic-bezier(0, 0, 0, 1);
     transition-timing-function: $animation-material-timing;
+    overflow-y: auto;
 
     &.transition-in {
         transform: translateX(0);

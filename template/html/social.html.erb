@@ -21,11 +21,13 @@
 
             <div class="content">
                 <ul class="social-items">
-
                     <% if @social_items %> 
                         <% for @item in @social_items %>
                             <li class="social-item 
-                                       social-item--<%= @item[:type] %>">
+                                       social-item--<%= @item[:type] %>"
+                                data-type="<%= @item[:type] %>"
+                                id="<%= @item[:type] %>-<%= @item[:id] %>"
+                            >
                                 <% if @item[:image] %>
                                     <figure class="social-item-image">
                                         <img src="<%= @item[:image] %>"

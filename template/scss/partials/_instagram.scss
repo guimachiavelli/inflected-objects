@@ -5,9 +5,14 @@
 .social-item {
     width: 20%;
     float: right;
-    background: red;
     margin: 0 10px 10px 0;
     overflow: hidden;
+
+    iframe {
+        max-width: 100% !important;
+        width: 100%;
+        min-width: 100% !important;
+    }
 }
 
 .social-item--instagram {

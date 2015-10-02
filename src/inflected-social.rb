@@ -49,7 +49,7 @@ class InflectedSocial
         {
             media: {},
             children: {},
-            meta: {"title" => "Social" },
+            meta: {"title" => "Social"},
             name: "social",
             html: html.result(binding)
         }
@@ -59,6 +59,7 @@ class InflectedSocial
         pics = @instagram.user_recent_media[0..5]
         pics.map do |pic|
             {
+                id: pic.id,
                 type: 'instagram',
                 image: pic.images.standard_resolution.url,
                 text: pic.caption.text
@@ -72,6 +73,7 @@ class InflectedSocial
 
         tweets.map do |tweet|
             {
+                id: tweet.id,
                 type: 'tweet',
                 text: tweet.full_text
             }

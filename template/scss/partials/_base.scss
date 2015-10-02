@@ -16,10 +16,10 @@ body {
     font-family: $main-font;
     height: 100%;
     padding-bottom: 2em;
+
     @media (max-width: $bp-mobile) {
         max-width: 479px;
     }
-
 }
 
 a {
@@ -35,4 +35,8 @@ a {
                            $animation-material-timing
                            infinite alternate);
     }
+}
+
+.no-scroll {
+    overflow: hidden;
 }

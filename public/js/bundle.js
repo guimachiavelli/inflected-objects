@@ -44,7 +44,7 @@
 
 }());
 
-},{"./helpers":5}],2:[function(require,module,exports){
+},{"./helpers":6}],2:[function(require,module,exports){
 /*
  * classList.js: Cross-browser full element.classList implementation.
  * 1.1.20150312
@@ -410,7 +410,78 @@ if (objCtr.defineProperty) {
     module.exports = exhibitionItems;
 }());
 
-},{"./helpers":5}],4:[function(require,module,exports){
+},{"./helpers":6}],4:[function(require,module,exports){
+(function(){
+    'use strict';
+
+    var helpers = require('./helpers');
+    var feed;
+
+    feed = {
+        init: function(els) {
+            if (!els) {
+                return;
+            }
+
+            this.setSizes(els);
+            this.setStyles(els);
+        },
+
+        setStyles: function(els) {
+            var id, type, i, len, el;
+
+            for (i = 0, len = els.length; i < len; i +=1) {
+                el = els[i];
+                type = el.id.split('-')[0];
+                id = el.id.split('-')[1];
+                el.innerHTML = '';
+                if (type === 'tweet') {
+                    window.twttr.widgets.createTweet(id, el, {conversation: 'none', cards: ''});
+                }
+            }
+        },
+
+        setSizes: function(els) {
+            var i, len;
+            for (i = 0, len = els.length; i < len; i +=1) {
+                els[i].style.width = helpers.randomInt(16, 12) + '%';
+            }
+        },
+
+        loadTwitterScript: function() {
+            var scriptId, el, t;
+            scriptId = 'twitter-script';
+
+            el = document.getElementById(scriptId);
+            t = window.twttr || {};
+
+            console.log(123);
+
+            if (el) {
+                return t;
+            }
+
+            el = document.createElement('script');
+            el.id = scriptId;
+            el.src = 'https://platform.twitter.com/widgets.js';
+            document.body.appendChild(el);
+
+            t._e = [];
+
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }
+
+    };
+
+
+    module.exports = feed;
+}());
+
+},{"./helpers":6}],5:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -440,7 +511,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./helpers":5}],5:[function(require,module,exports){
+},{"./helpers":6}],6:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -572,7 +643,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -581,6 +652,7 @@ if (objCtr.defineProperty) {
     var helpers = require('./helpers'),
         instagramFeed = require('./instagram-feed'),
         life = require('./life'),
+        feed = require('./feed'),
         modal = require('./modal');
 
     var site = {
@@ -591,8 +663,9 @@ if (objCtr.defineProperty) {
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
 
+
             //old IE
-            if (!!this.container.firsElementChild) {
+            if (!this.container.firstElementChild) {
                 return;
             }
 
@@ -600,11 +673,12 @@ if (objCtr.defineProperty) {
             if (window.innerWidth < 480) {
                 return;
             }
+
             this.hideExhibitionSubNav();
             this.bindEvents();
             //instagramFeed.init();
             life.init(this.container);
-
+            feed.loadTwitterScript();
         },
 
         hideExhibitionSubNav: function() {
@@ -653,7 +727,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./classlist-polyfill":2,"./helpers":5,"./instagram-feed":7,"./life":8,"./modal":9}],7:[function(require,module,exports){
+},{"./classlist-polyfill":2,"./feed":4,"./helpers":6,"./instagram-feed":8,"./life":9,"./modal":10}],8:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -818,7 +892,7 @@ if (objCtr.defineProperty) {
     module.exports = instagramFeed;
 }());
 
-},{"./helpers":5}],8:[function(require,module,exports){
+},{"./helpers":6}],9:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1012,13 +1086,14 @@ if (objCtr.defineProperty) {
     module.exports = life;
 }());
 
-},{"./helpers":5}],9:[function(require,module,exports){
+},{"./helpers":6}],10:[function(require,module,exports){
 (function(){
     'use strict';
 
     var helpers = require('./helpers'),
         exhibitionItems = require('./exhibition-items'),
         pagination = require('./pagination'),
+        feed = require('./feed'),
         carousel = require('./carousel');
 
     var modal;
@@ -1063,15 +1138,7 @@ if (objCtr.defineProperty) {
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
             pagination.init(this.el.querySelector('.content-text'));
-
-            var feed, i, len;
-            feed = this.el.querySelectorAll('.social-item');
-
-            if (feed) {
-                for (i = 0, len = feed.length; i < len; i +=1) {
-                    feed[i].style.width = helpers.randomInt(15, 10) + '%';
-                }
-            }
+            feed.init(this.el.querySelectorAll('.social-item'));
         },
 
         template: function(innerHTML) {
@@ -1105,6 +1172,7 @@ if (objCtr.defineProperty) {
 
             setTimeout(function(){
                 this.remove();
+                document.body.className = document.body.className.replace('no-scroll', '');
             }.bind(this), 300);
         },
 
@@ -1124,6 +1192,7 @@ if (objCtr.defineProperty) {
 
             setTimeout(function(){
                 frame.className += ' transition-in';
+                document.body.className += ' no-scroll';
             //fixme: 100ms delay so the http request does not affect
             //       the slide-in animation
             }.bind(this), 100);
@@ -1162,7 +1231,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./carousel":1,"./exhibition-items":3,"./helpers":5,"./pagination":10}],10:[function(require,module,exports){
+},{"./carousel":1,"./exhibition-items":3,"./feed":4,"./helpers":6,"./pagination":11}],11:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1276,4 +1345,4 @@ if (objCtr.defineProperty) {
     module.exports = pagination;
 }());
 
-},{"./font-stretch.js":4,"./helpers":5}]},{},[6]);
+},{"./font-stretch.js":5,"./helpers":6}]},{},[7]);

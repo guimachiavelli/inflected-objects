@@ -6,6 +6,7 @@
     var helpers = require('./helpers'),
         instagramFeed = require('./instagram-feed'),
         life = require('./life'),
+        feed = require('./feed'),
         modal = require('./modal');
 
     var site = {
@@ -16,8 +17,9 @@
             this.nav = document.querySelector('.navigation');
             this.container = document.querySelector('.container');
 
+
             //old IE
-            if (!!this.container.firsElementChild) {
+            if (!this.container.firstElementChild) {
                 return;
             }
 
@@ -25,11 +27,12 @@
             if (window.innerWidth < 480) {
                 return;
             }
+
             this.hideExhibitionSubNav();
             this.bindEvents();
             //instagramFeed.init();
             life.init(this.container);
-
+            feed.loadTwitterScript();
         },
 
         hideExhibitionSubNav: function() {

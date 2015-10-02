@@ -4,6 +4,7 @@
     var helpers = require('./helpers'),
         exhibitionItems = require('./exhibition-items'),
         pagination = require('./pagination'),
+        feed = require('./feed'),
         carousel = require('./carousel');
 
     var modal;
@@ -48,15 +49,7 @@
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
             pagination.init(this.el.querySelector('.content-text'));
-
-            var feed, i, len;
-            feed = this.el.querySelectorAll('.social-item');
-
-            if (feed) {
-                for (i = 0, len = feed.length; i < len; i +=1) {
-                    feed[i].style.width = helpers.randomInt(15, 10) + '%';
-                }
-            }
+            feed.init(this.el.querySelectorAll('.social-item'));
         },
 
         template: function(innerHTML) {
@@ -90,6 +83,7 @@
 
             setTimeout(function(){
                 this.remove();
+                document.body.className = document.body.className.replace('no-scroll', '');
             }.bind(this), 300);
         },
 
@@ -109,6 +103,7 @@
 
             setTimeout(function(){
                 frame.className += ' transition-in';
+                document.body.className += ' no-scroll';
             //fixme: 100ms delay so the http request does not affect
             //       the slide-in animation
             }.bind(this), 100);
