@@ -20,6 +20,7 @@
             var y;
             y = (parent.offsetHeight - 50)/el.offsetHeight;
             y = Math.min(y, 8);
+            y = Math.max(0.6, y);
             helpers.updatePrefixedStyle(el, 'transform', 'scaleY(' + y + ')');
         },
     };
