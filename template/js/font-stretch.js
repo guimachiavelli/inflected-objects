@@ -19,6 +19,7 @@
         stretch: function(el, parent) {
             var y;
             y = (parent.offsetHeight - 50)/el.offsetHeight;
+            y = Math.min(y, 8);
             helpers.updatePrefixedStyle(el, 'transform', 'scaleY(' + y + ')');
         },
     };
