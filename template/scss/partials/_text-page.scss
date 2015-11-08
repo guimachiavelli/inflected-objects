@@ -60,6 +60,7 @@ $content-text-padding: 2em;
     }
 }
 
+.pagination-counter,
 .pagination-button--next,
 .pagination-button--previous {
     position: absolute;
@@ -87,4 +88,9 @@ $content-text-padding: 2em;
 
 .pagination-button--previous {
     left: $content-text-padding;
+}
+
+.pagination-counter {
+    left: 50%;
+    transform: translateX(-50%) scaleY(1.2) skewX(45deg);
 }
