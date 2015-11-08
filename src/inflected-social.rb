@@ -20,7 +20,20 @@ class InflectedSocial
     def initialize
         @twitter = twitter_client
         @instagram = instagram_client
-   end
+        @hashtags = hashtag()
+    end
+
+    def hashtag
+        begin
+            content = File.read(File.join(
+                                File.expand_path('..', File.dirname(__FILE__)),
+                                'content', 'twitter.txt'
+                           ))
+            content.lines.map(&:chomp)
+        rescue
+            content = []
+        end
+    end
 
     def twitter_client
         Twitter::REST::Client.new do |config|
@@ -85,12 +98,14 @@ class InflectedSocial
     end
 
     def tweets_with_hashtags
-        query = stringified_hashtag_array + " -rt"
+        hashtags = stringified_hashtag_array
+        if hashtags.empty? then return [] end
+        query = hashtags + " -rt"
         @twitter.search(query, { count: 10 }).take(10)
     end
 
     def stringified_hashtag_array
-        hashtags = HASHTAGS.map { |tag| "##{tag}" }
+        hashtags = @hashtags.map { |tag| "##{tag}" }
         hashtags.join(" OR ")
     end
 end

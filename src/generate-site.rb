@@ -16,9 +16,13 @@ class InflectedSite
         @structure = InflectedStructure.new(content)
         @site = InflectedGenerator.new @structure.sections, @public
 
-        social = InflectedSocial.new
-        social.fetch
-        @site.parsed_sections[:children]["99-social"] = social.page
+        begin
+            social = InflectedSocial.new
+            social.fetch
+            @site.parsed_sections[:children]["99-social"] = social.page
+        rescue
+            puts "twitter fetch error"
+        end
 
         Dir.mkdir(@public) unless Dir.exist? @public
         Dir.mkdir(@assets) unless Dir.exist? @assets
