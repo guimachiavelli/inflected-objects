@@ -4,7 +4,6 @@
     require('./classlist-polyfill');
 
     var helpers = require('./helpers'),
-        instagramFeed = require('./instagram-feed'),
         life = require('./life'),
         feed = require('./feed'),
         modal = require('./modal');
@@ -30,9 +29,9 @@
 
             this.hideExhibitionSubNav();
             this.bindEvents();
-            //instagramFeed.init();
             life.init(this.container);
             feed.loadTwitterScript();
+            feed.loadInstagramScript();
         },
 
         hideExhibitionSubNav: function() {

@@ -428,17 +428,27 @@ if (objCtr.defineProperty) {
         },
 
         setStyles: function(els) {
-            var id, type, i, len, el;
+            var id, type, link, i, len, el;
 
             for (i = 0, len = els.length; i < len; i +=1) {
                 el = els[i];
                 type = el.id.split('-')[0];
                 id = el.id.split('-')[1];
+                link = el.getAttribute('data-link');
                 el.innerHTML = '';
                 if (type === 'tweet') {
-                    window.twttr.widgets.createTweet(id, el, {conversation: 'none', cards: ''});
+                    window.twttr.widgets.createTweet(id, el,
+                                                    { conversation: 'none',
+                                                      cards: ''}
+                    );
+                }
+
+                if (type === 'instagram') {
+                    el.innerHTML = this.instagramEmbed(link);
                 }
             }
+
+            window.instgrm.Embeds.process();
         },
 
         setSizes: function(els) {
@@ -454,8 +464,6 @@ if (objCtr.defineProperty) {
 
             el = document.getElementById(scriptId);
             t = window.twttr || {};
-
-            console.log(123);
 
             if (el) {
                 return t;
@@ -473,6 +481,40 @@ if (objCtr.defineProperty) {
             };
 
             return t;
+        },
+
+        loadInstagramScript: function() {
+            var scriptId, el, t;
+            scriptId = 'instagram-script';
+
+            el = document.getElementById(scriptId);
+            t = window.instgrm || {};
+
+            if (el) {
+                return t;
+            }
+
+            el = document.createElement('script');
+            el.id = scriptId;
+            el.src = 'https://platform.instagram.com/en_US/embeds.js';
+            document.body.appendChild(el);
+
+            t._e = [];
+
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+
+        },
+
+        instagramEmbed: function(linkID) {
+            var template;
+
+            template = '<blockquote class="instagram-media" data-instgrm-version="6" style=" background:#FFF; border: 1px solid lightgrey; border-radius:3px; padding:0;"><a href="{{link}}" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank"></blockquote>';
+
+            return template.replace('{{link}}', linkID);
         }
 
     };
@@ -503,7 +545,7 @@ if (objCtr.defineProperty) {
         stretch: function(el, parent) {
             var y;
             y = (parent.offsetHeight - 50)/el.offsetHeight;
-            y = Math.min(y, 8);
+            y = Math.min(y, 7.5);
             y = Math.max(0.6, y);
             helpers.updatePrefixedStyle(el, 'transform', 'scaleY(' + y + ')');
         },
@@ -652,7 +694,6 @@ if (objCtr.defineProperty) {
     require('./classlist-polyfill');
 
     var helpers = require('./helpers'),
-        instagramFeed = require('./instagram-feed'),
         life = require('./life'),
         feed = require('./feed'),
         modal = require('./modal');
@@ -678,9 +719,9 @@ if (objCtr.defineProperty) {
 
             this.hideExhibitionSubNav();
             this.bindEvents();
-            //instagramFeed.init();
             life.init(this.container);
             feed.loadTwitterScript();
+            feed.loadInstagramScript();
         },
 
         hideExhibitionSubNav: function() {
@@ -729,172 +770,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./classlist-polyfill":2,"./feed":4,"./helpers":6,"./instagram-feed":8,"./life":9,"./modal":10}],8:[function(require,module,exports){
-(function(){
-    'use strict';
-
-    var helpers = require('./helpers');
-
-    var instagramFeed, config;
-
-    config = {
-        clientID: '050fd5a405a14c8ca6e160892ddf119a',
-        accessToken: '1922142485.050fd5a.918c6442a9d04928a754532dde856033',
-        endpoint: 'https://api.instagram.com/v1/users/1922142485/media/recent/',
-        count: 10
-    };
-
-    instagramFeed = {
-        init: function() {
-            var request, URL;
-            URL = config.endpoint + '?access_token=' + config.accessToken;
-            URL += '&count=' + config.count;
-            URL += '&callback=onFeedFetchSuccess';
-
-            this.requestJSONP(URL)
-        },
-
-        requestJSONP: function(URL) {
-            var el;
-
-            el = document.createElement('script');
-            el.src = URL;
-            el.id = 'instagram-request';
-            document.head.appendChild(el);
-        },
-
-        onFeedFetchSuccess: function(response) {
-            var self;
-            self = instagramFeed;
-
-            if (response.meta.code !== 200) {
-                self.onFeedFetchError(response.meta);
-                return;
-            }
-
-            if (!response.data.length || response.data.length < 1) {
-                return;
-            }
-
-            if (response.data.length === 2) {
-                response.data.push(response.data[0]);
-            }
-
-            if (response.data.length === 1) {
-                response.data.push(response.data[0]);
-                response.data.push(response.data[0]);
-            }
-
-            self.parse(response.data);
-        },
-
-        onFeedFetchError: function(err) {
-            console.warn(err);
-        },
-
-        parse: function(data) {
-            var el;
-            data = this.parsedData(data);
-            el = this.template(data);
-            this.render(el);
-            this.animate(el, helpers.firstElementChild(el));
-        },
-
-        render: function(el) {
-            document.querySelector('.container').appendChild(el);
-        },
-
-        animate: function(el, current, previous) {
-            var next;
-
-            if (previous) {
-                previous.classList.add('photo--no-transition');
-                previous.classList.remove('photo--out');
-
-                setTimeout(function() {
-                    previous.classList.remove('photo--no-transition');
-                }, 300);
-            }
-
-            current.classList.remove('photo--in');
-            current.classList.add('photo--out');
-            next = current.nextElementSibling || helpers.firstElementChild(el);
-            next.classList.add('photo--in');
-
-            setTimeout(function() {
-                this.animate(el, next, current);
-            }.bind(this), 7500);
-        },
-
-        parsedData: function(data) {
-            return data.map(this.simplifiedDatum);
-        },
-
-        simplifiedDatum: function(datum) {
-            var caption, image;
-            caption = datum.caption;
-            image = datum.images;
-
-            caption = caption ? caption.text : '';
-            image = image.standard_resolution.url;
-
-            return {
-                text: caption,
-                image: image
-            };
-        },
-
-        template: function(photos) {
-            var el, self;
-
-            self = this;
-
-            el = document.createElement('ol');
-            el.className = 'instagram';
-
-            photos.forEach(function(photo) {
-                el.appendChild(self.photoWithCaption(photo));
-            });
-
-            return el;
-        },
-
-        photoWithCaption: function(photo) {
-            var el;
-
-            el = document.createElement('li');
-            el.className = 'instagram-photo';
-            el.appendChild(this.image(photo.image));
-            el.appendChild(this.caption(photo.text));
-
-            return el;
-        },
-
-        image: function(image) {
-            var img;
-            img = document.createElement('img');
-            img.className = 'instagram-image';
-            img.src = image;
-            return img;
-        },
-
-        caption: function(text) {
-            var caption, paragraph;
-            paragraph = document.createElement('p');
-            paragraph.innerHTML = text;
-            caption = document.createElement('div');
-            caption.className = 'instagram-caption';
-            caption.appendChild(paragraph);
-            return caption;
-        }
-
-    };
-
-    window.onFeedFetchSuccess = instagramFeed.onFeedFetchSuccess;
-    module.exports = instagramFeed;
-}());
-
-},{"./helpers":6}],9:[function(require,module,exports){
+},{"./classlist-polyfill":2,"./feed":4,"./helpers":6,"./life":8,"./modal":9}],8:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1088,7 +964,7 @@ if (objCtr.defineProperty) {
     module.exports = life;
 }());
 
-},{"./helpers":6}],10:[function(require,module,exports){
+},{"./helpers":6}],9:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -1233,7 +1109,7 @@ if (objCtr.defineProperty) {
 
 }());
 
-},{"./carousel":1,"./exhibition-items":3,"./feed":4,"./helpers":6,"./pagination":11}],11:[function(require,module,exports){
+},{"./carousel":1,"./exhibition-items":3,"./feed":4,"./helpers":6,"./pagination":10}],10:[function(require,module,exports){
 (function(){
     'use strict';
 
