@@ -72,7 +72,7 @@
                 return;
             }
 
-            modal.init(target.href);
+            modal.init(target.href, helpers.innerText(target));
         }
     };
 

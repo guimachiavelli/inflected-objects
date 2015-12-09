@@ -1,6 +1,15 @@
 (function(){
     'use strict';
 
+    function innerText(node) {
+        var text;
+
+        text = node.textContent !== undefined ?
+                                            node.textContent : node.innerText;
+
+        return text.replace(/\s+/g, ' ');
+    }
+
     function debounce(func, wait, immediate) {
 	var timeout;
 	return function() {
@@ -124,7 +133,8 @@
         findArrayItem: findArrayItem,
         updatePrefixedStyle: updatePrefixedStyle,
         nextSiblingOfType: nextSiblingOfType,
-        previousSiblingOfType: previousSiblingOfType
+        previousSiblingOfType: previousSiblingOfType,
+        innerText: innerText
     };
 
 }());

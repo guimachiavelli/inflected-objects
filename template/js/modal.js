@@ -13,25 +13,25 @@
         el: null,
         parent: document.body,
 
-        init: function(url) {
+        init: function(url, title) {
             if (this.el !== null) {
                 this.close();
                 return;
             }
 
-            this.fetchPage(url);
+            this.fetchPage(url, title);
         },
 
-        fetchPage: function(url) {
+        fetchPage: function(url, title) {
             var request = new XMLHttpRequest();
             request.open('GET', url, true);
-            request.onload = this.onPageFetchSuccess.bind(this);
+            request.onload = this.onPageFetchSuccess.bind(this, title);
             request.onerror = this.onPageFetchError;
 
             request.send();
         },
 
-        onPageFetchSuccess: function(e) {
+        onPageFetchSuccess: function(title, e) {
             var request, innerHTML, placeholderEl;
             request = e.target;
 
@@ -44,7 +44,7 @@
             placeholderEl.innerHTML = innerHTML;
             placeholderEl = placeholderEl.querySelector('.content');
 
-            this.el = this.template(placeholderEl.innerHTML);
+            this.el = this.template(placeholderEl.innerHTML, title);
             this.open();
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
@@ -52,8 +52,8 @@
             feed.init(this.el.querySelectorAll('.social-item'));
         },
 
-        template: function(innerHTML) {
-            var container, content, bg;
+        template: function(innerHTML, title) {
+            var container, content, bg, contentTitle;
 
             container = document.createElement('div');
             container.className = 'modal-container';
@@ -64,6 +64,13 @@
             content = document.createElement('div');
             content.className = 'modal-content';
             content.innerHTML = innerHTML;
+
+            if (content.querySelector('.content-text') !== null) {
+                contentTitle = document.createElement('h2');
+                contentTitle.innerHTML = title;
+                contentTitle.className = 'modal-title';
+                content.insertBefore(contentTitle, content.firstChild);
+            }
 
             container.appendChild(bg);
             container.appendChild(content);

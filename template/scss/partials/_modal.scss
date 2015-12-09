@@ -40,3 +40,17 @@
         transition-timing-function: $animation-material-timing;
     }
 }
+
+.modal-title {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+    box-sizing: border-box;
+    margin-top: 5vh;
+    z-index: 5;
+    color: white;
+    transform: scaleY(1.6);
+    letter-spacing: 1px;
+}

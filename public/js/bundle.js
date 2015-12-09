@@ -545,8 +545,8 @@ if (objCtr.defineProperty) {
         stretch: function(el, parent) {
             var y;
             y = (parent.offsetHeight - 50)/el.offsetHeight;
-            y = Math.min(y, 7.5);
-            y = Math.max(0.6, y);
+            y = Math.min(y, 6.5);
+            y = Math.max(0.7, y);
             helpers.updatePrefixedStyle(el, 'transform', 'scaleY(' + y + ')');
         },
     };
@@ -558,6 +558,15 @@ if (objCtr.defineProperty) {
 },{"./helpers":6}],6:[function(require,module,exports){
 (function(){
     'use strict';
+
+    function innerText(node) {
+        var text;
+
+        text = node.textContent !== undefined ?
+                                            node.textContent : node.innerText;
+
+        return text.replace(/\s+/g, ' ');
+    }
 
     function debounce(func, wait, immediate) {
 	var timeout;
@@ -682,7 +691,8 @@ if (objCtr.defineProperty) {
         findArrayItem: findArrayItem,
         updatePrefixedStyle: updatePrefixedStyle,
         nextSiblingOfType: nextSiblingOfType,
-        previousSiblingOfType: previousSiblingOfType
+        previousSiblingOfType: previousSiblingOfType,
+        innerText: innerText
     };
 
 }());
@@ -762,7 +772,7 @@ if (objCtr.defineProperty) {
                 return;
             }
 
-            modal.init(target.href);
+            modal.init(target.href, helpers.innerText(target));
         }
     };
 
@@ -980,25 +990,25 @@ if (objCtr.defineProperty) {
         el: null,
         parent: document.body,
 
-        init: function(url) {
+        init: function(url, title) {
             if (this.el !== null) {
                 this.close();
                 return;
             }
 
-            this.fetchPage(url);
+            this.fetchPage(url, title);
         },
 
-        fetchPage: function(url) {
+        fetchPage: function(url, title) {
             var request = new XMLHttpRequest();
             request.open('GET', url, true);
-            request.onload = this.onPageFetchSuccess.bind(this);
+            request.onload = this.onPageFetchSuccess.bind(this, title);
             request.onerror = this.onPageFetchError;
 
             request.send();
         },
 
-        onPageFetchSuccess: function(e) {
+        onPageFetchSuccess: function(title, e) {
             var request, innerHTML, placeholderEl;
             request = e.target;
 
@@ -1011,7 +1021,7 @@ if (objCtr.defineProperty) {
             placeholderEl.innerHTML = innerHTML;
             placeholderEl = placeholderEl.querySelector('.content');
 
-            this.el = this.template(placeholderEl.innerHTML);
+            this.el = this.template(placeholderEl.innerHTML, title);
             this.open();
             exhibitionItems.init(this.el.querySelectorAll('.item'));
             carousel.init(this.el.querySelector('.carousel'));
@@ -1019,8 +1029,8 @@ if (objCtr.defineProperty) {
             feed.init(this.el.querySelectorAll('.social-item'));
         },
 
-        template: function(innerHTML) {
-            var container, content, bg;
+        template: function(innerHTML, title) {
+            var container, content, bg, contentTitle;
 
             container = document.createElement('div');
             container.className = 'modal-container';
@@ -1031,6 +1041,13 @@ if (objCtr.defineProperty) {
             content = document.createElement('div');
             content.className = 'modal-content';
             content.innerHTML = innerHTML;
+
+            if (content.querySelector('.content-text') !== null) {
+                contentTitle = document.createElement('h2');
+                contentTitle.innerHTML = title;
+                contentTitle.className = 'modal-title';
+                content.insertBefore(contentTitle, content.firstChild);
+            }
 
             container.appendChild(bg);
             container.appendChild(content);
