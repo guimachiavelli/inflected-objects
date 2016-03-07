@@ -54,3 +54,22 @@
     transform: scaleY(1.6);
     letter-spacing: 1px;
 }
+
+.modal-external-container {
+    bottom: 0;
+    font-size: 5vw;
+    padding: 1em;
+
+    @media(min-width: $bp-mobile) {
+        width: auto;
+        height: 92vh;
+        box-sizing: border-box;
+        background: transparent;
+        font-size: 1.5vw;
+        overflow-y: scroll;
+        margin: 4vh;
+        position: relative;
+        padding: 0;
+    }
+
+}

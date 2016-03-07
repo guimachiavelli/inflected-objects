@@ -72,7 +72,21 @@
                 return;
             }
 
+            var type = this.linkType(e.target);
+
             modal.init(target.href, helpers.innerText(target));
+        },
+
+        linkType: function(node) {
+            var ancestor, type, searchString, typeIndex;
+
+            searchString = 'navigation-item--';
+
+            ancestor = helpers.closestAncestorWithClass(node,
+                                                        'navigation-item');
+            typeIndex = ancestor.className.indexOf(searchString);
+
+            console.log(ancestor.className.substr(typeIndex + searchString.length));
         }
     };
 

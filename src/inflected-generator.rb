@@ -12,7 +12,8 @@ class InflectedGenerator
         image: 'image.html.erb',
         text: 'text.html.erb',
         sound: 'sound.html.erb',
-        video: 'video.html.erb'
+        video: 'video.html.erb',
+        external: 'external.html.erb'
     }
 
     def initialize(sections, public_path)
