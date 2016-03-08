@@ -27,6 +27,14 @@ a {
     color: $colour-text;
 }
 
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
 .container {
     min-height: 100%;
     background: $background-colour;
