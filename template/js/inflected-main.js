@@ -4,7 +4,6 @@
     require('./classlist-polyfill');
 
     var helpers = require('./helpers'),
-        life = require('./life'),
         feed = require('./feed'),
         modal = require('./modal');
 
@@ -29,7 +28,6 @@
 
             this.hideExhibitionSubNav();
             this.bindEvents();
-            life.init(this.container);
             feed.loadTwitterScript();
             feed.loadInstagramScript();
         },
