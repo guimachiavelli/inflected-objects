@@ -20,6 +20,7 @@ $item-height: 40vw;
     img {
         display: block;
         width: 100%;
+        max-width: 100%;
         margin: 2em auto 0 auto;
     }
 
@@ -155,7 +156,7 @@ $item-height: 40vw;
         text-align: center;
 
         &.carousel--active {
-            display: block;
+            display: table;
         }
     }
 }
