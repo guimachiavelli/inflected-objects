@@ -2,9 +2,6 @@
     padding: 3em 1em 1em 1em;
 
     @media (min-width: $bp-mobile) {
-        position: absolute;
-        bottom: 1em;
-        left: 50px;
         margin: 0;
     }
 
@@ -32,6 +29,7 @@
 
     img {
         line-height: 0;
-        height: 70px;
+        max-height: 70px;
+        max-width: 100%;
     }
 }

@@ -47,11 +47,29 @@
                                         <ul class="subnavigation">
                                             <% for @subsubsection_name, @subsubsection in @subsection[:children] %>
                                                 <li class="subnavigation-item">
-                                                    <a class="subnavigation-link" href="<%= @subsubsection[:public_path] %>.html">
+                                                    <a class="subnavigation-link" 
+                                                       <% if @subsubsection[:children].empty? %>
+                                                          href="<%= @subsubsection[:public_path] %>.html"
+                                                        <% end %>
+                                                    >
                                                         <span class="deform">
                                                             <%= @subsubsection[:title] %>
                                                         </span>
                                                     </a>
+                                                    <% if @subsubsection[:children] %>
+                                                    <ul class="subnavigation">
+                                                        <% for @subsubsubsection_name, @subsubsubsection in @subsubsection[:children] %>
+                                                            <li class="subnavigation-item">
+                                                                <a class="subnavigation-link" href="<%= @subsubsubsection[:public_path] %>.html">
+                                                                    <span class="deform">
+                                                                        <%= @subsubsubsection[:title] %>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        <% end %>
+                                                    </ul>
+                                                    <% end %>
+
                                                 </li>
                                             <% end %>
                                         </ul>

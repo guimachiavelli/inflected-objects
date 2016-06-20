@@ -38,6 +38,9 @@ strong {
 .container {
     min-height: 100%;
     background: $background-colour;
+    display: flex;
+    flex-direction: column;
+
     @media (min-width: $bp-mobile) {
         @include animation(site-wobble (15 * $animation-duration) 
                            $animation-material-timing
