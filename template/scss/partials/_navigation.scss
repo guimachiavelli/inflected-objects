@@ -47,13 +47,11 @@
 
     .navigation-item--exhibition & {
         display: block;
-        max-height: 7*13vw;
         transition: max-height 400ms $animation-material-timing;
         overflow: hidden;
-        /*counter-reset: second-level 0;*/
 
         @media (min-width: $bp-mobile) {
-            /*max-height: 2.5*13vw;*/
+            max-height: 7*13vw;
         }
     }
 
