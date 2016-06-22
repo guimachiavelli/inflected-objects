@@ -12,9 +12,12 @@
     position: relative;
     display: table;
     z-index: 2;
-    white-space: nowrap;
     counter-increment: first-level;
     counter-reset: second-level 0;
+
+    @media (min-width: $bp-mobile) {
+        white-space: nowrap;
+    }
 }
 
 .navigation-link {
@@ -89,12 +92,17 @@
 
     .deform {
         display: inline-block;
+        margin: 0.5em;
 
         &:before {
             content: "#" counter(first-level) "." counter(second-level) " ";
             font-family: $highlight-font;
             display: inline-block;
             margin-right: 0.5em;
+        }
+
+        @media (min-width: $bp-mobile) {
+            margin: 0;
         }
     }
 
