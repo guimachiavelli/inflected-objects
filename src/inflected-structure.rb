@@ -140,7 +140,7 @@ class InflectedStructure
                 File.basename(entry) != 'captions.md')
             File.readlines(entry).each do |line|
                 next if line == "\n"
-                key, value = line.split(':')
+                key, value = line.split(':', 2)
                 caption[key.strip] = Kramdown::Document.new(value).to_html
             end
         end
